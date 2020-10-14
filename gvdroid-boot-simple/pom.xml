@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>gvdroid-boot-starter-parent</artifactId>
+        <groupId>com.gvdroidframework.boot</groupId>
+        <version>2.2.5-SNAPSHOT</version>
+        <relativePath />
+    </parent>
+    <artifactId>gvdroid-boot-simple</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>gvdroid-simple-redis</module>
+        <module>gvdroid-simple-logging</module>
+        <module>gvdroid-simple-mybatis</module>
+        <module>gvdroid-simple-helper</module>
+        <module>gvdroid-simple-security</module>
+        <module>gvdroid-simple-autoconfigure</module>
+    </modules>
+
+
+</project>
