@@ -1,5 +1,6 @@
 package com.gvdroidframework.logging.configuration;
 
+import com.gvdroidframework.logging.component.BusinessLoggingDTO;
 import com.gvdroidframework.logging.core.LoggingTemplate;
 import com.gvdroidframework.logging.core.LoggingTemplateImpl;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class LoggingAutoConfiguration {
     @Bean
     @Primary
     @ConditionalOnMissingBean
-    public LoggingTemplate loggingTemplate() {
-        LoggingTemplateImpl<?> template = new LoggingTemplateImpl<>();
+    public LoggingTemplate<BusinessLoggingDTO> loggingTemplate() {
+        LoggingTemplateImpl<BusinessLoggingDTO> template = new LoggingTemplateImpl<>();
         template.setLoggingProperties(loggingProperties, amqpTemplate);
         return template;
     }

@@ -3,13 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>gvdroid-boot-simple</artifactId>
-        <groupId>com.gvdroidframework.boot</groupId>
+        <artifactId>gvdroid-simple</artifactId>
+        <groupId>com.gvdroidframework</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gvdroid-simple-helper</artifactId>
-
+    <artifactId>gvdroid-simple-logging</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-logging</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -1,16 +1,16 @@
 package com.gvdroidframework.logging.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.gvdroidframework.logging.annotation.BusinessLogger;
-import com.gvdroidframework.logging.component.BusinessLoggingDTO;
-import com.gvdroidframework.logging.core.LoggingTemplate;
-import com.gvdroidframework.util.ClassUtils;
 import com.gvdroidframework.base.component.Context;
 import com.gvdroidframework.base.component.Response;
 import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.base.exception.RunException;
+import com.gvdroidframework.logging.annotation.BusinessLogger;
+import com.gvdroidframework.logging.component.BusinessLoggingDTO;
+import com.gvdroidframework.logging.core.LoggingTemplate;
+import com.gvdroidframework.util.ClassUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -38,7 +38,7 @@ public class BusinessLoggerAspect {
     @Autowired(required = false)
     private LoggingTemplate<BusinessLoggingDTO> loggingTemplate;
 
-    @Pointcut("@annotation(com.gvdroidframework.cloud.logging.annotation.BusinessLogger)")
+    @Pointcut("@annotation(com.gvdroidframework.logging.annotation.BusinessLogger)")
     public void loggerPointCut() {
     }
 
@@ -57,11 +57,16 @@ public class BusinessLoggerAspect {
         try {
             // 得到请求对象
             for (Object o : proceedingJoinPoint.getArgs()) {
-//                Class<?> clazz = o.getClass();
+                Class<?> clazz = o.getClass();
+                boolean isRequiredClass = clazz.getName().equals("com.gvdroidframework.base.component.Request");
+                if (isRequiredClass) {
+                    requestDTO = o;
+                    break;
+                }
                 //TODO 现在使用了Wrapper需要重写一下这里。
-                requestDTO = o.getClass();
+//                requestDTO = o.getClass();
 //                Class<?> superclass = o.getClass().getSuperclass();
-//                boolean isRequiredClass = superclass.equals(XfaceGenericRequestDTO.class);
+//                boolean isRequiredClass = superclass.equals(Request.class);
 //                if (isRequiredClass) {
 //                    requestDTO = o;
 //                    break;
@@ -77,20 +82,20 @@ public class BusinessLoggerAspect {
             logField.setAccessible(true);
             logger = (Logger) logField.get(target);
 
-            // 得到请求中的SessionContext
+            // 得到请求中的context
             context = ClassUtils.getObjFiledValue(requestDTO, "context", Context.class);
 
             logger.info("Process Xface Start");
             requestString = JSON.toJSONString(requestDTO);
             logger.info("RequestDTO=" + requestString);
 
-            // 不允许sessionContext为空
+            // 不允许context为空
             if (null == context) {
-                throw new BaseException("sessionContext cannot be null, please refer to api docs to get more info.", "777", ErrorCode.EXCEPTION, startTime);
+                throw new BaseException("context cannot be null, please refer to api docs to get more info.", "777", ErrorCode.EXCEPTION, startTime);
             }
 
             if (StringUtils.isEmpty(context.getEntityId())) {
-                throw new BaseException("entityId cannot be null in sessionContext", "777", ErrorCode.EXCEPTION, startTime);
+                throw new BaseException("entityId cannot be null in context", "777", ErrorCode.EXCEPTION, startTime);
             }
 
 //            // 当乐观锁为true的时候，更新序号不允许为空

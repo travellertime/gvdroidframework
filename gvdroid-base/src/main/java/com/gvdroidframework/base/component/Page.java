@@ -56,7 +56,19 @@ public class Page {
     public Page(int pageNum, int pageSize) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
-        returnCount = true;
+        returnCount = false;
+    }
+
+    /**
+     * 分页对象构造
+     * @param pageNum 第几页
+     * @param pageSize 每页条数
+     * @param returnCount 是否返回总记录条数
+     */
+    public Page(int pageNum, int pageSize, boolean returnCount) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+        this.returnCount = returnCount;
     }
 
     /**

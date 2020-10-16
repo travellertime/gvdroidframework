@@ -9,7 +9,8 @@
         <version>2.2.5-SNAPSHOT</version>
         <relativePath />
     </parent>
-    <artifactId>gvdroid-boot-simple</artifactId>
+    <groupId>com.gvdroidframework</groupId>
+    <artifactId>gvdroid-simple</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
