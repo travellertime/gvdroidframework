@@ -1,6 +1,8 @@
 package com.gvdroid.simple.logging.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.gvdroid.simple.logging.dto.CustomerRequestDTO;
+import com.gvdroid.simple.logging.dto.CustomerResponseDTO;
 import com.gvdroid.simple.logging.dto.UserRequestDTO;
 import com.gvdroid.simple.logging.dto.UserResponseDTO;
 import com.gvdroidframework.base.component.Request;
@@ -25,5 +27,14 @@ public class TestController {
         log.info(JSON.toJSONString(request.getContext()));
         log.info(requestString);
         return new Response<>(new UserResponseDTO(), new Status());
+    }
+
+    @PostMapping(value = "/customer")
+    @BusinessLogger(value = "CUST01")
+    public Response<CustomerResponseDTO> geCustomer(@RequestBody Request<CustomerRequestDTO> request) {
+        String requestString = JSON.toJSONString(request);
+        log.info(JSON.toJSONString(request.getContext()));
+        log.info(requestString);
+        return new Response<>(new CustomerResponseDTO(), new Status());
     }
 }

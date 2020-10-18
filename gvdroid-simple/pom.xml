@@ -20,6 +20,7 @@
         <module>gvdroid-simple-helper</module>
         <module>gvdroid-simple-security</module>
         <module>gvdroid-simple-autoconfigure</module>
+        <module>gvdroid-simple-complex</module>
     </modules>
 
 

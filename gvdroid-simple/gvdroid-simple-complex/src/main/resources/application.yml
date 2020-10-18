@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: gvdroid-simple-complex-server
+gvdroid:
+  swagger:
+    enabled: true
+    base-package: com.gvdroid.simple.complex
+    license: com.gvdroid.simple
+    description: simple api
+    title: simple api
+    version: 0.0.1-SNAPSHOT
+  business:
+    logging:
+      enabled: true
+      env: dev #dev, prod
+      method: mq # kafka
+      category: 7 # 1=inquiry, 2=maintenance, 4=transaction
+      mq:
+        name: gvdroid.simple.logging
+        queueDurable: true
+        queueAutoDelete: false
+        routing: gvdroid.simple.logging
+        exchange: gvdroid.simple.logging
+        exchangeDurable: true
+        exchangeAutoDelete: false
+logging:
+  level:
+    root: info
+    com.gvdroid.simple.mybatis: debug

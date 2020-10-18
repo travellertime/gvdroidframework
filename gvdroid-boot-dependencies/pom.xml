@@ -53,37 +53,12 @@
             <!-- gvdroid-boot -->
             <dependency>
                 <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-util</artifactId>
+                <artifactId>gvdroid-boot-starter</artifactId>
                 <version>${gvdroid.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-validation</artifactId>
-                <version>${gvdroid.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-security</artifactId>
-                <version>${gvdroid.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-redis</artifactId>
-                <version>${gvdroid.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-mybatis</artifactId>
-                <version>${gvdroid.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-logging</artifactId>
-                <version>${gvdroid.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-helper</artifactId>
+                <artifactId>gvdroid-boot-starter-autoconfigure</artifactId>
                 <version>${gvdroid.boot.version}</version>
             </dependency>
             <dependency>
@@ -93,7 +68,37 @@
             </dependency>
             <dependency>
                 <groupId>com.gvdroidframework.boot</groupId>
-                <artifactId>gvdroid-boot-starter-autoconfigure</artifactId>
+                <artifactId>gvdroid-boot-starter-helper</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-logging</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-mybatis</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-redis</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-security</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-util</artifactId>
+                <version>${gvdroid.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.boot</groupId>
+                <artifactId>gvdroid-boot-starter-validation</artifactId>
                 <version>${gvdroid.boot.version}</version>
             </dependency>
 

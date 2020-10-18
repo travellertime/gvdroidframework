@@ -10,9 +10,10 @@
 - gvdroid-boot-parent
 - gvdroid-boot-simple
     - gvdroid-simple-autoconfigure
+    - gvdroid-simple-complex
     - gvdroid-simple-helper
-    - gvdroid-simple-logging
-    - gvdroid-simple-mybatis
+    - `OK` gvdroid-simple-logging
+    - `OK` gvdroid-simple-mybatis
     - `OK` gvdroid-simple-redis
     - gvdroid-simple-security
 - `OK` gvdroid-boot-starters
