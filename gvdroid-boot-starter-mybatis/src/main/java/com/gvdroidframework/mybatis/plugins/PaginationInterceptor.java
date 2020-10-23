@@ -1,9 +1,9 @@
 package com.gvdroidframework.mybatis.plugins;
 
+import com.gvdroidframework.base.component.Page;
 import com.gvdroidframework.mybatis.dialect.Dialect;
 import com.gvdroidframework.mybatis.dialect.MysqlDialect;
 import com.gvdroidframework.util.ClassUtils;
-import com.gvdroidframework.base.component.Page;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
@@ -74,7 +74,7 @@ public class PaginationInterceptor implements Interceptor {
     public void setProperties(Properties properties) {
     }
 
-//    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private void totalCount(Connection conn, BoundSql boundSql, MappedStatement mappedStatement, Page page) throws SQLException {
 
         String sql = boundSql.getSql().toLowerCase();
