@@ -10,10 +10,13 @@ call mvn clean install -Dmaven.test.skip=true
 cd ../gvdroid-boot-parent
 call mvn clean install -Dmaven.test.skip=true
 
+@echo compile gvdroid-boot-starter-parent
+cd ../gvdroid-boot-starter-parent
+call mvn clean install -Dmaven.test.skip=true
+
 @echo compile gvdroid-boot-starters
 cd ../gvdroid-boot-starters
 call mvn clean install -Dmaven.test.skip=true
-
 
 @echo compile gvdroid-boot-starter-autoconfigure
 cd ../gvdroid-boot-starter-autoconfigure
@@ -51,8 +54,8 @@ call mvn clean install -Dmaven.test.skip=true
 cd ../gvdroid-boot-starter-validation
 call mvn clean install -Dmaven.test.skip=true
 
-@echo compile gvdroid-boot-starter-desire
-cd ../gvdroid-boot-starter-desire
+@echo compile gvdroid-boot-starter
+cd ../gvdroid-boot-starter
 call mvn clean install -Dmaven.test.skip=true
 
 @echo compile completed.

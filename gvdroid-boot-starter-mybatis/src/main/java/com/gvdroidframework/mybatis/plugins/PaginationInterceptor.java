@@ -74,7 +74,7 @@ public class PaginationInterceptor implements Interceptor {
     public void setProperties(Properties properties) {
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+//    @SuppressWarnings({"rawtypes", "unchecked"})
     private void totalCount(Connection conn, BoundSql boundSql, MappedStatement mappedStatement, Page page) throws SQLException {
 
         String sql = boundSql.getSql().toLowerCase();

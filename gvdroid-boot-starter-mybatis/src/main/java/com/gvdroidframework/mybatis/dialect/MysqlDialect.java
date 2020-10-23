@@ -5,7 +5,7 @@ import com.mysql.cj.util.StringUtils;
 
 public class MysqlDialect extends Dialect {
 
-    private String orderBy;
+    private final String orderBy;
 
     /**
      * 构造方法
