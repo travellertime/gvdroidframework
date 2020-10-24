@@ -11,6 +11,11 @@ public final class Response<T> implements Serializable {
         this.status = status;
     }
 
+    public Response(T t) {
+        this.body = t;
+        this.status = new Status();
+    }
+
     public Status getStatus() {
         return status;
     }

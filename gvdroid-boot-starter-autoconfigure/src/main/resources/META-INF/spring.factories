@@ -3,6 +3,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.gvdroidframework.boot.autoconfigure.server.WebCustomizeAutoConfiguration,\
   com.gvdroidframework.boot.autoconfigure.swagger.SwaggerAutoConfiguration,\
   com.gvdroidframework.boot.autoconfigure.cache.SpringCacheAutoConfiguration,\
-  com.gvdroidframework.boot.autoconfigure.controller.GlobalExceptionAdviceAutoConfiguration,\
   com.gvdroidframework.boot.autoconfigure.controller.RequestValidationAdviceAutoConfiguration,\
+  com.gvdroidframework.boot.autoconfigure.controller.GlobalExceptionAdviceAutoConfiguration,\
   com.gvdroidframework.boot.autoconfigure.util.MessageUtils

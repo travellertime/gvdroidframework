@@ -1,17 +1,15 @@
 package com.gvdroidframework.base.component;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 
 public final class Request<T> implements Serializable {
+
     private Context context;
+
+    @Valid
     private T body;
 
-
-//    public Request(Context context, T body) {
-//        this.context = context;
-//        this.body = body;
-//    }
-//
     public Context getContext() {
         return context;
     }
@@ -27,12 +25,5 @@ public final class Request<T> implements Serializable {
     public void setBody(T body) {
         this.body = body;
     }
-//
-//    public static <T> Request<T> body(T body) {
-//        return body(new Context(), body);
-//    }
-//
-//    public static <T> Request<T> body(Context context, T body) {
-//        return new Request<>(context, body);
-//    }
+
 }
