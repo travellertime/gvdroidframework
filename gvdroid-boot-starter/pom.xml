@@ -19,6 +19,10 @@
         </dependency>
         <dependency>
             <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
             <artifactId>gvdroid-boot-starter-autoconfigure</artifactId>
             <scope>compile</scope>
         </dependency>

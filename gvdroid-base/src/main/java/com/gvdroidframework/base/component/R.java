@@ -2,19 +2,20 @@ package com.gvdroidframework.base.component;
 
 import java.io.Serializable;
 
-public final class Response<T> implements Serializable {
+public final class R<T> implements Serializable {
     private Status status;
     private T body;
 
-    public Response(T t, Status status) {
+    public R(T t) {
+        this.body = t;
+        this.status = new Status();
+    }
+
+    public R(T t, Status status) {
         this.body = t;
         this.status = status;
     }
 
-    public Response(T t) {
-        this.body = t;
-        this.status = new Status();
-    }
 
     public Status getStatus() {
         return status;
@@ -32,11 +33,11 @@ public final class Response<T> implements Serializable {
         this.body = body;
     }
 
-    public static <T> Response<T> body(T body) {
-        return body(body, new Status());
+    public static <T> R<T> body(T body) {
+        return new R<>(body);
     }
 
-    public static <T> Response<T> body(T body, Status status) {
-        return new Response<>(body, status);
+    public static <T> R<T> body(T body, Status status) {
+        return new R<>(body, status);
     }
 }

@@ -13,12 +13,14 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.gvdroidframework</groupId>
             <artifactId>gvdroid-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
     <build>

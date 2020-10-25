@@ -1,7 +1,7 @@
 package com.gvdroidframework.boot.autoconfigure.controller;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.gvdroidframework.base.component.Response;
+import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 import org.springframework.core.annotation.Order;
@@ -28,7 +28,7 @@ public class RequestValidationAdviceAutoConfiguration {
      * @return ResponseEntity
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<Response<?>> handleBindException(MethodArgumentNotValidException e) {
+    public ResponseEntity<R<?>> handleBindException(MethodArgumentNotValidException e) {
         return new ResponseEntity<>(toStr(e), HttpStatus.OK);
     }
 
@@ -38,9 +38,9 @@ public class RequestValidationAdviceAutoConfiguration {
      * @param e MethodArgumentNotValidException
      * @return TransactionStatus
      */
-    private Response<?> toStr(MethodArgumentNotValidException e) {
+    private R<?> toStr(MethodArgumentNotValidException e) {
         Status status = new Status();
-        Response<?> response = new Response<>(null, status);
+        R<?> r = new R<>(null, status);
 
         String errors = e.getBindingResult().getFieldErrors().stream()
                 .map(ex -> ex.getField() + ":" + ex.getDefaultMessage())
@@ -50,8 +50,8 @@ public class RequestValidationAdviceAutoConfiguration {
                 });
 
         status.setError(errors, ErrorCode.ERROR_CODE_901);
-        response.setStatus(status);
-        return response;
+        r.setStatus(status);
+        return r;
     }
 
     /**
@@ -61,7 +61,7 @@ public class RequestValidationAdviceAutoConfiguration {
      * @return ResponseEntity
      */
     @ExceptionHandler(value = InvalidFormatException.class)
-    public ResponseEntity<Response<?>> handleEnumBindException(InvalidFormatException e) {
+    public ResponseEntity<R<?>> handleEnumBindException(InvalidFormatException e) {
         return new ResponseEntity<>(toStr(e), HttpStatus.BAD_REQUEST);
     }
 
@@ -71,10 +71,10 @@ public class RequestValidationAdviceAutoConfiguration {
      * @param e 格式错误异常
      * @return XfaceGenericResponseDTO
      */
-    private Response<?> toStr(InvalidFormatException e) {
+    private R<?> toStr(InvalidFormatException e) {
         Status status = new Status(ErrorCode.FAILURE, ErrorCode.ERROR_CODE_901, e.getMessage());
-        Response<?> responseDTO = new Response<>(null, status);
-        responseDTO.setStatus(status);
-        return responseDTO;
+        R<?> rDTO = new R<>(null, status);
+        rDTO.setStatus(status);
+        return rDTO;
     }
 }

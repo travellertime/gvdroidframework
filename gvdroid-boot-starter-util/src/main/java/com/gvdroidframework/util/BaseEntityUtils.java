@@ -13,7 +13,6 @@ import java.util.Date;
  * @author Colin
  * @since 3.0.0
  */
-@Deprecated
 public class BaseEntityUtils {
 
     /**

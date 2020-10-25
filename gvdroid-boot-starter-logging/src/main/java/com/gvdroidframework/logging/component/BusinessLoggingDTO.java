@@ -13,7 +13,7 @@ public class BusinessLoggingDTO implements Serializable, Cloneable {
     private String serviceId;
     private String entityId;
     private String postingDate;
-    private Instant localDate;
+    private String localDate;
     private String channel;
     private String userId;
     private String orgId;
@@ -70,11 +70,11 @@ public class BusinessLoggingDTO implements Serializable, Cloneable {
         this.postingDate = postingDate;
     }
 
-    public Instant getLocalDate() {
+    public String getLocalDate() {
         return localDate;
     }
 
-    public void setLocalDate(Instant localDate) {
+    public void setLocalDate(String localDate) {
         this.localDate = localDate;
     }
 

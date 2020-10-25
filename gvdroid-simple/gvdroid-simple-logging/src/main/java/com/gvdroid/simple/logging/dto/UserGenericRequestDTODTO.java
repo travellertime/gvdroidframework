@@ -1,8 +1,8 @@
 package com.gvdroid.simple.logging.dto;
 
-import com.gvdroidframework.base.component.Request;
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
 
-public class UserRequestDTO {
+public class UserGenericRequestDTODTO extends XfaceGenericRequestDTO {
 
     String id;
 

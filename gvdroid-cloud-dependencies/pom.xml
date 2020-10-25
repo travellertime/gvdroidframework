@@ -39,6 +39,11 @@
             </dependency>
             <dependency>
                 <groupId>com.gvdroidframework.cloud</groupId>
+                <artifactId>gvdroid-cloud-starter</artifactId>
+                <version>${gvdroid.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gvdroidframework.cloud</groupId>
                 <artifactId>gvdroid-cloud-starter-autoconfigure</artifactId>
                 <version>${gvdroid.cloud.version}</version>
             </dependency>

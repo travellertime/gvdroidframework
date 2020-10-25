@@ -5,9 +5,7 @@ import com.gvdroid.simple.complex.dto.ColinRequestDTO;
 import com.gvdroid.simple.complex.dto.ColinResponseDTO;
 import com.gvdroid.simple.complex.dto.NoticeRequestDTO;
 import com.gvdroid.simple.complex.dto.NoticeResponseDTO;
-import com.gvdroidframework.base.component.Request;
-import com.gvdroidframework.base.component.Response;
-import com.gvdroidframework.base.component.Status;
+import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,9 +24,9 @@ public class NoticeController {
     @PostMapping(value = "/notice")
     @BusinessLogger(value = "NTC01")
     @ApiOperation(value = "NTC01 测试-通知", httpMethod = "POST")
-    public Response<NoticeResponseDTO> getNotice(@RequestBody @Valid Request<NoticeRequestDTO> request) {
+    public R<NoticeResponseDTO> getNotice(@RequestBody @Valid NoticeRequestDTO request) {
         log.info(JSON.toJSONString(request));
-        return new Response<>(new NoticeResponseDTO());
+        return new R<>(new NoticeResponseDTO());
     }
 
     @PostMapping(value = "/colin")

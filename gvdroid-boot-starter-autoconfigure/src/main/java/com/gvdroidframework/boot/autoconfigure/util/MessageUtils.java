@@ -1,7 +1,7 @@
 package com.gvdroidframework.boot.autoconfigure.util;
 
 import com.gvdroidframework.base.component.Context;
-import com.gvdroidframework.base.component.Request;
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -58,13 +58,13 @@ public class MessageUtils {
         return messageSource.getMessage(key, args, locale);
     }
 
-    public static String getErrMsg(String key, Request<?> dto) {
+    public static String getErrMsg(String key, XfaceGenericRequestDTO dto) {
         Locale locale = getLocale(dto);
         return messageSource.getMessage(key, null, locale);
     }
 
 
-    public static String getErrMsg(String key, Request<?> dto, String... args) {
+    public static String getErrMsg(String key, XfaceGenericRequestDTO dto, String... args) {
         Locale locale = getLocale(dto);
         return messageSource.getMessage(key, args, locale);
     }
@@ -80,7 +80,7 @@ public class MessageUtils {
         return messageSource.getMessage(key, args, locale);
     }
 
-    private static Locale getLocale(Request<?> dto) {
+    private static Locale getLocale(XfaceGenericRequestDTO dto) {
         String tag = dto.getContext().getLocale();
         Locale locale;
         if (tag == null || tag.equals("")) {

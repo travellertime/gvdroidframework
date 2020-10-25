@@ -1,7 +1,7 @@
 package com.gvdroidframework.boot.autoconfigure.controller;
 
 
-import com.gvdroidframework.base.component.Response;
+import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
@@ -32,7 +32,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
      * @return ResponseEntity
      */
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<Response<?>> handleException(Exception e) {
+    public ResponseEntity<R<?>> handleException(Exception e) {
         return fetchGenericResponse(e);
     }
 
@@ -42,78 +42,78 @@ public class GlobalExceptionAdviceAutoConfiguration {
      * @param e Any RuntimeException
      * @return TransactionStatus
      */
-    private ResponseEntity<Response<?>> fetchGenericResponse(Exception e) {
+    private ResponseEntity<R<?>> fetchGenericResponse(Exception e) {
         Status status = new Status();
-        Response<?> response = new Response<>(null, status);
+        R<?> r = new R<>(null, status);
 
         // 自定义BaseException异常
         if (e instanceof BaseException) {
-            return getBaseException((BaseException) e, response, status);
+            return getBaseException((BaseException) e, r, status);
         }
 
         // 自定义RunException异常
         if (e instanceof RunException) {
-            return getRunException((RunException) e, response, status);
+            return getRunException((RunException) e, r, status);
         }
 
         // 系统运行时异常
-        return getRuntimeException(e, response, status);
+        return getRuntimeException(e, r, status);
     }
 
     /**
      * 获取运行时异常的错误信息
      *
      * @param e        Exception
-     * @param response XfaceGenericResponseDTO
+     * @param r XfaceGenericResponseDTO
      * @param status   Status
      * @return XfaceGenericResponseDTO and ResponseEntity with HttpStatus 200
      */
-    private ResponseEntity<Response<?>> getRuntimeException(Exception e, Response<?> response, Status status) {
-        fillTransactionStatus(e, response, status);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    private ResponseEntity<R<?>> getRuntimeException(Exception e, R<?> r, Status status) {
+        fillTransactionStatus(e, r, status);
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
     /**
      * 获取运行时的未知异常
      *
      * @param e        RunException
-     * @param response XfaceGenericResponseDTO
+     * @param r XfaceGenericResponseDTO
      * @param status   TransactionStatus
      * @return ResponseEntity
      */
-    private ResponseEntity<Response<?>> getRunException(RunException e, Response<?> response, Status status) {
+    private ResponseEntity<R<?>> getRunException(RunException e, R<?> r, Status status) {
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
-        fillTransactionStatus(e, response, status);
+        fillTransactionStatus(e, r, status);
         e.printStackTrace();
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(r, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**
      * 获取自定义异常的错误信息
      *
      * @param e        Exception
-     * @param response XfaceGenericResponseDTO
+     * @param r XfaceGenericResponseDTO
      * @param status   TransactionStatus
      * @return XfaceGenericResponseDTO
      */
-    private ResponseEntity<Response<?>> getBaseException(BaseException e, Response<?> response, Status status) {
+    private ResponseEntity<R<?>> getBaseException(BaseException e, R<?> r, Status status) {
         status.setError(e.getErrorDesc(), e.getErrorCode());
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
-        response.setStatus(status);
+        r.setStatus(status);
 //        return new ResponseEntity<>(response, HttpStatus.OK);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
     /**
      * 根据传入的Exception填充TransactionStatus
      *
      * @param e        Exception
-     * @param response XfaceGenericResponseDTO
+     * @param r XfaceGenericResponseDTO
      * @param status   TransactionStatus
      */
-    private void fillTransactionStatus(Exception e, Response<?> response, Status status) {
+    private void fillTransactionStatus(Exception e, R<?> r, Status status) {
         status.setError(ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
         status.setMemo(e.getMessage());
-        response.setStatus(status);
+        r.setStatus(status);
     }
 }

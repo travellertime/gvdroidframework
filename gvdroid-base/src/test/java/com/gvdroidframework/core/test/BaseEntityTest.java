@@ -1,14 +1,14 @@
 package com.gvdroidframework.core.test;
 
-import com.gvdroidframework.base.component.Request;
-import com.gvdroidframework.base.component.Response;
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
+import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.base.component.Status;
 
 public class BaseEntityTest {
 
-    public Response<ResponseDTO> make(Request RequestDTO) {
+    public R<ResponseDTO> make(XfaceGenericRequestDTO xfaceGenericRequestDTODTO) {
 
-        return new Response<>(new ResponseDTO("hello world"), new Status("1", "1"));
+        return new R<>(new ResponseDTO("hello world"), new Status("1", "1"));
     }
 
     public static void main(String[] args) {

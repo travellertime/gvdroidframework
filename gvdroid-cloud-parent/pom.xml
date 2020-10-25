@@ -7,7 +7,7 @@
         <groupId>com.gvdroidframework.cloud</groupId>
         <artifactId>gvdroid-cloud-dependencies</artifactId>
         <version>2.2.5-SNAPSHOT</version>
-        <relativePath>../gvdroid-boot-dependencies</relativePath>
+        <relativePath>../gvdroid-cloud-dependencies</relativePath>
     </parent>
     <artifactId>gvdroid-cloud-parent</artifactId>
     <packaging>pom</packaging>

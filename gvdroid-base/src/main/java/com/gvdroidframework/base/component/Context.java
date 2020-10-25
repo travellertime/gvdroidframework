@@ -23,7 +23,7 @@ public class Context implements Serializable {
     /**
      * 调用方本地时间 --年月日时分秒。（前端不填，后端可选）
      */
-    private Instant localDateTime;
+    private String localDateTime;
 
     /**
      * 交易机构编号。（可选）
@@ -114,11 +114,11 @@ public class Context implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public Instant getLocalDateTime() {
+    public String getLocalDateTime() {
         return localDateTime;
     }
 
-    public void setLocalDateTime(Instant localDateTime) {
+    public void setLocalDateTime(String localDateTime) {
         this.localDateTime = localDateTime;
     }
 

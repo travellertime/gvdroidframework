@@ -14,6 +14,10 @@ public class Status {
         }
     }
 
+    public static Status of(String serverName, String serviceId) {
+        return new Status(ErrorCode.EXCEPTION, "call remote service error", "901", serverName + ":" + serviceId);
+    }
+
     /**
      * 错误代码
      */

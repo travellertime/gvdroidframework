@@ -2,7 +2,8 @@ package com.gvdroidframework.logging.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.gvdroidframework.base.component.Context;
-import com.gvdroidframework.base.component.Response;
+import com.gvdroidframework.base.component.R;
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
 import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
@@ -57,20 +58,19 @@ public class BusinessLoggerAspect {
         try {
             // 得到请求对象
             for (Object o : proceedingJoinPoint.getArgs()) {
-                Class<?> clazz = o.getClass();
-                boolean isRequiredClass = clazz.getName().equals("com.gvdroidframework.base.component.Request");
-                if (isRequiredClass) {
-                    requestDTO = o;
-                    break;
-                }
-                //TODO 现在使用了Wrapper需要重写一下这里。
-//                requestDTO = o.getClass();
-//                Class<?> superclass = o.getClass().getSuperclass();
-//                boolean isRequiredClass = superclass.equals(Request.class);
+//                Class<?> clazz = o.getClass();
+//                boolean isRequiredClass = clazz.getName().equals("com.gvdroidframework.base.component.Request");
 //                if (isRequiredClass) {
 //                    requestDTO = o;
 //                    break;
 //                }
+                requestDTO = o.getClass();
+                Class<?> superclass = o.getClass().getSuperclass();
+                boolean isRequiredClass = superclass.equals(XfaceGenericRequestDTO.class);
+                if (isRequiredClass) {
+                    requestDTO = o;
+                    break;
+                }
             }
             if (null == requestDTO) {
                 throw new RunException("requestDTO cannot satisfied required info, check with your supervisor.", "775", ErrorCode.EXCEPTION, startTime);
@@ -143,12 +143,7 @@ public class BusinessLoggerAspect {
      * @return 标准输出对象
      */
     private Object getErrorResponse(BaseException e) {
-//        XfaceGenericResponseDTO responseDTO = new XfaceGenericResponseDTO();
-//        TransactionStatus transactionStatus = new TransactionStatus();
-//        transactionStatus.setError(e.getErrorDesc(), e.getErrorCode());
-//        responseDTO.setTransactionStatus(transactionStatus);
-//        return responseDTO;
-        return new Response<>(null, new Status(e.getErrorDesc(), e.getErrorCode()));
+        return new R<>(null, new Status(e.getErrorDesc(), e.getErrorCode()));
     }
 
     /**
@@ -158,13 +153,7 @@ public class BusinessLoggerAspect {
      * @return 标准输出对象
      */
     private Object getErrorResponse(Throwable e) {
-//        XfaceGenericResponseDTO responseDTO = new XfaceGenericResponseDTO();
-//        TransactionStatus transactionStatus = new TransactionStatus();
-//        transactionStatus.setError(ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
-//        transactionStatus.setMemo(e.getMessage());
-//        responseDTO.setTransactionStatus(transactionStatus);
-//        return responseDTO;
-        return new Response<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, e.getMessage()));
+        return new R<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, e.getMessage()));
     }
 
     /**
@@ -175,21 +164,10 @@ public class BusinessLoggerAspect {
      * @return 标准输出对象
      */
     private Object getErrorResponse(String replyText, String replyCode) {
-//        XfaceGenericResponseDTO responseDTO = new XfaceGenericResponseDTO();
-//        TransactionStatus transactionStatus = new TransactionStatus();
-//
-//        if (replyCode.equals(ErrorCode.ERROR_CODE_999)) {
-//            transactionStatus.setError(ErrorCode.ERROR_MSG_999, replyCode, ErrorCode.EXCEPTION);
-//            transactionStatus.setMemo(replyText);
-//        } else {
-//            transactionStatus.setError(replyText, replyCode);
-//        }
-//        responseDTO.setTransactionStatus(transactionStatus);
-//        return responseDTO;
         if (replyCode.equals(ErrorCode.ERROR_CODE_999)) {
-            return new Response<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999, replyCode, replyText));
+            return new R<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999, replyCode, replyText));
         } else {
-            return new Response<>(null, new Status(replyText, replyCode));
+            return new R<>(null, new Status(replyText, replyCode));
         }
     }
 

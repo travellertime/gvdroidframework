@@ -1,8 +1,10 @@
 package com.gvdroid.simple.complex.dto;
 
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
+
 import javax.validation.constraints.NotBlank;
 
-public class NoticeRequestDTO {
+public class NoticeRequestDTO extends XfaceGenericRequestDTO {
 
 
     @NotBlank(message = "id cannot be blank")

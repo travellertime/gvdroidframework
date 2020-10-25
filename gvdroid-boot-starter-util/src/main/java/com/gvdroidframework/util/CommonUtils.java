@@ -17,6 +17,10 @@ public class CommonUtils {
         return null == value || value == 0;
     }
 
+    public static boolean isEmptyOrZero(Long value) {
+        return null == value || value == 0;
+    }
+
     public static boolean isEmptyOrZero(Boolean value) {
         return null == value || !value;
     }
