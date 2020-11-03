@@ -38,6 +38,10 @@ call mvn clean install -Dmaven.test.skip=true
 cd ../gvdroid-boot-starter-mybatis
 call mvn clean install -Dmaven.test.skip=true
 
+@echo compile gvdroid-boot-starter-security
+cd ../gvdroid-boot-starter-security
+call mvn clean install -Dmaven.test.skip=true
+
 @echo compile gvdroid-boot-starter-helper
 cd ../gvdroid-boot-starter-helper
 call mvn clean install -Dmaven.test.skip=true
@@ -48,10 +52,6 @@ call mvn clean install -Dmaven.test.skip=true
 
 @echo compile gvdroid-boot-starter-desire
 cd ../gvdroid-boot-starter-desire
-call mvn clean install -Dmaven.test.skip=true
-
-@echo compile gvdroid-boot-starter-security
-cd ../gvdroid-boot-starter-security
 call mvn clean install -Dmaven.test.skip=true
 
 @echo compile gvdroid-boot-starter
