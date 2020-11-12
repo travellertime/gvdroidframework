@@ -10,6 +10,18 @@
         <relativePath />
     </parent>
     <artifactId>gvdroid-boot-starter-desire</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>
