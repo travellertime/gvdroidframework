@@ -3,9 +3,9 @@
 <mapper namespace="com.gvdroidframework.desire.repository.BaGlobalSerialMapper">
   <resultMap id="BaseResultMap" type="com.gvdroidframework.desire.entity.BaGlobalSerial">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
-    <result column="value" jdbcType="INTEGER" property="value" />
-    <result column="valueDate" jdbcType="VARCHAR" property="valueDate" />
+    <result column="sequenceKey" jdbcType="VARCHAR" property="sequenceKey" />
+    <result column="sequenceValue" jdbcType="INTEGER" property="sequenceValue" />
+    <result column="sequenceDate" jdbcType="VARCHAR" property="sequenceDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, key, value, valueDate
+    id, sequenceKey, sequenceValue, sequenceDate
   </sql>
   <select id="selectByExample" parameterType="com.gvdroidframework.desire.entity.BaGlobalSerialExample" resultMap="BaseResultMap">
     select
@@ -100,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gvdroidframework.desire.entity.BaGlobalSerial">
-    insert into ba_global_serial (id, key, value, 
-      valueDate)
-    values (#{id,jdbcType=BIGINT}, #{key,jdbcType=VARCHAR}, #{value,jdbcType=INTEGER}, 
-      #{valueDate,jdbcType=VARCHAR})
+    insert into ba_global_serial (id, sequenceKey, sequenceValue, 
+      sequenceDate)
+    values (#{id,jdbcType=BIGINT}, #{sequenceKey,jdbcType=VARCHAR}, #{sequenceValue,jdbcType=INTEGER}, 
+      #{sequenceDate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gvdroidframework.desire.entity.BaGlobalSerial">
     insert into ba_global_serial
@@ -111,28 +111,28 @@
       <if test="id != null">
         id,
       </if>
-      <if test="key != null">
-        key,
+      <if test="sequenceKey != null">
+        sequenceKey,
       </if>
-      <if test="value != null">
-        value,
+      <if test="sequenceValue != null">
+        sequenceValue,
       </if>
-      <if test="valueDate != null">
-        valueDate,
+      <if test="sequenceDate != null">
+        sequenceDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="key != null">
-        #{key,jdbcType=VARCHAR},
+      <if test="sequenceKey != null">
+        #{sequenceKey,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        #{value,jdbcType=INTEGER},
+      <if test="sequenceValue != null">
+        #{sequenceValue,jdbcType=INTEGER},
       </if>
-      <if test="valueDate != null">
-        #{valueDate,jdbcType=VARCHAR},
+      <if test="sequenceDate != null">
+        #{sequenceDate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,14 +148,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.key != null">
-        key = #{record.key,jdbcType=VARCHAR},
+      <if test="record.sequenceKey != null">
+        sequenceKey = #{record.sequenceKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.value != null">
-        value = #{record.value,jdbcType=INTEGER},
+      <if test="record.sequenceValue != null">
+        sequenceValue = #{record.sequenceValue,jdbcType=INTEGER},
       </if>
-      <if test="record.valueDate != null">
-        valueDate = #{record.valueDate,jdbcType=VARCHAR},
+      <if test="record.sequenceDate != null">
+        sequenceDate = #{record.sequenceDate,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -165,9 +165,9 @@
   <update id="updateByExample" parameterType="map">
     update ba_global_serial
     set id = #{record.id,jdbcType=BIGINT},
-      key = #{record.key,jdbcType=VARCHAR},
-      value = #{record.value,jdbcType=INTEGER},
-      valueDate = #{record.valueDate,jdbcType=VARCHAR}
+      sequenceKey = #{record.sequenceKey,jdbcType=VARCHAR},
+      sequenceValue = #{record.sequenceValue,jdbcType=INTEGER},
+      sequenceDate = #{record.sequenceDate,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -175,23 +175,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.gvdroidframework.desire.entity.BaGlobalSerial">
     update ba_global_serial
     <set>
-      <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+      <if test="sequenceKey != null">
+        sequenceKey = #{sequenceKey,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        value = #{value,jdbcType=INTEGER},
+      <if test="sequenceValue != null">
+        sequenceValue = #{sequenceValue,jdbcType=INTEGER},
       </if>
-      <if test="valueDate != null">
-        valueDate = #{valueDate,jdbcType=VARCHAR},
+      <if test="sequenceDate != null">
+        sequenceDate = #{sequenceDate,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gvdroidframework.desire.entity.BaGlobalSerial">
     update ba_global_serial
-    set key = #{key,jdbcType=VARCHAR},
-      value = #{value,jdbcType=INTEGER},
-      valueDate = #{valueDate,jdbcType=VARCHAR}
+    set sequenceKey = #{sequenceKey,jdbcType=VARCHAR},
+      sequenceValue = #{sequenceValue,jdbcType=INTEGER},
+      sequenceDate = #{sequenceDate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

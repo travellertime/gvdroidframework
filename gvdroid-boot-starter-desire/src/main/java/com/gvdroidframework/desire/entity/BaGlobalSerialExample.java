@@ -164,203 +164,203 @@ public class BaGlobalSerialExample {
             return (Criteria) this;
         }
 
-        public Criteria andKeyIsNull() {
-            addCriterion("key is null");
+        public Criteria andSequenceKeyIsNull() {
+            addCriterion("sequenceKey is null");
             return (Criteria) this;
         }
 
-        public Criteria andKeyIsNotNull() {
-            addCriterion("key is not null");
+        public Criteria andSequenceKeyIsNotNull() {
+            addCriterion("sequenceKey is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKeyEqualTo(String value) {
-            addCriterion("key =", value, "key");
+        public Criteria andSequenceKeyEqualTo(String value) {
+            addCriterion("sequenceKey =", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotEqualTo(String value) {
-            addCriterion("key <>", value, "key");
+        public Criteria andSequenceKeyNotEqualTo(String value) {
+            addCriterion("sequenceKey <>", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyGreaterThan(String value) {
-            addCriterion("key >", value, "key");
+        public Criteria andSequenceKeyGreaterThan(String value) {
+            addCriterion("sequenceKey >", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("key >=", value, "key");
+        public Criteria andSequenceKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("sequenceKey >=", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLessThan(String value) {
-            addCriterion("key <", value, "key");
+        public Criteria andSequenceKeyLessThan(String value) {
+            addCriterion("sequenceKey <", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLessThanOrEqualTo(String value) {
-            addCriterion("key <=", value, "key");
+        public Criteria andSequenceKeyLessThanOrEqualTo(String value) {
+            addCriterion("sequenceKey <=", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLike(String value) {
-            addCriterion("key like", value, "key");
+        public Criteria andSequenceKeyLike(String value) {
+            addCriterion("sequenceKey like", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotLike(String value) {
-            addCriterion("key not like", value, "key");
+        public Criteria andSequenceKeyNotLike(String value) {
+            addCriterion("sequenceKey not like", value, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyIn(List<String> values) {
-            addCriterion("key in", values, "key");
+        public Criteria andSequenceKeyIn(List<String> values) {
+            addCriterion("sequenceKey in", values, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotIn(List<String> values) {
-            addCriterion("key not in", values, "key");
+        public Criteria andSequenceKeyNotIn(List<String> values) {
+            addCriterion("sequenceKey not in", values, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyBetween(String value1, String value2) {
-            addCriterion("key between", value1, value2, "key");
+        public Criteria andSequenceKeyBetween(String value1, String value2) {
+            addCriterion("sequenceKey between", value1, value2, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotBetween(String value1, String value2) {
-            addCriterion("key not between", value1, value2, "key");
+        public Criteria andSequenceKeyNotBetween(String value1, String value2) {
+            addCriterion("sequenceKey not between", value1, value2, "sequenceKey");
             return (Criteria) this;
         }
 
-        public Criteria andValueIsNull() {
-            addCriterion("value is null");
+        public Criteria andSequenceValueIsNull() {
+            addCriterion("sequenceValue is null");
             return (Criteria) this;
         }
 
-        public Criteria andValueIsNotNull() {
-            addCriterion("value is not null");
+        public Criteria andSequenceValueIsNotNull() {
+            addCriterion("sequenceValue is not null");
             return (Criteria) this;
         }
 
-        public Criteria andValueEqualTo(Integer value) {
-            addCriterion("value =", value, "value");
+        public Criteria andSequenceValueEqualTo(Integer value) {
+            addCriterion("sequenceValue =", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueNotEqualTo(Integer value) {
-            addCriterion("value <>", value, "value");
+        public Criteria andSequenceValueNotEqualTo(Integer value) {
+            addCriterion("sequenceValue <>", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueGreaterThan(Integer value) {
-            addCriterion("value >", value, "value");
+        public Criteria andSequenceValueGreaterThan(Integer value) {
+            addCriterion("sequenceValue >", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueGreaterThanOrEqualTo(Integer value) {
-            addCriterion("value >=", value, "value");
+        public Criteria andSequenceValueGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sequenceValue >=", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueLessThan(Integer value) {
-            addCriterion("value <", value, "value");
+        public Criteria andSequenceValueLessThan(Integer value) {
+            addCriterion("sequenceValue <", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueLessThanOrEqualTo(Integer value) {
-            addCriterion("value <=", value, "value");
+        public Criteria andSequenceValueLessThanOrEqualTo(Integer value) {
+            addCriterion("sequenceValue <=", value, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueIn(List<Integer> values) {
-            addCriterion("value in", values, "value");
+        public Criteria andSequenceValueIn(List<Integer> values) {
+            addCriterion("sequenceValue in", values, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueNotIn(List<Integer> values) {
-            addCriterion("value not in", values, "value");
+        public Criteria andSequenceValueNotIn(List<Integer> values) {
+            addCriterion("sequenceValue not in", values, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueBetween(Integer value1, Integer value2) {
-            addCriterion("value between", value1, value2, "value");
+        public Criteria andSequenceValueBetween(Integer value1, Integer value2) {
+            addCriterion("sequenceValue between", value1, value2, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueNotBetween(Integer value1, Integer value2) {
-            addCriterion("value not between", value1, value2, "value");
+        public Criteria andSequenceValueNotBetween(Integer value1, Integer value2) {
+            addCriterion("sequenceValue not between", value1, value2, "sequenceValue");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateIsNull() {
-            addCriterion("valueDate is null");
+        public Criteria andSequenceDateIsNull() {
+            addCriterion("sequenceDate is null");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateIsNotNull() {
-            addCriterion("valueDate is not null");
+        public Criteria andSequenceDateIsNotNull() {
+            addCriterion("sequenceDate is not null");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateEqualTo(String value) {
-            addCriterion("valueDate =", value, "valueDate");
+        public Criteria andSequenceDateEqualTo(String value) {
+            addCriterion("sequenceDate =", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateNotEqualTo(String value) {
-            addCriterion("valueDate <>", value, "valueDate");
+        public Criteria andSequenceDateNotEqualTo(String value) {
+            addCriterion("sequenceDate <>", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateGreaterThan(String value) {
-            addCriterion("valueDate >", value, "valueDate");
+        public Criteria andSequenceDateGreaterThan(String value) {
+            addCriterion("sequenceDate >", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateGreaterThanOrEqualTo(String value) {
-            addCriterion("valueDate >=", value, "valueDate");
+        public Criteria andSequenceDateGreaterThanOrEqualTo(String value) {
+            addCriterion("sequenceDate >=", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateLessThan(String value) {
-            addCriterion("valueDate <", value, "valueDate");
+        public Criteria andSequenceDateLessThan(String value) {
+            addCriterion("sequenceDate <", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateLessThanOrEqualTo(String value) {
-            addCriterion("valueDate <=", value, "valueDate");
+        public Criteria andSequenceDateLessThanOrEqualTo(String value) {
+            addCriterion("sequenceDate <=", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateLike(String value) {
-            addCriterion("valueDate like", value, "valueDate");
+        public Criteria andSequenceDateLike(String value) {
+            addCriterion("sequenceDate like", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateNotLike(String value) {
-            addCriterion("valueDate not like", value, "valueDate");
+        public Criteria andSequenceDateNotLike(String value) {
+            addCriterion("sequenceDate not like", value, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateIn(List<String> values) {
-            addCriterion("valueDate in", values, "valueDate");
+        public Criteria andSequenceDateIn(List<String> values) {
+            addCriterion("sequenceDate in", values, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateNotIn(List<String> values) {
-            addCriterion("valueDate not in", values, "valueDate");
+        public Criteria andSequenceDateNotIn(List<String> values) {
+            addCriterion("sequenceDate not in", values, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateBetween(String value1, String value2) {
-            addCriterion("valueDate between", value1, value2, "valueDate");
+        public Criteria andSequenceDateBetween(String value1, String value2) {
+            addCriterion("sequenceDate between", value1, value2, "sequenceDate");
             return (Criteria) this;
         }
 
-        public Criteria andValueDateNotBetween(String value1, String value2) {
-            addCriterion("valueDate not between", value1, value2, "valueDate");
+        public Criteria andSequenceDateNotBetween(String value1, String value2) {
+            addCriterion("sequenceDate not between", value1, value2, "sequenceDate");
             return (Criteria) this;
         }
     }

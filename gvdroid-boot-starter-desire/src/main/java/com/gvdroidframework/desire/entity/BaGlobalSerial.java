@@ -3,11 +3,11 @@ package com.gvdroidframework.desire.entity;
 public class BaGlobalSerial {
     private Long id;
 
-    private String key;
+    private String sequenceKey;
 
-    private Integer value;
+    private Integer sequenceValue;
 
-    private String valueDate;
+    private String sequenceDate;
 
     public Long getId() {
         return id;
@@ -17,27 +17,27 @@ public class BaGlobalSerial {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getSequenceKey() {
+        return sequenceKey;
     }
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setSequenceKey(String sequenceKey) {
+        this.sequenceKey = sequenceKey == null ? null : sequenceKey.trim();
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getSequenceValue() {
+        return sequenceValue;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setSequenceValue(Integer sequenceValue) {
+        this.sequenceValue = sequenceValue;
     }
 
-    public String getValueDate() {
-        return valueDate;
+    public String getSequenceDate() {
+        return sequenceDate;
     }
 
-    public void setValueDate(String valueDate) {
-        this.valueDate = valueDate == null ? null : valueDate.trim();
+    public void setSequenceDate(String sequenceDate) {
+        this.sequenceDate = sequenceDate == null ? null : sequenceDate.trim();
     }
 }

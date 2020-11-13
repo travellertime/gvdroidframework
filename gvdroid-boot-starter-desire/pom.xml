@@ -7,19 +7,39 @@
         <groupId>com.gvdroidframework.boot</groupId>
         <artifactId>gvdroid-boot-starters</artifactId>
         <version>2.2.5-SNAPSHOT</version>
-        <relativePath />
+        <relativePath/>
     </parent>
     <artifactId>gvdroid-boot-starter-desire</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
             <artifactId>gvdroid-boot-starter-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>compile</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
     <build>

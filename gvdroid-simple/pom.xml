@@ -21,6 +21,7 @@
         <module>gvdroid-simple-security</module>
         <module>gvdroid-simple-autoconfigure</module>
         <module>gvdroid-simple-complex</module>
+        <module>gvdroid-simple-desire</module>
     </modules>
 
 
