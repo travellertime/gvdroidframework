@@ -12,7 +12,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 
 @Configuration
-@ConditionalOnClass(RedisOperations.class)
+@ConditionalOnClass(value = {RedisOperations.class})
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableCaching
 @Slf4j

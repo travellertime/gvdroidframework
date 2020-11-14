@@ -17,6 +17,14 @@
         </dependency>
         <dependency>
             <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-desire</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
             <artifactId>gvdroid-boot-starter-mybatis</artifactId>
         </dependency>
         <dependency>

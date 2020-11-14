@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gvdroid-simple-complex-server
+    name: gvdroid-simple-desire-server
   datasource:
     continue-on-error: false
     type: com.alibaba.druid.pool.DruidDataSource

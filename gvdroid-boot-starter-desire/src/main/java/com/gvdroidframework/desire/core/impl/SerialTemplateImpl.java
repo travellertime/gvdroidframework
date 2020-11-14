@@ -3,10 +3,9 @@ package com.gvdroidframework.desire.core.impl;
 import com.gvdroidframework.desire.core.SerialTemplate;
 import com.gvdroidframework.desire.service.GlobalSerialService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.integration.jdbc.lock.JdbcLockRegistry;
+import org.springframework.integration.redis.util.RedisLockRegistry;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -16,7 +15,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class SerialTemplateImpl implements SerialTemplate {
 
     final GlobalSerialService globalSerialService;
-    final JdbcLockRegistry jdbcLockRegistry;
+    final RedisLockRegistry lockRegistry;
 
     @Override
     public Integer serialInquiry(String key, String valueDate) {
@@ -35,7 +34,7 @@ public class SerialTemplateImpl implements SerialTemplate {
         }
 
         Integer serialNo = 0;
-        Lock lock = jdbcLockRegistry.obtain(key);
+        Lock lock = lockRegistry.obtain(key);
         try {
             boolean lockAcquired = lock.tryLock(10, SECONDS);
             if (lockAcquired) {

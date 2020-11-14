@@ -24,6 +24,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!-- 移除掉默认支持的 Tomcat -->
@@ -87,5 +92,4 @@
             </resource>
         </resources>
     </build>
-
 </project>
