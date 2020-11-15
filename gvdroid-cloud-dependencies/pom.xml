@@ -26,6 +26,7 @@
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
         <!-- gvdroid-cloud -->
         <gvdroid.cloud.version>2.2.5-SNAPSHOT</gvdroid.cloud.version>
+        <nacos.discovery.version>2.2.1.RELEASE</nacos.discovery.version>
     </properties>
 
     <dependencyManagement>
@@ -46,6 +47,16 @@
                 <groupId>com.gvdroidframework.cloud</groupId>
                 <artifactId>gvdroid-cloud-starter-autoconfigure</artifactId>
                 <version>${gvdroid.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.discovery.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.discovery.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

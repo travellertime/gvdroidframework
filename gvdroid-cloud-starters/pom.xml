@@ -12,5 +12,4 @@
     </parent>
     <artifactId>gvdroid-cloud-starters</artifactId>
     <packaging>pom</packaging>
-
 </project>
