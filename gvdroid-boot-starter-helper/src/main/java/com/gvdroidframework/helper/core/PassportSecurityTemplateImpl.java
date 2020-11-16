@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
-    private static final String REDIS_TOKEN_FIELD = "global-user-sign-in:";
-    private static int TOKEN_EXPIRY = 2419200; // 28天
+    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
+    private static final int TOKEN_EXPIRY = 2419200; // 28天
 
-    private RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
     public PassportSecurityTemplateImpl(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
