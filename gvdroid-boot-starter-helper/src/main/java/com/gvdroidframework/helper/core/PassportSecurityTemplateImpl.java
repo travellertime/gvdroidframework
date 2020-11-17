@@ -5,18 +5,30 @@ import com.gvdroidframework.security.util.JWTUtils;
 import com.gvdroidframework.util.MD5Util;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
-    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
+//    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
     private static final int TOKEN_EXPIRY = 2419200; // 28天
 
     private final RedisTemplate<String, String> redisTemplate;
 
     public PassportSecurityTemplateImpl(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    private String getTokenRedisKey(String tokenId) {
+        // 生成redis key
+        return JWTTokenClaim.KEY_TOKEN_PREFIX + MD5Util.MD5_32bit(tokenId);
+    }
+
+    @Override
+    public String getTokenSecretKey(String tokenId) {
+        String key = getTokenRedisKey(tokenId);
+        return this.redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -26,11 +38,10 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
      * @param saltCode saltCode
      */
     private void setRedis(String tokenId, String saltCode) {
-        // 生成redis key
-        String key = REDIS_TOKEN_FIELD + MD5Util.MD5_32bit(tokenId);
-
+        // 得到redis key
+        String key = getTokenRedisKey(tokenId);
         // 异步写入redis
-        redisTemplate.opsForValue().set(key, saltCode, TOKEN_EXPIRY);
+        redisTemplate.opsForValue().set(key, saltCode, Duration.ofSeconds(TOKEN_EXPIRY));
     }
 
     /**
@@ -40,8 +51,8 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
      */
     @Override
     public void remove(String tokenId) {
-        // 生成redis key
-        String key = REDIS_TOKEN_FIELD + MD5Util.MD5_32bit(tokenId);
+        // 得到redis key
+        String key = getTokenRedisKey(tokenId);
 
         // 异步删除redis
         redisTemplate.delete(key);

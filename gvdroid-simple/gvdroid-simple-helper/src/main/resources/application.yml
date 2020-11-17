@@ -1,0 +1,17 @@
+server:
+  port: 19001
+spring:
+  application:
+    name: gvdroid-simple-helper-server
+  redis:
+    url: "redis://@192.168.8.8:6379"
+    database: 5
+    ssl: false
+    timeout: 5000
+    lettuce:
+      pool:
+        max-active: 8 # Maximum number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
+        max-idle: 8 # Maximum number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
+        max-wait: -1ms # Maximum amount of time a connect allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
+        min-idle: 0 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
+#        shutdown-timeout: 100ms # Shutdown timeout.

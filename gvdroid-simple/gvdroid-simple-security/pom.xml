@@ -11,5 +11,10 @@
 
     <artifactId>gvdroid-simple-security</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
 </project>

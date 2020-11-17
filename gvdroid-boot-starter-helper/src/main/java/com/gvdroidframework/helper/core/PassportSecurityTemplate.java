@@ -5,4 +5,6 @@ public interface PassportSecurityTemplate {
     void remove(String tokenId);
 
     String generateTokenId(String customerId, String entityCode, String channelId, String saltCode);
+
+    String getTokenSecretKey(String tokenId);
 }
