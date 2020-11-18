@@ -1,0 +1,32 @@
+server:
+  port: 4001
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        register-enabled: true
+## internationalization (MessageSourceProperties)
+  messages:
+    always-use-message-format: false # Whether to always apply the MessageFormat rules, parsing even messages without arguments.
+    basename: i18n/messages # Comma-separated list of basenames (essentially a fully-qualified classpath location), each following the ResourceBundle convention with relaxed support for slash based locations.
+    cache-duration: # Loaded resource bundle files cache duration. When not set, bundles are cached forever. If a duration suffix is not specified, seconds will be used.
+    encoding: UTF-8 # Message bundles encoding.
+    fallback-to-system-locale: true # Whether to fall back to the system Locale if no files for a specific Locale have been found.
+    use-code-as-default-message: false # Whether to use the message code as the default message instead of throwing a "NoSuchMessageException". Recommended during development only.
+gvdroid:
+  swagger:
+    enabled: true
+    base-package: com.gvdroid.simple.demo1
+    license: com.gvdroid.cloud
+    description: demo1 api
+    title: demo1 api
+    version: 1.0.0-SNAPSHOT
+logging:
+#  config: classpath:logback/logback-${spring.profiles.active}.xml
+  file:
+    name: ./logs/${spring.application.name}-${server.port}.log
+    max-history: 90
+  level:
+    root: info
+    com.gvdroid.cloud.cif: debug

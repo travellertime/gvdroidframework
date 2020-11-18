@@ -156,4 +156,20 @@ public class Status {
         this.duration = duration;
     }
 
+    public Boolean isSuccess() {
+        return this.errorCode.equals(ErrorCode.SUCCESS);
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "errorCode='" + this.getErrorCode() + '\'' +
+                ", replyCode='" + this.getReplyCode() + '\'' +
+                ", replyText='" + this.getReplyText() + '\'' +
+                ", memo='" + this.getMemo() + '\'' +
+                ", appName='" + this.getAppName() + '\'' +
+                ", isSuccess='" + this.isSuccess() + '\'' +
+                ", duration=" + this.getDuration() +
+                '}';
+    }
 }

@@ -6,6 +6,10 @@ public final class R<T> implements Serializable {
     private Status status;
     private T body;
 
+    public R(){
+
+    }
+
     public R(T t) {
         this.body = t;
         this.status = new Status();

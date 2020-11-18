@@ -3,6 +3,7 @@ package com.gvdroidframework.util;
 import com.gvdroidframework.base.component.Context;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
@@ -27,6 +28,10 @@ public class CommonUtils {
 
     public static boolean isEmptyOrZero(BigDecimal value) {
         return null == value || BigDecimal.ZERO.compareTo(value) == 0;
+    }
+
+    public static boolean isEmpty(@Nullable Object str) {
+        return str == null || "".equals(str);
     }
 
     public static void primaryKeyValidation(Context context, String... keys) {
