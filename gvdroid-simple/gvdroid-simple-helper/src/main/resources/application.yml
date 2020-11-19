@@ -14,4 +14,6 @@ spring:
         max-idle: 8 # Maximum number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
         max-wait: -1ms # Maximum amount of time a connect allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
         min-idle: 0 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
+  main:
+    allow-bean-definition-overriding: true
 #        shutdown-timeout: 100ms # Shutdown timeout.

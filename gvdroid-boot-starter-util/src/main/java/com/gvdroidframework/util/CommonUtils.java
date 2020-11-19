@@ -7,6 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CommonUtils {
 
@@ -32,6 +33,10 @@ public class CommonUtils {
 
     public static boolean isEmpty(@Nullable Object str) {
         return str == null || "".equals(str);
+    }
+
+    public static boolean isEmpty(List<Object> list) {
+        return null == list || list.isEmpty();
     }
 
     public static void primaryKeyValidation(Context context, String... keys) {

@@ -14,11 +14,20 @@
     <dependencies>
         <dependency>
             <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
             <artifactId>gvdroid-boot-starter-helper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
