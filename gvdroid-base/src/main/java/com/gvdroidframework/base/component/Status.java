@@ -2,7 +2,9 @@ package com.gvdroidframework.base.component;
 
 import com.gvdroidframework.base.constant.ErrorCode;
 
-public class Status {
+import java.io.Serializable;
+
+public class Status implements Serializable {
 
     private static String APPLICATION_NAME = null;
 

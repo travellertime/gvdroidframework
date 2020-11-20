@@ -3,6 +3,7 @@ package com.gvdroidframework.desire.manager;
 import com.gvdroidframework.desire.entity.BaGlobalSerial;
 import com.gvdroidframework.desire.entity.BaGlobalSerialExample;
 import com.gvdroidframework.desire.repository.BaGlobalSerialMapper;
+import com.gvdroidframework.util.IDUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ public class BaGlobalSerialManager {
     }
 
     public void insert(BaGlobalSerial entity) {
+        entity.setId(IDUtils.generateOrderId());
         this.baGlobalSerialMapper.insert(entity);
     }
 

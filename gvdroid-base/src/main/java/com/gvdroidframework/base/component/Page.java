@@ -1,5 +1,7 @@
 package com.gvdroidframework.base.component;
 
+import java.io.Serializable;
+
 /**
  * 分页对象
  * 使用mybatis plus组件，该类会在后续版本移除。
@@ -7,7 +9,7 @@ package com.gvdroidframework.base.component;
  * @author Colin
  * @since 1.0.0
  */
-public class Page {
+public class Page implements Serializable {
 
     /**
      * 总记录数，自动返回，请勿设置
