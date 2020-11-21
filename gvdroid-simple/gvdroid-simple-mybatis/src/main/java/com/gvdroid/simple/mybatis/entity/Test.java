@@ -1,5 +1,7 @@
 package com.gvdroid.simple.mybatis.entity;
 
+import java.util.Date;
+
 public class Test {
     private Long id;
 
@@ -8,6 +10,8 @@ public class Test {
     private Integer age;
 
     private String entityId;
+
+    private Date nDate;
 
     public Long getId() {
         return id;
@@ -39,5 +43,13 @@ public class Test {
 
     public void setEntityId(String entityId) {
         this.entityId = entityId == null ? null : entityId.trim();
+    }
+
+    public Date getnDate() {
+        return nDate;
+    }
+
+    public void setnDate(Date nDate) {
+        this.nDate = nDate;
     }
 }

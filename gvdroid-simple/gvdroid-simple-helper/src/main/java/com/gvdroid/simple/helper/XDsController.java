@@ -1,5 +1,6 @@
 package com.gvdroid.simple.helper;
 
+import com.alibaba.fastjson.JSON;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,10 @@ public class XDsController {
 
     @GetMapping(value = "/h/l2/{id}")
     public List<UserDTO> getUserList(@PathVariable("id") String id) {
-        return this.dxService.getUserList(id);
+        List<UserDTO> userList = this.dxService.getUserList(id);
+        for (UserDTO userDTO : userList) {
+            System.out.println(JSON.toJSONString(userDTO));
+        }
+        return userList;
     }
 }

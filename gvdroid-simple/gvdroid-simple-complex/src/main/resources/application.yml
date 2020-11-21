@@ -1,6 +1,8 @@
 spring:
   application:
     name: gvdroid-simple-complex-server
+  jackson:
+    time-zone: UTC
 gvdroid:
   swagger:
     enabled: true

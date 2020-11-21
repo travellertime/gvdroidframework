@@ -1,10 +1,11 @@
-package com.gvdroid.simple.complex.dto;
+package com.gvdroid.simple.mybatis.dto;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.List;
 
 public class ColinRequestDTO {
+
+    Long id;
 
     @NotBlank(message = "name cannot be null")
     String name;
@@ -13,7 +14,13 @@ public class ColinRequestDTO {
 
     String postDate2;
 
-    List<ColinRequestSubDTO> requestSubList;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -37,13 +44,5 @@ public class ColinRequestDTO {
 
     public void setPostDate2(String postDate2) {
         this.postDate2 = postDate2;
-    }
-
-    public List<ColinRequestSubDTO> getRequestSubList() {
-        return requestSubList;
-    }
-
-    public void setRequestSubList(List<ColinRequestSubDTO> requestSubList) {
-        this.requestSubList = requestSubList;
     }
 }

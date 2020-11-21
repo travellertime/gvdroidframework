@@ -1,4 +1,4 @@
-package com.gvdroid.simple.complex.dto;
+package com.gvdroid.simple.mybatis.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +15,4 @@ public class ColinResponseDTO implements Serializable {
     String name;
 
     Date expiryDate;
-
-    List<ColinResponseSubDTO> subList;
 }
