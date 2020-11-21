@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="entityId" jdbcType="VARCHAR" property="entityId" />
+    <result column="nDate" jdbcType="TIMESTAMP" property="nDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,13 +67,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, age, entityId
+    id, name, age, entityId, nDate
   </sql>
   <select id="selectByExample" parameterType="com.gvdroid.simple.mybatis.entity.TestExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
+    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from test
     <if test="_parameter != null">
@@ -83,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from test
     where id = #{id,jdbcType=BIGINT}
@@ -99,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gvdroid.simple.mybatis.entity.Test">
-    insert into test (id, name, age,
-      entityId)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
-      #{entityId,jdbcType=VARCHAR})
+    insert into test (id, name, age, 
+      entityId, nDate)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{entityId,jdbcType=VARCHAR}, #{nDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.gvdroid.simple.mybatis.entity.Test">
     insert into test
@@ -119,6 +121,9 @@
       <if test="entityId != null">
         entityId,
       </if>
+      <if test="nDate != null">
+        nDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +137,9 @@
       </if>
       <if test="entityId != null">
         #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="nDate != null">
+        #{nDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +164,9 @@
       <if test="record.entityId != null">
         entityId = #{record.entityId,jdbcType=VARCHAR},
       </if>
+      <if test="record.nDate != null">
+        nDate = #{record.nDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +177,8 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
-      entityId = #{record.entityId,jdbcType=VARCHAR}
+      entityId = #{record.entityId,jdbcType=VARCHAR},
+      nDate = #{record.nDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +195,9 @@
       <if test="entityId != null">
         entityId = #{entityId,jdbcType=VARCHAR},
       </if>
+      <if test="nDate != null">
+        nDate = #{nDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -190,7 +205,8 @@
     update test
     set name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
-      entityId = #{entityId,jdbcType=VARCHAR}
+      entityId = #{entityId,jdbcType=VARCHAR},
+      nDate = #{nDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

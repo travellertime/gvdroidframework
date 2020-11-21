@@ -4,9 +4,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
-public class ColinRequestDTO {
+public class Colin2RequestDTO {
 
-    @NotBlank(message = "name cannot be null")
     String name;
 
     Date postDate;

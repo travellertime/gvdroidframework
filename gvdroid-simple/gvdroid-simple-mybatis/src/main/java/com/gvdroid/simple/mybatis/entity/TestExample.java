@@ -1,6 +1,7 @@
 package com.gvdroid.simple.mybatis.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TestExample {
@@ -361,6 +362,66 @@ public class TestExample {
 
         public Criteria andEntityIdNotBetween(String value1, String value2) {
             addCriterion("entityId not between", value1, value2, "entityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateIsNull() {
+            addCriterion("nDate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateIsNotNull() {
+            addCriterion("nDate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateEqualTo(Date value) {
+            addCriterion("nDate =", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateNotEqualTo(Date value) {
+            addCriterion("nDate <>", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateGreaterThan(Date value) {
+            addCriterion("nDate >", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("nDate >=", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateLessThan(Date value) {
+            addCriterion("nDate <", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateLessThanOrEqualTo(Date value) {
+            addCriterion("nDate <=", value, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateIn(List<Date> values) {
+            addCriterion("nDate in", values, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateNotIn(List<Date> values) {
+            addCriterion("nDate not in", values, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateBetween(Date value1, Date value2) {
+            addCriterion("nDate between", value1, value2, "nDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andNDateNotBetween(Date value1, Date value2) {
+            addCriterion("nDate not between", value1, value2, "nDate");
             return (Criteria) this;
         }
     }
