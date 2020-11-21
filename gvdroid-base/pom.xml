@@ -16,11 +16,4 @@
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
     </properties>
-    <distributionManagement>
-        <repository>
-            <id>rdc-snapshots</id>
-            <name>Aliyun Repository Snapshots</name>
-            <url>https://packages.aliyun.com/maven/repository/2046769-snapshot-6PXM6e/</url>
-        </repository>
-    </distributionManagement>
 </project>
