@@ -7,13 +7,13 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.util.List;
 
-public class JsonUtil {
+public class JsonUtils {
 
     /**
      * 对象转json串，全字段转换，含null
      *
-     * @param object
-     * @return
+     * @param object object
+     * @return String
      */
     public static String allToJson(Object object) {
         if (null == object) {
@@ -25,8 +25,8 @@ public class JsonUtil {
     /**
      * 对象转json串，null字段忽略
      *
-     * @param object
-     * @return
+     * @param object object
+     * @return String
      */
     public static String allToJsonIgnoreNull(Object object) {
         if (null == object) {
@@ -38,34 +38,35 @@ public class JsonUtil {
     /**
      * 功能描述：把JSON数据转换成指定的java对象
      *
-     * @param jsonStr JSON数据
-     * @param clazz   指定的java对象
+     * @param jsonString JSON数据
+     * @param targetClass   指定的java对象
      * @return 指定的java对象
      */
-    public static <T> T toBean(String jsonStr, Class<T> clazz) {
-        return JSON.parseObject(jsonStr, clazz);
+    public static <T> T toBean(String jsonString, Class<T> targetClass) {
+        return JSON.parseObject(jsonString, targetClass);
     }
 
     /**
      * 功能描述：把JSON数据转换成指定的java对象，属性保持原来的顺序
-     * @param srcJsonStr
-     * @param destClazz
-     * @param <T>
-     * @return
+     *
+     * @param sourceJsonString srcJsonString
+     * @param targetClass     destClazz
+     * @param <T>           t
+     * @return destClazz
      */
-    public static <T> T toBeanOrdered(String srcJsonStr, Class<T> destClazz) {
-        return JSON.parseObject(srcJsonStr, destClazz, Feature.OrderedField);
+    public static <T> T toBeanOrdered(String sourceJsonString, Class<T> targetClass) {
+        return JSON.parseObject(sourceJsonString, targetClass, Feature.OrderedField);
     }
 
     /**
      * 将json转化成List
      *
-     * @param srcJsonStr 源字符串
-     * @param destClazz 目标对象
-     * @return
+     * @param sourceJsonString 源字符串
+     * @param targetClass  目标对象
+     * @return List
      */
-    public static <T> List<T> toList(String srcJsonStr, Class<T> destClazz) {
-        return JSONObject.parseArray(srcJsonStr, destClazz);
+    public static <T> List<T> toList(String sourceJsonString, Class<T> targetClass) {
+        return JSONObject.parseArray(sourceJsonString, targetClass);
     }
 
 }
