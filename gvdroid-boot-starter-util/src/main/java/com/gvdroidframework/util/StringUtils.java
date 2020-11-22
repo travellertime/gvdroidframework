@@ -17,7 +17,7 @@ public class StringUtils {
      * @param isLeftFill true为左补齐，false为右补齐
      * @return String
      */
-    private static String stringFill(String source, int fillLength,
+    public static String stringFill(String source, int fillLength,
                                      char fillChar, boolean isLeftFill) {
         if (source == null || source.length() >= fillLength)
             return source;
