@@ -1,5 +1,6 @@
 package com.gvdroidframework.util;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -75,6 +76,15 @@ public class DateTimeUtils {
      */
     public static LocalDateTime getFormatDate(DateTimeFormatter format) {
         return LocalDateTime.parse(LocalDateTime.now().format(format), format);
+    }
+
+    /**
+     * 获取当前星期几
+     *
+     * @return
+     */
+    public static String getWeekDay() {
+        return String.valueOf(LocalDateTime.now().getDayOfWeek());
     }
 
     /**
