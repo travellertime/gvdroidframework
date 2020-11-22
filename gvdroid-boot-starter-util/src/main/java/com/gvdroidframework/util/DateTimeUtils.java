@@ -1,6 +1,5 @@
 package com.gvdroidframework.util;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,6 +9,7 @@ public class DateTimeUtils {
 
     public static final DateTimeFormatter TIME_FORMAT_FULL = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static final DateTimeFormatter TIME_FORMAT_YMD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter TIME_FORMAT_YMD_SIMP = DateTimeFormatter.ofPattern("yyyyMMdd");
     public static final DateTimeFormatter TIME_FORMAT_HMS = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter TIME_FORMAT_HM = DateTimeFormatter.ofPattern("HH:mm");
     public static final DateTimeFormatter TIME_FORMAT_YMD_HM = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -58,6 +58,15 @@ public class DateTimeUtils {
      */
     public static String getDateYMDStr() {
         return LocalDate.now().format(TIME_FORMAT_YMD);
+    }
+
+    /**
+     * 获取当前系统日期字符串，格式：yyyyMMdd
+     *
+     * @return
+     */
+    public static String getDateYMDSimpStr() {
+        return LocalDate.now().format(TIME_FORMAT_YMD_SIMP);
     }
 
     /**
