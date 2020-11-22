@@ -368,4 +368,13 @@ public class MathUtils {
         return b.setScale(2, BigDecimal.ROUND_DOWN);
     }
 
+    /**
+     * 向上取整
+     * @param molecule 分子
+     * @param denominator 分母
+     * @return
+     */
+    public static int ceil(double molecule, double denominator) {
+        return (int) Math.ceil(molecule/denominator);
+    }
 }
