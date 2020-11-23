@@ -35,8 +35,16 @@ public class CommonUtils {
         return str == null || "".equals(str);
     }
 
+    public static boolean isNotEmpty(@Nullable Object str) {
+        return !isEmpty(str);
+    }
+
     public static boolean isEmpty(List<Object> list) {
         return null == list || list.isEmpty();
+    }
+
+    public static boolean isNotEmpty(List<Object> list) {
+        return !isEmpty(list);
     }
 
     public static void primaryKeyValidation(Context context, String... keys) {
