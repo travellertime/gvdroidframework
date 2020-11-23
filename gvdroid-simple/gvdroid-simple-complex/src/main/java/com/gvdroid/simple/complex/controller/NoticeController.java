@@ -1,6 +1,7 @@
 package com.gvdroid.simple.complex.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.gvdroid.simple.complex.configuration.GDemoProperties;
 import com.gvdroid.simple.complex.dto.*;
 import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
@@ -8,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +29,18 @@ import java.util.List;
 @Slf4j
 public class NoticeController {
 
+    @Autowired
+    GDemoProperties gDemoProperties;
+
     @PostMapping(value = "/notice")
-    @BusinessLogger(value = "NTC01")
+//    @BusinessLogger(value = "NTC01")
     @ApiOperation(value = "NTC01 测试-通知", httpMethod = "POST")
     public R<NoticeResponseDTO> getNotice(@RequestBody @Valid NoticeRequestDTO request) {
         log.info(JSON.toJSONString(request));
-        return new R<>(new NoticeResponseDTO());
+
+        gDemoProperties.getList().forEach(System.out::println);
+
+        return R.body(new NoticeResponseDTO());
     }
 
     @PostMapping(value = "/colin")

@@ -6,7 +6,11 @@ spring:
       discovery:
         server-addr: localhost:8848
         register-enabled: true
-## internationalization (MessageSourceProperties)
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        enabled: true
+  ## internationalization (MessageSourceProperties)
   messages:
     always-use-message-format: false # Whether to always apply the MessageFormat rules, parsing even messages without arguments.
     basename: i18n/messages # Comma-separated list of basenames (essentially a fully-qualified classpath location), each following the ResourceBundle convention with relaxed support for slash based locations.
@@ -30,3 +34,15 @@ logging:
   level:
     root: info
     com.gvdroid.cloud.cif: debug
+gd:
+  bbb: asdasd
+  list2:
+  list:
+    - a
+    - b
+    - c
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health
