@@ -3,6 +3,11 @@ spring:
     name: gvdroid-simple-complex-server
   jackson:
     time-zone: UTC
+gd:
+  list:
+    - a
+    - b
+    - c
 gvdroid:
   swagger:
     enabled: true
@@ -25,7 +30,9 @@ gvdroid:
         exchange: gvdroid.simple.logging
         exchangeDurable: true
         exchangeAutoDelete: false
+
 logging:
   level:
     root: info
     com.gvdroid.simple.mybatis: debug
+
