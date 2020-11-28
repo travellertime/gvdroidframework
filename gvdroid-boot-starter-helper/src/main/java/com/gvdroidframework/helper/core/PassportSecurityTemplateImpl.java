@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
-//    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
+    //    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
     private static final int TOKEN_EXPIRY = 2419200; // 28天
 
     private final RedisTemplate<String, String> redisTemplate;
@@ -42,6 +42,20 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         String key = getTokenRedisKey(tokenId);
         // 异步写入redis
         redisTemplate.opsForValue().set(key, saltCode, Duration.ofSeconds(TOKEN_EXPIRY));
+    }
+
+    /**
+     * 将生成的token写入redis
+     *
+     * @param tokenId      tokenId
+     * @param saltCode     saltCode
+     * @param expirySecond expirySecond
+     */
+    private void setRedis(String tokenId, String saltCode, int expirySecond) {
+        // 得到redis key
+        String key = getTokenRedisKey(tokenId);
+        // 异步写入redis
+        redisTemplate.opsForValue().set(key, saltCode, Duration.ofSeconds(expirySecond));
     }
 
     /**
@@ -78,6 +92,30 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         String complexToken = JWTUtils.genToken(map, saltCode);
 
         setRedis(complexToken, saltCode);
+
+        return complexToken;
+    }
+
+    /**
+     * 生成token
+     *
+     * @param customerId customerId
+     * @param entityCode entityCode
+     * @param channelId  channelId
+     * @param saltCode   saltCode
+     * @return tokenId
+     */
+    @Override
+    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySecond) {
+
+        Map<String, String> map = new HashMap<>();
+        map.put(JWTTokenClaim.KEY_USER, customerId);
+        map.put(JWTTokenClaim.KEY_CHANNEL, channelId);
+        map.put(JWTTokenClaim.KEY_ENTITY, entityCode);
+
+        String complexToken = JWTUtils.genToken(map, saltCode, expirySecond);
+
+        setRedis(complexToken, saltCode, expirySecond);
 
         return complexToken;
     }

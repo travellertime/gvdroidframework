@@ -6,5 +6,7 @@ public interface PassportSecurityTemplate {
 
     String generateTokenId(String customerId, String entityCode, String channelId, String saltCode);
 
+    String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds);
+
     String getTokenSecretKey(String tokenId);
 }

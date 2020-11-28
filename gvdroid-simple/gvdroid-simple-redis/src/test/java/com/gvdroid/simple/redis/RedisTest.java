@@ -16,10 +16,18 @@ public class RedisTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+
+
     @Test
     public void stringRedisTest() {
-        this.stringRedisTemplate.opsForValue().set("1", "1", Duration.ofSeconds(60));
-
+        this.stringRedisTemplate.opsForValue().set("1", "1");
+        this.stringRedisTemplate.opsForValue().set("2", "1casdasf");
+        this.stringRedisTemplate.opsForValue().set("kaxsd-asd13", "112341341324");
+        this.stringRedisTemplate.opsForValue().set("4", "134r");
+        this.stringRedisTemplate.opsForValue().set("5", "1124.1324-xfw12c");
+        this.stringRedisTemplate.opsForValue().set("key-6", "1");
+//        this.valueOperations.set("1", "1", Duration.ofDays(1));
+//        this.valueOperations.set("1", "1");
     }
 
     @Autowired
@@ -28,6 +36,13 @@ public class RedisTest {
     @Test
     public void redisTest() {
         this.redisTemplate.opsForValue().set("2", "2", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("1", "1", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("2", "1casdasf", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("kaxsd-asd13", "112341341324", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("4", "134r", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("5", "1124.1324-xfw12c", Duration.ofSeconds(60));
+        this.redisTemplate.opsForValue().set("key-6", "1", Duration.ofSeconds(60));
+
     }
 
     @Autowired
