@@ -70,6 +70,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
      */
     private ResponseEntity<R<?>> getRuntimeException(Exception e, R<?> r, Status status) {
         fillTransactionStatus(e, r, status);
+        e.printStackTrace();
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
@@ -100,6 +101,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
         status.setError(e.getErrorDesc(), e.getErrorCode());
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         r.setStatus(status);
+        e.printStackTrace();
 //        return new ResponseEntity<>(response, HttpStatus.OK);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
