@@ -8,7 +8,7 @@ package com.gvdroidframework.security.component;
  */
 public interface JWTTokenClaim {
 
-    String KEY_TOKEN_PREFIX = "gvdroid-token-";
+    String KEY_TOKEN_PREFIX = "gvdroid:token:";
     /**
      * 用户编号
      */
