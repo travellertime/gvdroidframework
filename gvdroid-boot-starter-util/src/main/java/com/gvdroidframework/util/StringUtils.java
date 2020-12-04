@@ -2,6 +2,8 @@ package com.gvdroidframework.util;
 
 import org.springframework.lang.Nullable;
 
+import java.util.List;
+
 public class StringUtils {
 
     public static boolean isEmpty(@Nullable Object str) {
@@ -18,7 +20,7 @@ public class StringUtils {
      * @return String
      */
     public static String stringFill(String source, int fillLength,
-                                     char fillChar, boolean isLeftFill) {
+                                    char fillChar, boolean isLeftFill) {
         if (source == null || source.length() >= fillLength)
             return source;
 
@@ -36,6 +38,37 @@ public class StringUtils {
             }
         }
         return result.toString();
+    }
+
+    /**
+     * 字符串拼接
+     *
+     * @param srcList
+     * @param patternStr
+     * @return
+     */
+    public static String strAppend(List<String> srcList, String patternStr) {
+        try {
+            if (CommonUtils.isEmpty(srcList)) {
+                return null;
+            }
+            StringBuilder target = new StringBuilder();
+            if (srcList.size() <= 1) {
+                target.append(srcList.get(0));
+                return target.toString();
+            }
+            for (String s : srcList) {
+                if (CommonUtils.isNotEmpty(s)) {
+                    target.append(s);
+                    target.append(patternStr);
+                }
+            }
+            return target.substring(0, target.toString().length() - patternStr.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 }
