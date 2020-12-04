@@ -1,6 +1,7 @@
 package com.gvdroidframework.base.exception;
 
 
+import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 
 /**

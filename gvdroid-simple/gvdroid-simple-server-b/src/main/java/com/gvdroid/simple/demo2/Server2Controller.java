@@ -2,6 +2,8 @@ package com.gvdroid.simple.demo2;
 
 import com.alibaba.fastjson.JSON;
 import com.gvdroidframework.base.component.R;
+import com.gvdroidframework.base.constant.ErrorCode;
+import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,9 +35,16 @@ public class Server2Controller {
 
         R<UserResponseDTO> response = demo1Service.processRequest(requestDTO);
 
+
+
         System.out.println(response.getStatus().isSuccess());
 
         System.out.println(JSON.toJSONString(response));
-        return new R<>(responseDTO);
+
+        if (!response.getStatus().isSuccess()) {
+            throw new BaseException(response.getStatus().getReplyText(), response.getStatus().getReplyCode());
+        }
+
+        return new R<>(responseDTO, response.getStatus());
     }
 }

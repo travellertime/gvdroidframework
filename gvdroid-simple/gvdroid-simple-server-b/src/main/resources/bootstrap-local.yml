@@ -13,6 +13,27 @@ spring:
     encoding: UTF-8 # Message bundles encoding.
     fallback-to-system-locale: true # Whether to fall back to the system Locale if no files for a specific Locale have been found.
     use-code-as-default-message: false # Whether to use the message code as the default message instead of throwing a "NoSuchMessageException". Recommended during development only.
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        #        connectTimeout: 3000
+        connectTimeout: 3000
+        readTimeout: 60000
+hystrix:
+  threadpool:
+    default:
+      coreSize: 500
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+ribbon:
+  MaxAutoRetriesNextServer: 1 #当访问的服务器超时或者没有响应，则尝试访问其它可用服务器
 gvdroid:
   swagger:
     enabled: true

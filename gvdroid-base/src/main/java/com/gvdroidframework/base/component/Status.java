@@ -17,7 +17,7 @@ public class Status implements Serializable {
     }
 
     public static Status of(String serverName, String serviceId) {
-        return new Status(ErrorCode.EXCEPTION, "call remote service error", "901", serverName + ":" + serviceId);
+        return new Status(ErrorCode.EXCEPTION, "call remote service error. serverName: " + serverName + ", serviceId: " + serviceId, "901");
     }
 
     /**
