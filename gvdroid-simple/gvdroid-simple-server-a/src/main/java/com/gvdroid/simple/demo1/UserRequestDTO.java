@@ -7,5 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRequestDTO extends XfaceGenericRequestDTO {
-    String id;
+    private String id;
+
+    private UserRequestDTO userRequestDTO;
 }

@@ -31,7 +31,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 1000
+            timeoutInMilliseconds: 36000
 ribbon:
   MaxAutoRetriesNextServer: 1 #当访问的服务器超时或者没有响应，则尝试访问其它可用服务器
 gvdroid:

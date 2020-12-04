@@ -41,7 +41,13 @@ public class BaseException extends RuntimeException {
     }
 
     public BaseException(String message) {
-        super(message, null, false, false);
+        super(message);
+//        super(message, null, false, false);
+        this.errorDesc = message;
+    }
+
+    public BaseException(String message, Throwable throwable) {
+        super(message, throwable, false, false);
         this.errorDesc = message;
     }
 
@@ -50,13 +56,31 @@ public class BaseException extends RuntimeException {
      * @param errorCode String
      */
     public BaseException(String message, String errorCode) {
-        super(message, null, false, false);
+//        super(message, null, false, false);
+        super(message);
+        this.errorDesc = message;
+        this.errorCode = errorCode;
+    }
+
+    public BaseException(String message, String errorCode, Throwable throwable) {
+//        super(message, null, false, false);
+        super(message, throwable, false, false);
         this.errorDesc = message;
         this.errorCode = errorCode;
     }
 
     public BaseException(String message, String errorCode, String errorLevel, long timestamp) {
-        super(message, null, false, false);
+//        super(message, null, false, false);
+        super(message);
+        this.errorDesc = message;
+        this.errorCode = errorCode;
+        this.errorLevel = errorLevel;
+        this.timestamp = timestamp;
+    }
+
+    public BaseException(String message, String errorCode, String errorLevel, long timestamp, Throwable throwable) {
+//        super(message, null, false, false);
+        super(message, throwable, false, false);
         this.errorDesc = message;
         this.errorCode = errorCode;
         this.errorLevel = errorLevel;

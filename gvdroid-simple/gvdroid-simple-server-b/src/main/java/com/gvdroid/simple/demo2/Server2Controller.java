@@ -26,7 +26,7 @@ public class Server2Controller {
     Demo1Service demo1Service;
 
     @BusinessLogger(value = "DEMO-2")
-    @ApiOperation(value = "DEMO-2 Demo2", httpMethod = "POST")
+//    @ApiOperation(value = "DEMO-2 Demo2", httpMethod = "POST")
     @PostMapping(value = "/demo/2")
     @ResponseBody
     public R<UserResponseDTO> inquiryUser(@Valid @RequestBody UserRequestDTO requestDTO) {

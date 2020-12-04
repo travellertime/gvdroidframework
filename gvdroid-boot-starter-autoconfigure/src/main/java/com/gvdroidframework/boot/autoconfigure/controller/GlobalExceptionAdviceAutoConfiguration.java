@@ -86,7 +86,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         fillTransactionStatus(e, r, status);
         e.printStackTrace();
-        return new ResponseEntity<>(r, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
     /**
@@ -102,7 +102,6 @@ public class GlobalExceptionAdviceAutoConfiguration {
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         r.setStatus(status);
         e.printStackTrace();
-//        return new ResponseEntity<>(response, HttpStatus.OK);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
@@ -114,8 +113,8 @@ public class GlobalExceptionAdviceAutoConfiguration {
      * @param status   TransactionStatus
      */
     private void fillTransactionStatus(Exception e, R<?> r, Status status) {
-        status.setError(ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
-        status.setMemo(e.getMessage());
+        status.setError(ErrorCode.ERROR_MSG_999 + e.getCause().toString(), ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
+//        status.setMemo(e.getCause().toString());
         r.setStatus(status);
     }
 }

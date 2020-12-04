@@ -41,7 +41,12 @@ public class RunException extends RuntimeException {
         this.errorDesc = message;
     }
 
-    public RunException(String message, Throwable cause, String errorLevel, long timestamp) {
+    public RunException(String message, Throwable throwable) {
+        super(message, throwable, false, false);
+        this.errorDesc = message;
+    }
+
+    public RunException(String message, String errorLevel, long timestamp, Throwable cause) {
         super(message, cause, false, false);
         this.errorDesc = message;
         this.errorLevel = errorLevel;

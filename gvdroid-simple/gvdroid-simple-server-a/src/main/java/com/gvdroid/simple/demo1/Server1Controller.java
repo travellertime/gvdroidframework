@@ -1,6 +1,7 @@
 package com.gvdroid.simple.demo1;
 
 import com.gvdroidframework.base.component.R;
+import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,10 +37,19 @@ public class Server1Controller {
     @SneakyThrows
     public R<UserResponseDTO> inquiryUser(@Valid @RequestBody UserRequestDTO requestDTO) {
 
-        TimeUnit.SECONDS.sleep(10L);
+//        TimeUnit.SECONDS.sleep(10L);
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setName(this.gDemoProperties.getBbb());
         responseDTO.setDataList(this.gDemoProperties.getList());
+
+        String str = null;
+        requestDTO.setUserRequestDTO(null);
+        if (requestDTO.getId().equals("111")) {
+            throw new BaseException("222", "222");
+        }
+        if(requestDTO.getUserRequestDTO().getId() == null) {
+            throw new BaseException("1111", "1111");
+        }
         return new R<>(responseDTO);
     }
 }

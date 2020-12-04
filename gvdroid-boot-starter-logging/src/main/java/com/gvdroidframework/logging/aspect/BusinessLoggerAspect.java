@@ -121,7 +121,7 @@ public class BusinessLoggerAspect {
             throw new BaseException(e.getMessage(), e.getErrorCode(), ErrorCode.FAILURE, startTime);
         } catch (Throwable e) {
             responseDTO = getErrorResponse(e);
-            throw new RunException(e.getMessage(), e, ErrorCode.EXCEPTION, startTime);
+            throw new RunException(e.getMessage(), ErrorCode.EXCEPTION, startTime, e);
         } finally {
 
             // 最终执行计算执行时间并将时间设置进入transactionStatus中，并打印日志
@@ -153,7 +153,7 @@ public class BusinessLoggerAspect {
      * @return 标准输出对象
      */
     private Object getErrorResponse(Throwable e) {
-        return new R<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999, ErrorCode.ERROR_CODE_999, e.getMessage()));
+        return new R<>(null, new Status(ErrorCode.EXCEPTION, ErrorCode.ERROR_MSG_999 + e.toString(), ErrorCode.ERROR_CODE_999));
     }
 
     /**
