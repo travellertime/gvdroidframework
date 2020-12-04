@@ -6,6 +6,7 @@ import com.gvdroidframework.base.component.Status;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.base.exception.RunException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 @ControllerAdvice
 @Order(-998)
+@Slf4j
 public class GlobalExceptionAdviceAutoConfiguration {
 
     /**
@@ -70,7 +72,8 @@ public class GlobalExceptionAdviceAutoConfiguration {
      */
     private ResponseEntity<R<?>> getRuntimeException(Exception e, R<?> r, Status status) {
         fillTransactionStatus(e, r, status);
-        e.printStackTrace();
+        log.error("runtime error:", e);
+//        e.printStackTrace();
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
@@ -85,7 +88,8 @@ public class GlobalExceptionAdviceAutoConfiguration {
     private ResponseEntity<R<?>> getRunException(RunException e, R<?> r, Status status) {
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         fillTransactionStatus(e, r, status);
-        e.printStackTrace();
+        log.error("unknown runtime error:", e);
+//        e.printStackTrace();
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
@@ -101,7 +105,8 @@ public class GlobalExceptionAdviceAutoConfiguration {
         status.setError(e.getErrorDesc(), e.getErrorCode());
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         r.setStatus(status);
-        e.printStackTrace();
+        log.error("base exception:", e);
+//        e.printStackTrace();
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
