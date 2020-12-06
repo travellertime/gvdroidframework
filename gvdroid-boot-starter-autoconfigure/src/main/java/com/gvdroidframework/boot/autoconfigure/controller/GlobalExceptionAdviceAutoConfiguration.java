@@ -65,9 +65,9 @@ public class GlobalExceptionAdviceAutoConfiguration {
     /**
      * 获取运行时异常的错误信息
      *
-     * @param e        Exception
-     * @param r XfaceGenericResponseDTO
-     * @param status   Status
+     * @param e      Exception
+     * @param r      XfaceGenericResponseDTO
+     * @param status Status
      * @return XfaceGenericResponseDTO and ResponseEntity with HttpStatus 200
      */
     private ResponseEntity<R<?>> getRuntimeException(Exception e, R<?> r, Status status) {
@@ -80,9 +80,9 @@ public class GlobalExceptionAdviceAutoConfiguration {
     /**
      * 获取运行时的未知异常
      *
-     * @param e        RunException
-     * @param r XfaceGenericResponseDTO
-     * @param status   TransactionStatus
+     * @param e      RunException
+     * @param r      XfaceGenericResponseDTO
+     * @param status TransactionStatus
      * @return ResponseEntity
      */
     private ResponseEntity<R<?>> getRunException(RunException e, R<?> r, Status status) {
@@ -96,16 +96,16 @@ public class GlobalExceptionAdviceAutoConfiguration {
     /**
      * 获取自定义异常的错误信息
      *
-     * @param e        Exception
-     * @param r XfaceGenericResponseDTO
-     * @param status   TransactionStatus
+     * @param e      Exception
+     * @param r      XfaceGenericResponseDTO
+     * @param status TransactionStatus
      * @return XfaceGenericResponseDTO
      */
     private ResponseEntity<R<?>> getBaseException(BaseException e, R<?> r, Status status) {
         status.setError(e.getErrorDesc(), e.getErrorCode());
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         r.setStatus(status);
-        log.error("base exception:", e);
+        // log.error("base exception:", e);
 //        e.printStackTrace();
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
@@ -113,9 +113,9 @@ public class GlobalExceptionAdviceAutoConfiguration {
     /**
      * 根据传入的Exception填充TransactionStatus
      *
-     * @param e        Exception
-     * @param r XfaceGenericResponseDTO
-     * @param status   TransactionStatus
+     * @param e      Exception
+     * @param r      XfaceGenericResponseDTO
+     * @param status TransactionStatus
      */
     private void fillTransactionStatus(Exception e, R<?> r, Status status) {
         status.setError(ErrorCode.ERROR_MSG_999 + e.getCause().toString(), ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
