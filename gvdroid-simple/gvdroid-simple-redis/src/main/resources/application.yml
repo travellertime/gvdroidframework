@@ -2,7 +2,7 @@ spring:
   application:
     name: gvdroid-simple-redis-server
   redis:
-    url: "redis://@127.0.0.1:6379"
+    url: "redis://@192.168.8.8:6379"
     database: 5
     ssl: false
     timeout: 5000
