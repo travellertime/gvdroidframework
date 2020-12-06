@@ -24,6 +24,7 @@
         <module>gvdroid-simple-desire</module>
         <module>gvdroid-simple-server-a</module>
         <module>gvdroid-simple-server-b</module>
+        <module>gvdroid-simple-print</module>
     </modules>
 
 
