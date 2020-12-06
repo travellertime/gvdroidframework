@@ -13,6 +13,9 @@ public class IpUtils {
      * @return
      */
     public static String getIPAddress(HttpServletRequest request) {
+        if(null == request){
+            return null;
+        }
         String ip = null;
         //X-Forwarded-For：Squid 服务代理
         String ipAddresses = request.getHeader("X-Forwarded-For");
