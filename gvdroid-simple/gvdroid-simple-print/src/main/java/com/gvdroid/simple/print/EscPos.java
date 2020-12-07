@@ -100,10 +100,10 @@ public class EscPos {
 
         // print goods
         // print title
-        for (Goods goods : posTpl.getGoods()) {
-            printTitle(goods);
-        }
-        escPos.line(1);
+//        for (Goods goods : posTpl.getGoods()) {
+//            printTitle(goods);
+//        }
+//        escPos.line(1);
 
 
         // print detail
@@ -388,6 +388,13 @@ public class EscPos {
         writer.write(0x1D);
         writer.write(33);
         writer.write(fontSize);
+        return this;
+    }
+
+    private EscPos sizeOrigin(int size) throws IOException {
+        writer.write(0x1D);
+        writer.write(33);
+        writer.write(size);
         return this;
     }
 
@@ -685,59 +692,47 @@ public class EscPos {
      */
     private static void printGoods(Map<String, Object> goods, List<Goods> goodsList) throws IOException {
 
-        int i = 0;
-        for (Goods item : goodsList) {
-
-
-
-            if (i == 0) {
-                i++;
-                String[] itemNames = SubByteString.getSubedStrings(goods.get(item.getVariable()).toString(), item.getWidth());
-                for (int n = 0; n < itemNames.length; n++) {
-                    if (n == itemNames.length) {
-                        escPos.align(item.getFormat())
-                                .bold(false)
-                                .underline(false)
-                                .size(1)
-                                .printStr(itemNames[n])
-                                .boldOff(false)
-                                .underlineOff(false)
-                                .line(0);
-                    } else {
-                        escPos.align(item.getFormat())
-                                .bold(false)
-                                .underline(false)
-                                .size(1)
-                                .printStr(itemNames[n])
-                                .boldOff(false)
-                                .underlineOff(false)
-                                .line(1);
-                    }
+        if (goodsList.size() != 4) {
+            return;
+        }
+        Goods name = goodsList.get(0);
+        String[] names = SubByteString.getSubedStrings(goods.get(name.getVariable()).toString(), name.getWidth());
+        if (null != names) {
+            for (int i = 0; i < names.length; i++) {
+                if (i != names.length - 1) {
+                    escPos.align(name.getFormat())
+                            .size(1)
+                            .printStr(fillLength(names[i], name))
+                            .line(1);
+                } else {
+                    escPos.align(name.getFormat())
+                            .size(1)
+                            .printStr(fillLength(names[i], name))
+                            .line(0);
                 }
-            } else {
-                escPos.align(item.getFormat())
-                        .bold(false)
-                        .underline(false)
-                        .size(1)
-                        .printStr(fillLength(goods.get(item.getVariable()).toString(), item))
-                        .boldOff(false)
-                        .underlineOff(false)
-                        .line(0);
             }
         }
-        i = 0;
+
+//        Goods num = goodsList.get(1);
+//        Goods price = goodsList.get(2);
+//        Goods pay = goodsList.get(3);
+        for (int i = 1; i < goodsList.size(); i++) {
+            escPos.align(goodsList.get(i).getFormat())
+                    .bold(false)
+                    .underline(false)
+                    .size(1)
+                    .printStr(fillLength(goods.get(goodsList.get(i).getVariable()).toString(), goodsList.get(i)))
+                    .boldOff(false)
+                    .underlineOff(false)
+                    .line(0);
+        }
         escPos.line(1);
 
 //        for (Goods item : goodsList) {
-//            item.getVariable()
-////            String[] itemNames = SubByteString.getSubedStrings(goods.get(item.getVariable()).toString(), item.getWidth());
-////
-//
 //            escPos.align(item.getFormat())
 //                    .bold(false)
 //                    .underline(false)
 //                    .size(1)
-////                    .printStr(itemNames)
 //                    .printStr(fillLength(goods.get(item.getVariable()).toString(), item))
 //                    .boldOff(false)
 //                    .underlineOff(false)

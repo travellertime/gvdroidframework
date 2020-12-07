@@ -26,7 +26,7 @@ public class PrintTemplate {
             "  },\n" +
             "  \"goods\": [\n" +
             "    {\n" +
-            "      \"name\": \"外婆小炖菜+米饭套餐 \n 6.6折，原价36.00\",\n" +
+            "      \"name\": \"外婆小炖菜+米饭套餐6.6折，原价36.00\",\n" +
             "      \"num\": 1,\n" +
             "      \"price\": 23.80,\n" +
             "      \"pay\": 23.80\n" +
@@ -38,13 +38,13 @@ public class PrintTemplate {
             "      \"pay\": 48.00\n" +
             "    },\n" +
             "    {\n" +
-            "      \"name\": \"我要加大米饭 \n（小碗菜不带米饭）\",\n" +
+            "      \"name\": \"我要加大米饭（小碗菜不带米饭）\",\n" +
             "      \"num\": 1,\n" +
             "      \"price\": 2.00,\n" +
             "      \"pay\": 2.00\n" +
             "    },\n" +
             "    {\n" +
-            "      \"name\": \"白灼菜心（现炒小份菜） \n，7.5折，原价7.90\",\n" +
+            "      \"name\": \"白灼菜心（现炒小份菜），7.5折，原价7.90\",\n" +
             "      \"num\": 1,\n" +
             "      \"price\": 5.90,\n" +
             "      \"pay\": 5.90\n" +
@@ -160,37 +160,46 @@ public class PrintTemplate {
 
     private List<Text> getTemplateFooter() {
         return Arrays.asList(
-                new Text(0, 1, 2, "李亮（先生）", 3, true, false),
-                new Text(0, 1, 2, "顾客号码：13600010002", 3, true, false)
+                new Text(0, 0, 1, "李杰（先生）", 2, true, false),
+                new Text(0, 0, 1, "顾客号码：手机尾号 2236", 2, true, false),
+                getBlankLine(),
+                new Text(1, 1, 1, "{$barCode}",1, false, false ),
+                new Text(0, 1, 1, "ID:{$barCode}",1, false, false ),
+                new Text(0, 1, 0, "***************",1, false, false ),
+                new Text(0, 1, 0, "#0001完",2, false, false ),
+                new Text(0, 1, 1, "***************",1, false, false )
         );
     }
 
 
     private List<Text> getTemplateBills() {
         return Arrays.asList(
-                new Text(0, 1, 2, "实收现金", 3, true, false),
-                new Text(0, 1, 2, "{$cash}", 3, true, false)
+                getStarLineText(),
+                new Text(0, 2, 1, "原价：93.00元", 1, false, false),
+                new Text(0, 1, 0, "（用户在线支付）", 1, false, false),
+                new Text(0, 2, 1, "74000.80元", 2, true, false),
+                getCutLine()
         );
     }
 
     private List<Goods> getTemplateOther() {
         return Arrays.asList(
                 new Goods("商品名", 0, 40, "name"),
-                new Goods("金额", 1, 8, "pay")
+                new Goods("金额", 2, 8, "pay")
         );
     }
 
     private List<Text> getTemplateOtherTitle() {
         return Collections.singletonList(
-                new Text(0, 1, 1, "-------------------- 其它 --------------------", 1, true, false));
+                new Text(0, 1, 1, "-------------------- 其它 --------------------", 1, false, false));
     }
 
     private List<Goods> getTemplateGoods() {
         return Arrays.asList(
                 new Goods("商品名", 0, 24, "name"),
                 new Goods("数量", 1, 8, "num"),
-                new Goods("单价", 1, 8, "price"),
-                new Goods("金额", 1, 8, "pay")
+                new Goods("单价", 2, 8, "price"),
+                new Goods("金额", 2, 8, "pay")
         );
     }
 
@@ -203,7 +212,7 @@ public class PrintTemplate {
         headers.add(getOrderSubmitTime("下单时间：2020-12-06 21:57:56"));
         headers.add(getCutLine());
         headers.add(getRemarks("顾客需要餐具，还需要两个辣椒和一个洋葱"));
-        headers.add(getStarLine());
+        headers.add(getStarLineText());
         headers.add(getPocketName("------------------ 一号口袋 ------------------"));
         return headers;
     }
@@ -211,7 +220,7 @@ public class PrintTemplate {
     private Text getPocketName(String pocketName) {
         Text header = new Text();
         header.setText(pocketName);
-        header.setFormat(0);
+        header.setFormat(1);
         header.setSize(1);
         header.setBold(false);
         header.setLine(2);
@@ -263,15 +272,15 @@ public class PrintTemplate {
         return header;
     }
 
-    private Text getStarLine() {
-        Text header = new Text();
-        header.setText("************************************************");
-        header.setFormat(0);
-        header.setSize(1);
-        header.setBold(true);
-        header.setLine(2);
-        header.setType(0);
-        return header;
+    private Text getStarLineText() {
+        Text starLine = new Text();
+        starLine.setText("************************************************");
+        starLine.setFormat(0);
+        starLine.setSize(1);
+        starLine.setBold(false);
+        starLine.setLine(1);
+        starLine.setType(0);
+        return starLine;
     }
 
     private Text getCutLine() {
@@ -279,10 +288,21 @@ public class PrintTemplate {
         header.setText("------------------------------------------------");
         header.setFormat(0);
         header.setSize(1);
-        header.setBold(true);
+        header.setBold(false);
         header.setLine(1);
         header.setType(0);
         return header;
+    }
+
+    private Text getBlankLine() {
+        Text blankLine = new Text();
+        blankLine.setText("");
+        blankLine.setFormat(0);
+        blankLine.setSize(1);
+        blankLine.setBold(true);
+        blankLine.setLine(1);
+        blankLine.setType(0);
+        return blankLine;
     }
 
     private Text getTitle(String title) {
