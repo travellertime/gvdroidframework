@@ -28,7 +28,7 @@ public class EnglishParamBuilder {
         dto.setStoreName("Liuyishou hotpot");
         dto.setOrderSubmitDatetime("order date: 2020-12-07 22:15:15");
         dto.setOrderMemo("remarks: remark big remark");
-        dto.setOriginPrice("origin price：93.00");
+        dto.setOriginPrice("origin price: 93.00");
         dto.setPaymentMethod("(payment online)");
         dto.setPaymentPrice("74011.09");
         dto.setCustomer("Mr.Jobs");
@@ -75,7 +75,7 @@ public class EnglishParamBuilder {
         dataList.add(goods1);
 
         ParamGoodsDTO goods2 = new ParamGoodsDTO();
-        goods2.setName("oh my good food.");
+        goods2.setName("OLLA COMPARTIR \nCaldo al estilo Sichuan muy Picante \n Caldo al estilo Sichuan extra Picante \n Caldo de encurtido de repollo con pescado \n Caldo de tomate y ternera)");
         goods2.setNum("1");
         goods2.setPrice("48.80");
         goods2.setPay("48.80");
