@@ -69,7 +69,7 @@ public class EscPos {
      * @param param    参数
      * @throws IOException
      */
-    public static void print(String template, String param) throws IOException {
+    public void print(String template, String param) throws IOException {
         PosParam posParam = JSON.parseObject(param, PosParam.class);
 
         Map<String, Object> keyMap = posParam.getKeys();
@@ -451,22 +451,22 @@ public class EscPos {
      * @throws IOException
      */
     private EscPos qrCode(int position, String qrData) throws IOException {
-        int moduleSize = 0;
+        int moduleSize = 5;
         int length = qrData.getBytes(encoding).length;
-        int l = (int) (Math.ceil(1.5 * length) * 8);
-        if (l < 200) {
-            moduleSize = 1;
-        } else if (l < 429) {
-            moduleSize = 2;
-        } else if (l < 641) {
-            moduleSize = 3;
-        } else if (l < 885) {
-            moduleSize = 4;
-        } else if (l < 1161) {
-            moduleSize = 5;
-        } else if (l < 1469) {
-            moduleSize = 6;
-        }
+//        int l = (int) (Math.ceil(1.5 * length) * 8);
+//        if (l < 200) {
+//            moduleSize = 1;
+//        } else if (l < 429) {
+//            moduleSize = 2;
+//        } else if (l < 641) {
+//            moduleSize = 3;
+//        } else if (l < 885) {
+//            moduleSize = 4;
+//        } else if (l < 1161) {
+//            moduleSize = 5;
+//        } else if (l < 1469) {
+//            moduleSize = 6;
+//        }
 
         alignQr(position, moduleSize);
 
@@ -711,6 +711,11 @@ public class EscPos {
                             .line(0);
                 }
             }
+        } else {
+            escPos.align(name.getFormat())
+                    .size(1)
+                    .printStr(fillLength("", name))
+                    .line(0);
         }
 
 //        Goods num = goodsList.get(1);
@@ -749,17 +754,57 @@ public class EscPos {
      * @throws IOException
      */
     private static void printOthers(Map<String, Object> others, List<Goods> goodsList) throws IOException {
-        for (Goods ele : goodsList) {
-            escPos.align(ele.getFormat())
+
+        if (goodsList.size() != 2) {
+            return;
+        }
+        Goods name = goodsList.get(0);
+        String[] names = SubByteString.getSubedStrings(others.get(name.getVariable()).toString(), name.getWidth());
+        if (null != names) {
+            for (int i = 0; i < names.length; i++) {
+                if (i != names.length - 1) {
+                    escPos.align(name.getFormat())
+                            .size(1)
+                            .printStr(fillLength(names[i], name))
+                            .line(1);
+                } else {
+                    escPos.align(name.getFormat())
+                            .size(1)
+                            .printStr(fillLength(names[i], name))
+                            .line(0);
+                }
+            }
+        } else {
+            escPos.align(name.getFormat())
+                    .size(1)
+                    .printStr(fillLength("", name))
+                    .line(0);
+        }
+
+        for (int i = 1; i < goodsList.size(); i++) {
+            escPos.align(goodsList.get(i).getFormat())
                     .bold(false)
                     .underline(false)
                     .size(1)
-                    .printStr(fillLength(others.get(ele.getVariable()).toString(), ele))
+                    .printStr(fillLength(others.get(goodsList.get(i).getVariable()).toString(), goodsList.get(i)))
                     .boldOff(false)
                     .underlineOff(false)
                     .line(0);
         }
         escPos.line(1);
+
+
+//        for (Goods ele : goodsList) {
+//            escPos.align(ele.getFormat())
+//                    .bold(false)
+//                    .underline(false)
+//                    .size(1)
+//                    .printStr(fillLength(others.get(ele.getVariable()).toString(), ele))
+//                    .boldOff(false)
+//                    .underlineOff(false)
+//                    .line(0);
+//        }
+//        escPos.line(1);
     }
 
     /**

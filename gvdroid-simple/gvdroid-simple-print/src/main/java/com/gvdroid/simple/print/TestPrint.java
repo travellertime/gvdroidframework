@@ -4,74 +4,100 @@ import java.io.IOException;
 
 public class TestPrint {
 
-    static String template = "{ \"bill\":[{\"bold\":true,\"format\":1,\"line\":2,\"size\":3,\"text\":\"实收现金\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":1,\"line\":2,\"size\":3,\"text\":\"{$cash}\",\"type\":0,\"underline\":false}],\"footer\":[{\"bold\":true,\"format\":1,\"line\":2,\"size\":3,\"text\":\"李亮（先生）\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":1,\"line\":2,\"size\":3,\"text\":\"顾客号码：13600010002\",\"type\":0,\"underline\":false}],\"goods\":[{\"format\":0,\"name\":\"商品名\",\"variable\":\"name\",\"width\":24},{\"format\":1,\"name\":\"数量\",\"variable\":\"num\",\"width\":8},{\"format\":1,\"name\":\"单价\",\"variable\":\"price\",\"width\":8},{\"format\":2,\"name\":\"金额\",\"variable\":\"pay\",\"width\":8}],\"header\":[{\"bold\":true,\"format\":0,\"line\":1,\"size\":2,\"text\":\"商家小票\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":1,\"text\":\"------------------------------------------------\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":1,\"line\":1,\"size\":2,\"text\":\"**#00留一手外卖**\",\"type\":0,\"underline\":false},{\"bold\":false,\"format\":1,\"line\":2,\"size\":1,\"text\":\"* 留一手火锅 *\",\"type\":0,\"underline\":false},{\"bold\":false,\"format\":0,\"line\":1,\"size\":1,\"text\":\"下单时间：2020-12-06 21:57:56\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":1,\"text\":\"------------------------------------------------\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":2,\"size\":2,\"text\":\"备注：顾客需要餐具，还需要两个辣椒和一个洋葱\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":2,\"size\":1,\"text\":\"************************************************\",\"type\":0,\"underline\":false},{\"bold\":false,\"format\":0,\"line\":2,\"size\":1,\"text\":\"------------------ 一号口袋 ------------------\",\"type\":0,\"underline\":false}],\"otherTitle\":[{\"bold\":true,\"format\":1,\"line\":1,\"size\":1,\"text\":\"-------------------- 其它 --------------------\",\"type\":0,\"underline\":false}],\"others\":[{\"format\":0,\"name\":\"商品名\",\"variable\":\"name\",\"width\":40},{\"format\":2,\"name\":\"金额\",\"variable\":\"pay\",\"width\":8}]}";
-//            "{\n" +
-//            "\"header\":[{\"bold\":true,\"format\":0,\"line\":1,\"size\":2,\"text\":\"商家小票\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":1,\"text\":\"------------------------------------------------\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":1,\"line\":1,\"size\":2,\"text\":\"**#00留一手外卖**\",\"type\":0,\"underline\":false},{\"bold\":false,\"format\":1,\"line\":2,\"size\":1,\"text\":\"*留一手火锅*\",\"type\":0,\"underline\":false},{\"bold\":false,\"format\":0,\"line\":1,\"size\":1,\"text\":\"下单时间：2020-12-06 21::57:56\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":1,\"text\":\"------------------------------------------------\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":2,\"text\":\"备注：顾客需要餐具\",\"type\":0,\"underline\":false},{\"bold\":true,\"format\":0,\"line\":1,\"size\":1,\"text\":\"************************************************\",\"type\":0,\"underline\":false}]," +
-//            "    \"goods\": [\n" +
-//            "        {\n" +
-//            "            \"name\": \"商品名\",\n" +
-//            "            \"width\": 24,\n" +
-//            "            \"format\": 0,\n" +
-//            "            \"variable\": \"name\"\n" +
-//            "        },\n" +
-//            "        {\n" +
-//            "            \"name\": \"数量\",\n" +
-//            "            \"width\": 8,\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"variable\": \"num\"\n" +
-//            "        },\n" +
-//            "        {\n" +
-//            "            \"name\": \"单价\",\n" +
-//            "            \"width\": 8,\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"variable\": \"price\"\n" +
-//            "        },\n" +
-//            "        {\n" +
-//            "            \"name\": \"金额\",\n" +
-//            "            \"width\": 8,\n" +
-//            "            \"format\": 2,\n" +
-//            "            \"variable\": \"pay\"\n" +
-//            "        }\n" +
-//            "    ],\n" +
-//
-//            "    \"bill\": [\n" +
-//            "        {\n" +
-//            "            \"text\": \"实收现金\",\n" +
-//            "            \"size\": 3,\n" +
-//            "            \"bold\": true,\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"line\": 2,\n" +
-//            "            \"underline\": false,\n" +
-//            "            \"type\": 0\n" +
-//            "        },\n" +
-//            "        {\n" +
-//            "            \"text\": \"{$cash}\",\n" +
-//            "            \"size\": 3,\n" +
-//            "            \"bold\": true,\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"line\": 2,\n" +
-//            "            \"underline\": false,\n" +
-//            "            \"type\": 0\n" +
-//            "        }\n" +
-//            "    ],\n" +
-//            "    \"footer\": [\n" +
-//            "        {\n" +
-//            "            \"text\": \"详情请访问官网\",\n" +
-//            "            \"size\": 2,\n" +
-//            "            \"bold\": true,\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"line\": 2,\n" +
-//            "            \"underline\": true,\n" +
-//            "            \"type\": 0\n" +
-//            "        },\n" +
-//            "        {\n" +
-//            "            \"text\": \"http://www.sublulu.com\",\n" +
-//            "            \"format\": 1,\n" +
-//            "            \"line\": 2,\n" +
-//            "            \"type\": 2\n" +
-//            "        }\n" +
-//            "    ]\n" +
-//            "}";
+    static String template = "{\n" +
+            "    \"header\": [\n" +
+            "        {\n" +
+            "            \"text\": \"{$shopname}\",\n" +
+            "            \"size\": 2,\n" +
+            "            \"bold\": true,\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"underline\": true,\n" +
+            "            \"type\": 0\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"text\": \"{$barCode}\",\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"type\": 1\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"path\": \"{$logo}\",\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"type\": 3\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"text\": \"{$qrCode}\",\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"type\": 2\n" +
+            "        }\n" +
+            "    ],\n" +
+            "    \"goods\": [\n" +
+            "        {\n" +
+            "            \"name\": \"商品名\",\n" +
+            "            \"width\": 24,\n" +
+            "            \"format\": 0,\n" +
+            "            \"variable\": \"name\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"name\": \"数量\",\n" +
+            "            \"width\": 8,\n" +
+            "            \"format\": 1,\n" +
+            "            \"variable\": \"num\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"name\": \"单价\",\n" +
+            "            \"width\": 8,\n" +
+            "            \"format\": 1,\n" +
+            "            \"variable\": \"price\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"name\": \"金额\",\n" +
+            "            \"width\": 8,\n" +
+            "            \"format\": 2,\n" +
+            "            \"variable\": \"pay\"\n" +
+            "        }\n" +
+            "    ],\n" +
+            "    \"bill\": [\n" +
+            "        {\n" +
+            "            \"text\": \"实收现金\",\n" +
+            "            \"size\": 3,\n" +
+            "            \"bold\": true,\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"underline\": false,\n" +
+            "            \"type\": 0\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"text\": \"{$cash}\",\n" +
+            "            \"size\": 3,\n" +
+            "            \"bold\": true,\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"underline\": false,\n" +
+            "            \"type\": 0\n" +
+            "        }\n" +
+            "    ],\n" +
+            "    \"footer\": [\n" +
+            "        {\n" +
+            "            \"text\": \"详情请访问官网\",\n" +
+            "            \"size\": 2,\n" +
+            "            \"bold\": true,\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"underline\": true,\n" +
+            "            \"type\": 0\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"text\": \"http://www.sublulu.com\",\n" +
+            "            \"format\": 1,\n" +
+            "            \"line\": 2,\n" +
+            "            \"type\": 2\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
 
     static String params = "{\n" +
             "  \"keys\": {\n" +
@@ -132,8 +158,8 @@ public class TestPrint {
 
     public static void main(String[] args) {
         try {
-            EscPos.getInstance("192.168.8.188");
-            EscPos.print(template, params);
+            EscPos instance = EscPos.getInstance("192.168.8.188");
+            instance.print(template, params);
         } catch (IOException e) {
             e.printStackTrace();
         }
