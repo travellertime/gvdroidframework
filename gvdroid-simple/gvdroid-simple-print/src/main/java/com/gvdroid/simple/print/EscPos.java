@@ -20,14 +20,14 @@ import java.util.regex.Pattern;
 
 public class EscPos {
 
-    private static String encoding = null;
+    public static String encoding = null;
 
     // 通过socket流进行读写
     private OutputStream socketOut = null;
     private OutputStreamWriter writer = null;
 
     // 以ip作为key，EscPos实例作为value的Map
-    private static Map<String, EscPos> posMap = new HashMap<String, EscPos>();
+    private static Map<String, EscPos> posMap = new HashMap<>();
     private static EscPos escPos = null;
 
     /**
@@ -42,7 +42,7 @@ public class EscPos {
         Socket socket = new Socket(ip, port);
         socketOut = socket.getOutputStream();
         socket.isClosed();
-        this.encoding = encoding;
+        EscPos.encoding = encoding;
         writer = new OutputStreamWriter(socketOut, encoding);
     }
 
@@ -60,6 +60,10 @@ public class EscPos {
 
     public static synchronized EscPos getInstance(String ip) throws IOException {
         return getInstance(ip, Constant.DEFAULT_PORT, Constant.DEFAULT_ENCODING);
+    }
+
+    public static synchronized EscPos getInstance(String ip, String encoding) throws IOException {
+        return getInstance(ip, Constant.DEFAULT_PORT, encoding);
     }
 
     /**

@@ -70,7 +70,7 @@ public class TemplateBuilder {
 
     public List<Text> getTemplateOtherTitle() {
         return Collections.singletonList(
-                new Text(0, 1, 1, "--------------------- 其它 ---------------------", 1, false, false));
+                new Text(0, 1, 1, "--------------------- {$otherName} ---------------------", 1, false, false));
     }
 
     public List<Goods> getTemplateGoods() {
@@ -95,7 +95,7 @@ public class TemplateBuilder {
         headers.add(getCutLine());
         headers.add(new Text(0, 0, 2, "{$orderMemo}", 2, true, false));
         headers.add(getStarLineText());
-        headers.add(new Text(0, 1, 2, "------------------- 一号口袋 -------------------", 1, true, false));
+        headers.add(new Text(0, 1, 2, "------------------- {$pocketName} -------------------", 1, true, false));
         return headers;
     }
 

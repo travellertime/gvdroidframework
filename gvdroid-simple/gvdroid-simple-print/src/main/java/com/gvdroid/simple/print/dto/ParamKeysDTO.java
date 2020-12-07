@@ -15,6 +15,8 @@ public class ParamKeysDTO {
     private String completedText;
     private String barCode;
     private String qrCode;
+    private String pocketName;
+    private String otherName;
 
     public String getBillTitle() {
         return billTitle;
@@ -126,5 +128,21 @@ public class ParamKeysDTO {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public String getPocketName() {
+        return pocketName;
+    }
+
+    public void setPocketName(String pocketName) {
+        this.pocketName = pocketName;
+    }
+
+    public String getOtherName() {
+        return otherName;
+    }
+
+    public void setOtherName(String otherName) {
+        this.otherName = otherName;
     }
 }

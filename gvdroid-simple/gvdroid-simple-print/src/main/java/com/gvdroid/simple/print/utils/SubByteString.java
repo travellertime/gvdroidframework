@@ -1,6 +1,7 @@
 package com.gvdroid.simple.print.utils;
 
 
+import com.gvdroid.simple.print.EscPos;
 import com.gvdroid.simple.print.params.Constant;
 import org.apache.http.util.TextUtils;
 
@@ -62,7 +63,10 @@ public class SubByteString {
     }
 
     public static String[] getSubedStrings(String str, int unitLength) {
-        int num = unitLength / 2;
+        int num = unitLength;
+        if ("GBK".equals(EscPos.encoding)) {
+            num = unitLength / 2;
+        }
 
 //        String str = "打包费打包费打包费打包费打sazxz，包费打包费打包费打包费打包费打包费打包费打包费打包费打包费打包费打包费打包费";
         char[] chars = str.toCharArray();
@@ -77,34 +81,6 @@ public class SubByteString {
             list.add(s1);
         }
         return list.toArray(new String[0]);
-//        if (TextUtils.isEmpty(string)) {
-//            return null;
-//        }
-//
-//        String str = new String(string);
-//
-//        int arraySize = 0;
-//        try {
-//            arraySize = str.getBytes("GBK").length / unitLength;
-//            if (str.getBytes("GBK").length % unitLength > 0) {
-//                arraySize++;
-//            }
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String[] result = new String[arraySize];
-//
-//        for (int i = 0; i < arraySize; i++) {
-//            try {
-//                result[i] = subStr(str, unitLength);
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//            str = str.replace(result[i], "");
-//        }
-//
-//        return result;
     }
 
     /**
