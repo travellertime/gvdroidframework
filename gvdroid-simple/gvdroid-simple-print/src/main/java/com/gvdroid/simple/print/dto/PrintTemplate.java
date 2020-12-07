@@ -292,6 +292,7 @@ public class PrintTemplate {
         header.setLine(1);
         header.setType(0);
         return header;
+
     }
 
     private Text getBlankLine() {
