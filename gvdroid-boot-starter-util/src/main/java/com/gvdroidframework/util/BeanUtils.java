@@ -42,9 +42,9 @@ public class BeanUtils {
      * copy对象
      *
      * @param sourceObject 源对象
-     * @param targetClass 目标对象
-     * @param <T>       t
-     * @param <E>       e
+     * @param targetClass  目标对象
+     * @param <T>          t
+     * @param <E>          e
      * @return destClazz.class
      */
     public static <T, E> T copy(E sourceObject, Class<T> targetClass) {
@@ -63,9 +63,9 @@ public class BeanUtils {
     /**
      * copy List
      *
-     * @param sourceList    源List
+     * @param sourceList  源List
      * @param targetClass 目标对象
-     * @param <E>       e
+     * @param <E>         e
      * @return List
      */
     public static <E> List<E> copyList(List<?> sourceList, Class<E> targetClass) {
@@ -83,4 +83,18 @@ public class BeanUtils {
         }
         return null;
     }
+
+    /**
+     * copy Properties
+     * @param sourceObject
+     * @param targetObject
+     */
+    public static void copyProperties(Object sourceObject, Object targetObject) {
+        try {
+            org.springframework.beans.BeanUtils.copyProperties(sourceObject, targetObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
