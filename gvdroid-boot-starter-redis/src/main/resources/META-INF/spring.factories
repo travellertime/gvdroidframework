@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.gvdroidframework.redis.configuration.GRedisAutoConfiguration
+  com.gvdroidframework.redis.utils.RedisUtils

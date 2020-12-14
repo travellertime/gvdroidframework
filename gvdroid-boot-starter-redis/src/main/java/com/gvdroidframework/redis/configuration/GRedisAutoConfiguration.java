@@ -28,7 +28,7 @@ public class GRedisAutoConfiguration {
      * @return HashOperations<String, String, Object>
      */
     @Bean
-    public HashOperations<String, String, Object> hashOperations(RedisTemplate<String, Object> redisTemplate) {
+    public HashOperations<String, Object, Object> hashOperations(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForHash();
     }
 
