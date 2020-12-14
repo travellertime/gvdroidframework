@@ -24,16 +24,16 @@ public class ChineseParamBuilder {
         dto.setBillTitle("商家小票");
         dto.setQrCode("https://news.163.com/20/1207/20/FT970HRL000189FH.html?clickfrom=w_yw");
         dto.setBarCode("6921734976505");
-        dto.setOrderTitle("留一手外卖");
+        dto.setOrderTitle("留一手");
         dto.setStoreName("留一手火锅");
         dto.setOrderSubmitDatetime("下单时间：2020-12-07 22:15:15");
         dto.setOrderMemo("备注：顾客需要餐具，还需要两个辣椒和一个洋葱");
         dto.setOriginPrice("原价：93.00元");
-        dto.setPaymentMethod("（用户在线支付）");
-        dto.setPaymentPrice("74011.09元");
+        dto.setPaymentMethod("（在线支付）");
+        dto.setPaymentPrice("74018.09元");
         dto.setCustomer("乔布斯（先生）");
         dto.setCustomerContact("顾客号码：手机尾号 8848");
-        dto.setOrderSerialNo("98848");
+        dto.setOrderSerialNo("988");
         dto.setCompletedText("完");
         dto.setPocketName("一号口袋");
         dto.setOtherName("其它");
@@ -44,7 +44,7 @@ public class ChineseParamBuilder {
     private List<ParamOtherDTO> buildParamOthers() {
         List<ParamOtherDTO> dataList = new ArrayList<>();
         ParamOtherDTO other1 = new ParamOtherDTO();
-        other1.setName("打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包打包费打包费打包费打包费打包费打包");
+        other1.setName("打包费打包费打包费打包费打包费打包打包费打包费打包费打包费");
         other1.setPay("3.00");
         dataList.add(other1);
 
@@ -69,7 +69,7 @@ public class ChineseParamBuilder {
     private List<ParamGoodsDTO> buildParamGoods() {
         List<ParamGoodsDTO> dataList = new ArrayList<>();
         ParamGoodsDTO goods1 = new ParamGoodsDTO();
-        goods1.setName("外婆小炖菜+米饭套餐6.6折，原价36.00外婆小炖菜+米饭套餐6.6折，原价36.00");
+        goods1.setName("外婆小炖菜+米饭套餐6.6折，原价36.00");
         goods1.setNum("12");
         goods1.setPrice("23.80");
         goods1.setPay("23.80");

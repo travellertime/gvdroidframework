@@ -1,31 +1,37 @@
 package com.gvdroid.simple.print;
 
-import com.gvdroid.simple.print.core.ChineseParamBuilder;
-import com.gvdroid.simple.print.core.EnglishParamBuilder;
-import com.gvdroid.simple.print.core.TemplateBuilder;
+import com.gvdroid.simple.print.core.*;
 
 import java.io.IOException;
 
 public class PrintTest2 {
 
     public static void main(String[] args) {
-        TemplateBuilder templateBuilder = new TemplateBuilder();
+//        Template80Builder template80Builder = new Template80Builder();
         ChineseParamBuilder chineseParamBuilder = new ChineseParamBuilder();
-        EnglishParamBuilder englishParamBuilder = new EnglishParamBuilder();
+//        EnglishParamBuilder englishParamBuilder = new EnglishParamBuilder();
 
-        System.out.println(templateBuilder.buildTemplate());
+        TemplateService templateService = TemplateFactory.getInstance(PaperSizeEnum.s80);
+
+        System.out.println(templateService.buildTemplate());
         System.out.println(chineseParamBuilder.buildParam());
 
         try {
-//            EscPos instance = EscPos.getInstance("192.168.8.188");
-//            instance.print(templateBuilder.buildTemplate(), chineseParamBuilder.buildParam());
+//            EscPos instance = EscPos.getInstance("192.168.8.198");
+//            instance.print(template80Builder.buildTemplate(), chineseParamBuilder.buildParam());
 
-            EscPos eng = EscPos.getInstance("192.168.8.188", "UTF-8");
-            eng.print(templateBuilder.buildTemplate(), englishParamBuilder.buildParam());
+//            EscPos eng = EscPos.getInstance("192.168.8.188", "UTF-8");
+//            eng.print(templateBuilder.buildTemplate(), englishParamBuilder.buildParam());
 //            instance.print(templateBuilder.buildTemplate(), paramBuilder.buildParam());
 //            EscPos.print();
+            EscPos instance = EscPos.getInstance("192.168.8.188");
+            instance.print(templateService.buildTemplate(), chineseParamBuilder.buildParam());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
     }
 }

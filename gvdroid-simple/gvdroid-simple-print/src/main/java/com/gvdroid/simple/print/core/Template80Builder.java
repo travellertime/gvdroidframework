@@ -10,28 +10,29 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class TemplateBuilder {
+public class Template80Builder  implements TemplateService{
 
+    @Override
     public String buildTemplate() {
         TemplateDTO template = new TemplateDTO();
-        TemplateBuilder templateBuilder = new TemplateBuilder();
+//        Template80Builder template80Builder = new Template80Builder();
         // 构造Header
-        template.setHeader(templateBuilder.getTemplateHeader());
+        template.setHeader(this.getTemplateHeader());
 
         // 构造商品 goods
-        template.setGoods(templateBuilder.getTemplateGoods());
+        template.setGoods(this.getTemplateGoods());
 
         // 构造其它 title
-        template.setOtherTitle(templateBuilder.getTemplateOtherTitle());
+        template.setOtherTitle(this.getTemplateOtherTitle());
 
         // 构造其它 商品内容
-        template.setOthers(templateBuilder.getTemplateOther());
+        template.setOthers(this.getTemplateOther());
 
         // 构造账单 bills
-        template.setBill(templateBuilder.getTemplateBills());
+        template.setBill(this.getTemplateBills());
 
         // 构造尾部 footer
-        template.setFooter(templateBuilder.getTemplateFooter());
+        template.setFooter(this.getTemplateFooter());
 
         return JSON.toJSONString(template);
     }
