@@ -6,7 +6,7 @@
     <parent>
         <artifactId>gvdroid-boot-starters</artifactId>
         <groupId>com.gvdroidframework.boot</groupId>
-        <version>2.2.5-SNAPSHOT</version>
+        <version>2.2.5-RELEASE</version>
         <relativePath />
     </parent>
     <artifactId>gvdroid-boot-starter</artifactId>

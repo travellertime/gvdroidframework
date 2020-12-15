@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gvdroidframework.cloud</groupId>
     <artifactId>gvdroid-cloud-dependencies</artifactId>
-    <version>2.2.5-SNAPSHOT</version>
+    <version>2.2.5-RELEASE</version>
     <packaging>pom</packaging>
     <developers>
         <developer>
@@ -25,7 +25,7 @@
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
         <!-- gvdroid-cloud -->
-        <gvdroid.cloud.version>2.2.5-SNAPSHOT</gvdroid.cloud.version>
+        <gvdroid.cloud.version>2.2.5-RELEASE</gvdroid.cloud.version>
         <nacos.discovery.version>2.2.1.RELEASE</nacos.discovery.version>
     </properties>
 
@@ -77,4 +77,11 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://packages.aliyun.com/maven/repository/2046769-release-awsrHC/</url>
+        </repository>
+    </distributionManagement>
 </project>

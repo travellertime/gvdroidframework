@@ -6,7 +6,7 @@
 
     <groupId>com.gvdroidframework</groupId>
     <artifactId>gvdroid-base</artifactId>
-    <version>5.2.0-SNAPSHOT</version>
+    <version>5.2.0-RELEASE</version>
     <properties>
         <project.encoding>UTF-8</project.encoding>
         <java.version>1.8</java.version>
@@ -16,4 +16,11 @@
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://packages.aliyun.com/maven/repository/2046769-release-awsrHC/</url>
+        </repository>
+    </distributionManagement>
 </project>
