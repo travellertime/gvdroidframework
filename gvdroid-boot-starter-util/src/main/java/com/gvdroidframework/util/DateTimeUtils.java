@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * 日期时间工具
+ *
  * @author TuJun
  */
 public class DateTimeUtils {
@@ -95,8 +96,10 @@ public class DateTimeUtils {
      *
      * @return String
      */
-    public static String getWeekDay() {
-        return String.valueOf(LocalDateTime.now().getDayOfWeek());
+    public static String getWeekDay(String timeZone) {
+        ZoneId zoneId = ZoneId.of(timeZone);
+        LocalDateTime time = ZonedDateTime.of(LocalDateTime.now(), zoneId).toLocalDateTime();
+        return String.valueOf(time.getDayOfWeek());
     }
 
     /**
@@ -152,10 +155,7 @@ public class DateTimeUtils {
     public static boolean checkTimeOut(Date date, Long effecMillisecond) {
         int denominator = 1000;
         LocalDateTime localDateTime = toLocalDateTime(date);
-        if (LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator))) {
-            return true;
-        }
-        return false;
+        return LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator));
     }
 
 }
