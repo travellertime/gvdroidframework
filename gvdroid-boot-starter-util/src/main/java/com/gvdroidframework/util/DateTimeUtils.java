@@ -97,8 +97,7 @@ public class DateTimeUtils {
      * @return String
      */
     public static String getWeekDay(String timeZone) {
-        ZoneId zoneId = ZoneId.of(timeZone);
-        LocalDateTime time = ZonedDateTime.of(LocalDateTime.now(), zoneId).toLocalDateTime();
+        LocalDateTime time = toLocalDateTimeTZ(timeZone);;
         return String.valueOf(time.getDayOfWeek());
     }
 
@@ -114,6 +113,16 @@ public class DateTimeUtils {
     }
 
     /**
+     * LocalDateTime 转换时区
+     *
+     * @return LocalDateTime
+     */
+    public static LocalDateTime toLocalDateTimeTZ(String timeZone) {
+        ZoneId zoneId = ZoneId.of(timeZone);
+        return ZonedDateTime.now().withZoneSameInstant(zoneId).toLocalDateTime();
+    }
+
+    /**
      * 校验当前时区时间是否在时间区域内
      *
      * @param timeZone 时区ID
@@ -121,8 +130,7 @@ public class DateTimeUtils {
      * @return boolean
      */
     public static boolean checkTime(String timeZone, String... timeArea) {
-        ZoneId zoneId = ZoneId.of(timeZone);
-        LocalDateTime time = ZonedDateTime.of(LocalDateTime.now(), zoneId).toLocalDateTime();
+        LocalDateTime time = toLocalDateTimeTZ(timeZone);
         LocalDateTime localDateTime = LocalDateTime.parse(time.format(TIME_FORMAT_YMD_HM), TIME_FORMAT_YMD_HM);
         int len = timeArea.length;
         for (int i = 0; i < len; i++) {
