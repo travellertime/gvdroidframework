@@ -1,10 +1,13 @@
 package com.gvdroidframework.util;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
+/**
+ * 日期时间工具
+ * @author TuJun
+ */
 public class DateTimeUtils {
 
     public static final DateTimeFormatter TIME_FORMAT_FULL = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -17,7 +20,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统时间
      *
-     * @return
+     * @return LocalTime
      */
     public static LocalTime getLocalTime() {
         return LocalTime.now();
@@ -26,7 +29,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期
      *
-     * @return
+     * @return LocalDate
      */
     public static LocalDate getLocalDate() {
         return LocalDate.now();
@@ -35,7 +38,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期时间
      *
-     * @return
+     * @return LocalDateTime
      */
     public static LocalDateTime getLocalDateTime() {
         return LocalDateTime.now();
@@ -45,7 +48,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统时间字符串,格式：HH:mm:ss
      *
-     * @return
+     * @return String
      */
     public static String getDateHMSStr() {
         return LocalTime.now().format(TIME_FORMAT_HMS);
@@ -54,7 +57,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期字符串，格式：yyyy-MM-dd
      *
-     * @return
+     * @return String
      */
     public static String getDateYMDStr() {
         return LocalDate.now().format(TIME_FORMAT_YMD);
@@ -63,7 +66,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期字符串，格式：yyyyMMdd
      *
-     * @return
+     * @return String
      */
     public static String getDateYMDSimpStr() {
         return LocalDate.now().format(TIME_FORMAT_YMD_SIMP);
@@ -72,7 +75,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期时间字符串，格式：yyyy-MM-dd HH:mm:ss
      *
-     * @return
+     * @return String
      */
     public static String getDateStr() {
         return LocalDateTime.now().format(TIME_FORMAT_FULL);
@@ -81,7 +84,7 @@ public class DateTimeUtils {
     /**
      * 获取当前系统日期时间字符串，格式：yyyy-MM-dd HH:mm:ss
      *
-     * @return
+     * @return LocalDateTime
      */
     public static LocalDateTime getFormatDate(DateTimeFormatter format) {
         return LocalDateTime.parse(LocalDateTime.now().format(format), format);
@@ -90,20 +93,33 @@ public class DateTimeUtils {
     /**
      * 获取当前星期几
      *
-     * @return
+     * @return String
      */
     public static String getWeekDay() {
         return String.valueOf(LocalDateTime.now().getDayOfWeek());
     }
 
     /**
-     * 校验当前时间是否在时间区域内
+     * Date 转 LocalDateTime (默认时区转换）
      *
-     * @param timeArea 时间区域，格式：HH:mm-HH:mm
-     * @return
+     * @return LocalDateTime
      */
-    public static boolean checkTime(String... timeArea) {
-        LocalDateTime time = LocalDateTime.now();
+    public static LocalDateTime toLocalDateTime(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return instant.atZone(zoneId).toLocalDateTime();
+    }
+
+    /**
+     * 校验当前时区时间是否在时间区域内
+     *
+     * @param timeZone 时区ID
+     * @param timeArea 时间区域，格式：HH:mm-HH:mm
+     * @return boolean
+     */
+    public static boolean checkTime(String timeZone, String... timeArea) {
+        ZoneId zoneId = ZoneId.of(timeZone);
+        LocalDateTime time = ZonedDateTime.of(LocalDateTime.now(), zoneId).toLocalDateTime();
         LocalDateTime localDateTime = LocalDateTime.parse(time.format(TIME_FORMAT_YMD_HM), TIME_FORMAT_YMD_HM);
         int len = timeArea.length;
         for (int i = 0; i < len; i++) {
@@ -115,12 +131,29 @@ public class DateTimeUtils {
             LocalDateTime dateTimeStart = LocalDateTime.of(time.toLocalDate(), timeStart);
             if (timeStart.isAfter(timeEnd)) {
                 dateTimeEnd = LocalDateTime.of(time.toLocalDate(), timeEnd).plusDays(1);
-            } else
+            } else {
                 dateTimeEnd = LocalDateTime.of(time.toLocalDate(), timeEnd);
+            }
 
             if (localDateTime.isAfter(dateTimeStart) && localDateTime.isBefore(dateTimeEnd)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * 校验是否超时
+     *
+     * @param date             日期时间
+     * @param effecMillisecond 有效时长（毫秒）
+     * @return boolean
+     */
+    public static boolean checkTimeOut(Date date, Long effecMillisecond) {
+        int denominator = 1000;
+        LocalDateTime localDateTime = toLocalDateTime(date);
+        if (LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator))) {
+            return true;
         }
         return false;
     }
