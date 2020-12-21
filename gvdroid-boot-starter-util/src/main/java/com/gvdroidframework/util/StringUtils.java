@@ -49,7 +49,7 @@ public class StringUtils {
      */
     public static String strAppend(List<String> srcList, String patternStr) {
         try {
-            if (CommonUtils.isEmpty(patternStr) || CommonUtils.isEmpty(srcList)) {
+            if (null == patternStr || CommonUtils.isEmpty(srcList)) {
                 return null;
             }
             StringBuilder target = new StringBuilder();
@@ -79,7 +79,7 @@ public class StringUtils {
      */
     public static String strAppend(String patternStr, String... strs) {
         try {
-            if (CommonUtils.isEmpty(patternStr) || CommonUtils.isEmpty(strs)) {
+            if (null == patternStr || CommonUtils.isEmpty(strs)) {
                 return null;
             }
 
