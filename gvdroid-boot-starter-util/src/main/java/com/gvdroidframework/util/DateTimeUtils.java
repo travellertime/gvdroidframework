@@ -65,12 +65,32 @@ public class DateTimeUtils {
     }
 
     /**
+     * 获取当前系统日期字符串，格式：yyyy-MM-dd
+     *
+     * @return String
+     */
+    public static String getDateYMDStr(LocalDateTime localDateTime, String timeZone) {
+        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
+        return time.format(TIME_FORMAT_YMD);
+    }
+
+    /**
      * 获取当前系统日期字符串，格式：yyyyMMdd
      *
      * @return String
      */
     public static String getDateYMDSimpStr() {
         return LocalDate.now().format(TIME_FORMAT_YMD_SIMP);
+    }
+
+    /**
+     * 获取当前系统日期字符串，格式：yyyyMMdd
+     *
+     * @return String
+     */
+    public static String getDateYMDSimpStr(LocalDateTime localDateTime, String timeZone) {
+        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
+        return time.format(TIME_FORMAT_YMD_SIMP);
     }
 
     /**
@@ -97,7 +117,18 @@ public class DateTimeUtils {
      * @return String
      */
     public static String getWeekDay(String timeZone) {
-        LocalDateTime time = toLocalDateTimeTZ(timeZone);;
+        LocalDateTime time = toLocalDateTimeTZ(timeZone);
+        ;
+        return String.valueOf(time.getDayOfWeek());
+    }
+
+    /**
+     * 获取当前星期几
+     *
+     * @return String
+     */
+    public static String getWeekDay(LocalDateTime localDateTime, String timeZone) {
+        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
         return String.valueOf(time.getDayOfWeek());
     }
 
@@ -120,6 +151,17 @@ public class DateTimeUtils {
     public static LocalDateTime toLocalDateTimeTZ(String timeZone) {
         ZoneId zoneId = ZoneId.of(timeZone);
         return ZonedDateTime.now().withZoneSameInstant(zoneId).toLocalDateTime();
+    }
+
+    /**
+     * LocalDateTime 转换时区
+     *
+     * @return LocalDateTime
+     */
+    public static LocalDateTime toLocalDateTimeTZ(LocalDateTime localDateTime, String timeZone) {
+        ZoneId zoneId = ZoneId.of(timeZone);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, zoneId);
+        return zonedDateTime.withZoneSameInstant(zoneId).toLocalDateTime();
     }
 
     /**
