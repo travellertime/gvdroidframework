@@ -69,8 +69,7 @@ public class DateTimeUtils {
      *
      * @return String
      */
-    public static String getDateYMDStr(LocalDateTime localDateTime, String timeZone) {
-        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
+    public static String getDateYMDStr(LocalDateTime time) {
         return time.format(TIME_FORMAT_YMD);
     }
 
@@ -88,8 +87,7 @@ public class DateTimeUtils {
      *
      * @return String
      */
-    public static String getDateYMDSimpStr(LocalDateTime localDateTime, String timeZone) {
-        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
+    public static String getDateYMDSimpStr(LocalDateTime time) {
         return time.format(TIME_FORMAT_YMD_SIMP);
     }
 
@@ -118,7 +116,6 @@ public class DateTimeUtils {
      */
     public static String getWeekDay(String timeZone) {
         LocalDateTime time = toLocalDateTimeTZ(timeZone);
-        ;
         return String.valueOf(time.getDayOfWeek());
     }
 
@@ -127,8 +124,7 @@ public class DateTimeUtils {
      *
      * @return String
      */
-    public static String getWeekDay(LocalDateTime localDateTime, String timeZone) {
-        LocalDateTime time = toLocalDateTimeTZ(localDateTime, timeZone);
+    public static String getWeekDay(LocalDateTime time) {
         return String.valueOf(time.getDayOfWeek());
     }
 
@@ -153,26 +149,15 @@ public class DateTimeUtils {
         return ZonedDateTime.now().withZoneSameInstant(zoneId).toLocalDateTime();
     }
 
-    /**
-     * LocalDateTime 转换时区
-     *
-     * @return LocalDateTime
-     */
-    public static LocalDateTime toLocalDateTimeTZ(LocalDateTime localDateTime, String timeZone) {
-        ZoneId zoneId = ZoneId.of(timeZone);
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, zoneId);
-        return zonedDateTime.withZoneSameInstant(zoneId).toLocalDateTime();
-    }
 
     /**
      * 校验当前时区时间是否在时间区域内
      *
-     * @param timeZone 时区ID
+     * @param time     时区ID
      * @param timeArea 时间区域，格式：HH:mm-HH:mm
      * @return boolean
      */
-    public static boolean checkTime(String timeZone, String... timeArea) {
-        LocalDateTime time = toLocalDateTimeTZ(timeZone);
+    public static boolean checkTimeIn(LocalDateTime time, String... timeArea) {
         LocalDateTime localDateTime = LocalDateTime.parse(time.format(TIME_FORMAT_YMD_HM), TIME_FORMAT_YMD_HM);
         int len = timeArea.length;
         for (int i = 0; i < len; i++) {
@@ -207,5 +192,6 @@ public class DateTimeUtils {
         LocalDateTime localDateTime = toLocalDateTime(date);
         return LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator));
     }
+
 
 }
