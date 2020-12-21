@@ -65,12 +65,30 @@ public class DateTimeUtils {
     }
 
     /**
+     * 获取当前系统日期字符串，格式：yyyy-MM-dd
+     *
+     * @return String
+     */
+    public static String getDateYMDStr(LocalDateTime time) {
+        return time.format(TIME_FORMAT_YMD);
+    }
+
+    /**
      * 获取当前系统日期字符串，格式：yyyyMMdd
      *
      * @return String
      */
     public static String getDateYMDSimpStr() {
         return LocalDate.now().format(TIME_FORMAT_YMD_SIMP);
+    }
+
+    /**
+     * 获取当前系统日期字符串，格式：yyyyMMdd
+     *
+     * @return String
+     */
+    public static String getDateYMDSimpStr(LocalDateTime time) {
+        return time.format(TIME_FORMAT_YMD_SIMP);
     }
 
     /**
@@ -97,7 +115,16 @@ public class DateTimeUtils {
      * @return String
      */
     public static String getWeekDay(String timeZone) {
-        LocalDateTime time = toLocalDateTimeTZ(timeZone);;
+        LocalDateTime time = toLocalDateTimeTZ(timeZone);
+        return String.valueOf(time.getDayOfWeek());
+    }
+
+    /**
+     * 获取当前星期几
+     *
+     * @return String
+     */
+    public static String getWeekDay(LocalDateTime time) {
         return String.valueOf(time.getDayOfWeek());
     }
 
@@ -122,15 +149,15 @@ public class DateTimeUtils {
         return ZonedDateTime.now().withZoneSameInstant(zoneId).toLocalDateTime();
     }
 
+
     /**
      * 校验当前时区时间是否在时间区域内
      *
-     * @param timeZone 时区ID
+     * @param time     时区ID
      * @param timeArea 时间区域，格式：HH:mm-HH:mm
      * @return boolean
      */
-    public static boolean checkTime(String timeZone, String... timeArea) {
-        LocalDateTime time = toLocalDateTimeTZ(timeZone);
+    public static boolean checkTimeIn(LocalDateTime time, String... timeArea) {
         LocalDateTime localDateTime = LocalDateTime.parse(time.format(TIME_FORMAT_YMD_HM), TIME_FORMAT_YMD_HM);
         int len = timeArea.length;
         for (int i = 0; i < len; i++) {
@@ -165,5 +192,6 @@ public class DateTimeUtils {
         LocalDateTime localDateTime = toLocalDateTime(date);
         return LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator));
     }
+
 
 }
