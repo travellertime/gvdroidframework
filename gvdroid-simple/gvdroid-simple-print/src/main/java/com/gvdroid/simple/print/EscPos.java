@@ -457,31 +457,18 @@ public class EscPos {
     private EscPos qrCode(int position, String qrData) throws IOException {
         int moduleSize = 5;
         int length = qrData.getBytes(encoding).length;
-//        int l = (int) (Math.ceil(1.5 * length) * 8);
-//        if (l < 200) {
-//            moduleSize = 1;
-//        } else if (l < 429) {
-//            moduleSize = 2;
-//        } else if (l < 641) {
-//            moduleSize = 3;
-//        } else if (l < 885) {
-//            moduleSize = 4;
-//        } else if (l < 1161) {
-//            moduleSize = 5;
-//        } else if (l < 1469) {
-//            moduleSize = 6;
-//        }
 
+        // 二维码位置
         alignQr(position, moduleSize);
 
-        writer.write(0x1D);// init
-        writer.write("(k");// adjust height of barcode
-        writer.write(length + 3); // pl
-        writer.write(0); // ph
-        writer.write(49); // cn
-        writer.write(80); // fn
-        writer.write(48); //
-        writer.write(qrData);
+        // 设置二维码大小
+        writer.write(0x1D);
+        writer.write("(k");
+        writer.write(3);
+        writer.write(0);
+        writer.write(49);
+        writer.write(67);
+        writer.write(moduleSize);
 
         writer.write(0x1D);
         writer.write("(k");
@@ -491,13 +478,14 @@ public class EscPos {
         writer.write(69);
         writer.write(48);
 
-        writer.write(0x1D);
-        writer.write("(k");
-        writer.write(3);
-        writer.write(0);
-        writer.write(49);
-        writer.write(67);
-        writer.write(moduleSize);
+        writer.write(0x1D);// init
+        writer.write("(k");// adjust height of barcode
+        writer.write(length + 3); // pl
+        writer.write(0); // ph
+        writer.write(49); // cn
+        writer.write(80); // fn
+        writer.write(48); //
+        writer.write(qrData);
 
         writer.write(0x1D);
         writer.write("(k");
