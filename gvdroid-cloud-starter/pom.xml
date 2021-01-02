@@ -30,8 +30,8 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>rdc-releases</id>
-            <url>https://packages.aliyun.com/maven/repository/2046769-release-awsrHC/</url>
+            <id>cld-releases</id>
+            <url>http://dev.nexus.cldteam.com:18081/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
 </project>
