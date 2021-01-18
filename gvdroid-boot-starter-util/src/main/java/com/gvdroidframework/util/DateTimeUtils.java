@@ -110,10 +110,21 @@ public class DateTimeUtils {
     }
 
     /**
-     * 获取当前星期几
-     *
-     * @return String
+     * timestamp 转 LocalDateTime
+     * @param timestamp
+     * @return
      */
+    public static LocalDateTime getDateTimeOfTimestamp(long timestamp) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        ZoneId zone = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zone);
+    }
+
+        /**
+         * 获取当前星期几
+         *
+         * @return String
+         */
     public static String getWeekDay(String timeZone) {
         LocalDateTime time = toLocalDateTimeTZ(timeZone);
         return String.valueOf(time.getDayOfWeek());
@@ -193,5 +204,17 @@ public class DateTimeUtils {
         return LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator));
     }
 
+    /**
+     * 校验是否超时
+     *
+     * @param timestamp             日期时间
+     * @param effecMillisecond 有效时长（毫秒）
+     * @return boolean
+     */
+    public static boolean checkTimeOut(Long timestamp, Long effecMillisecond) {
+        int denominator = 1000;
+        LocalDateTime localDateTime = getDateTimeOfTimestamp(timestamp);
+        return LocalDateTime.now().isAfter(localDateTime.plusSeconds(effecMillisecond / denominator));
+    }
 
 }
