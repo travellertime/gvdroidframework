@@ -2,6 +2,7 @@ package com.gvdroidframework.util;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * Base64工具
@@ -29,7 +30,7 @@ public class Base64Utils extends org.springframework.util.Base64Utils {
 	 */
 	public static String encode(String value, Charset charset) {
 		byte[] val = value.getBytes(charset);
-		return new String(Base64Utils.encode(val), charset);
+		return new String(Base64.getEncoder().withoutPadding().encode(val), charset);
 	}
 
 	/**
