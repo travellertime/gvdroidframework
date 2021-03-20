@@ -2,10 +2,23 @@ server:
   port: 4002
 spring:
   cloud:
-    nacos:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      enabled: true
       discovery:
-        server-addr: localhost:8848
-        register-enabled: true
+        register: true
+        enabled: true
+        prefer-ip-address: true
+        instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        serviceName: ${spring.application.name}
+        port: ${server.port}
+        healthCheckInterval: 15s
+        healthCheckCriticalTimeout: 5m
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#        register-enabled: true
   messages:
     always-use-message-format: false # Whether to always apply the MessageFormat rules, parsing even messages without arguments.
     basename: i18n/messages # Comma-separated list of basenames (essentially a fully-qualified classpath location), each following the ResourceBundle convention with relaxed support for slash based locations.
