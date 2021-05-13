@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RequiredArgsConstructor
 public class RepeatAvoidTemplateImpl implements RepeatAvoidTemplate {
-    private final static String AVOID_REPEATED_CACHE_PREFIX = "avoid.repeat.key.";
+    private final static String AVOID_REPEATED_CACHE_PREFIX = "gvdroidAvoid:repeatKey:";
 
     final RedisTemplate<String, String> redisTemplate;
 
@@ -81,7 +81,8 @@ public class RepeatAvoidTemplateImpl implements RepeatAvoidTemplate {
 
     }
 
-//    /**
+
+    //    /**
 //     * 根据传入的业务关键词进行请求防重。
 //     * <p>
 //     * 在防重持续时间内只允许请求一次。

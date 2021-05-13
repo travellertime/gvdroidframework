@@ -2,7 +2,10 @@ spring:
   application:
     name: gvdroid-simple-complex-server
   jackson:
-    time-zone: UTC
+    time-zone: GMT+8
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      WRITE_DATES_AS_TIMESTAMPS: true
 gd:
   list:
     - a

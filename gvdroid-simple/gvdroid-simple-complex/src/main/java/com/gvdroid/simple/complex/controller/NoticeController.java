@@ -38,9 +38,12 @@ public class NoticeController {
     public R<NoticeResponseDTO> getNotice(@RequestBody @Valid NoticeRequestDTO request) {
         log.info(JSON.toJSONString(request));
 
-        gDemoProperties.getList().forEach(System.out::println);
+//        gDemoProperties.getList().forEach(System.out::println);
+        System.out.println(request.getStartDate());
+        NoticeResponseDTO noticeResponseDTO = new NoticeResponseDTO();
+        noticeResponseDTO.setDatt(request.getStartDate());
 
-        return R.body(new NoticeResponseDTO());
+        return R.body(noticeResponseDTO);
     }
 
     @PostMapping(value = "/colin")
