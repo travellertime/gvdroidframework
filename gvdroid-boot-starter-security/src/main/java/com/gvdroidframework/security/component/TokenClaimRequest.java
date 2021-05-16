@@ -1,13 +1,14 @@
 package com.gvdroidframework.security.component;
 
-public class TokenClaim {
+public class TokenClaimRequest {
 
-    private TokenClaim(Builder builder) {
+    private TokenClaimRequest(Builder builder) {
         this.userId = builder.userId;
         this.channelId = builder.channelId;
         this.entityId = builder.entityId;
         this.roles = builder.roles;
         this.privileges = builder.privileges;
+        this.expiresIn = builder.expiresIn;
     }
 
     private String userId;
@@ -15,6 +16,7 @@ public class TokenClaim {
     private String entityId;
     private String roles;
     private String privileges;
+    private int expiresIn;
 
     public String getUserId() {
         return userId;
@@ -56,6 +58,14 @@ public class TokenClaim {
         this.privileges = privileges;
     }
 
+    public int getExpiresIn() {
+        return expiresIn;
+    }
+
+    public void setExpiresIn(int expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -67,6 +77,7 @@ public class TokenClaim {
         private String entityId;
         private String roles;
         private String privileges;
+        private int expiresIn;
 
         public Builder userId(String userId) {
             this.userId = userId;
@@ -93,8 +104,13 @@ public class TokenClaim {
             return this;
         }
 
-        public TokenClaim build() {
-            return new TokenClaim(this);
+        public Builder expiresIn(int expiresIn) {
+            this.expiresIn = expiresIn;
+            return this;
+        }
+
+        public TokenClaimRequest build() {
+            return new TokenClaimRequest(this);
         }
     }
 }

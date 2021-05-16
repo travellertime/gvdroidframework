@@ -1,6 +1,7 @@
 package com.gvdroidframework.helper.core;
 
-import com.gvdroidframework.security.component.TokenClaim;
+import com.gvdroidframework.security.component.TokenClaimRequest;
+import com.gvdroidframework.security.component.TokenClaimResponse;
 
 /**
  * 登录凭证的生成、刷新、移除
@@ -14,17 +15,20 @@ public interface PassportSecurityTemplate {
      *
      * @param tokenId 登录凭证
      */
-    void remove(String tokenId);
+    void removeToken(String tokenId);
 
-    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey);
+//    @Deprecated
+//    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey);
+//
+//    @Deprecated
+//    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
+//
+//    @Deprecated
+//    TokenObject generateToken(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
 
-    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
+    TokenClaimResponse generateToken(TokenClaimRequest tokenClaimRequest);
 
-    TokenObject generateToken(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
-
-    TokenObject generateToken(TokenClaim tokenClaim, String secretKey, int expirySeconds);
-
-    TokenObject refreshToken(String tokenId, String saltCode, int expireSeconds);
+    TokenClaimResponse refreshToken(String refreshToken);
 
     String getTokenSecretKey(String tokenId);
 }

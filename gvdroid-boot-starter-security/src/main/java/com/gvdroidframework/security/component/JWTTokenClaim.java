@@ -8,7 +8,10 @@ package com.gvdroidframework.security.component;
  */
 public interface JWTTokenClaim {
 
-    String KEY_TOKEN_PREFIX = "gvdroid:token:";
+    String KEY_TOKEN_PREFIX = "gvdroid:tokenAccess:";
+
+    String KEY_REFRESH_TOKEN_PREFIX = "gvdroid:tokenRefresh:";
+
     /**
      * 用户编号
      */
@@ -34,5 +37,8 @@ public interface JWTTokenClaim {
      */
     String KEY_ENTITY = "entityId";
 
-
+    /**
+     * 过期时间秒数
+     */
+    String KEY_EXPIRES_IN = "expiresIn";
 }

@@ -7,10 +7,10 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.gvdroidframework.security.component.JWTTokenClaim;
+import com.gvdroidframework.security.component.TokenClaimRequest;
 import com.gvdroidframework.util.StringUtils;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Java Web Token工具类
@@ -55,29 +55,29 @@ public class JWTUtils {
      * generate token by JWT.
      * JWT constitute: header, payload, signature.
      *
-     * @param map          map
-     * @param secretKey    secretKey
-     * @param expirySecond expirySecond
+     * @param map              map
+     * @param secretKey        secretKey
+     * @param expiresInSeconds expirySecond
      * @return String
      */
-    public static String genToken(Map<String, String> map, String secretKey, int expirySecond) {
+    public static String genToken(Map<String, String> map, String secretKey, int expiresInSeconds) {
         // input parameters validation.
-        if (null == map || StringUtils.isEmpty(secretKey) || expirySecond == 0)
+        if (null == map || StringUtils.isEmpty(secretKey) || expiresInSeconds == 0)
             return null;
 
-        JWTCreator.Builder builder = getJWTCreator(expirySecond);
+        JWTCreator.Builder builder = getJWTCreator(expiresInSeconds);
         map.forEach(builder::withClaim);
 
         return builder.sign(Algorithm.HMAC256(secretKey));
     }
 
-    private static JWTCreator.Builder getJWTCreator(int expirySecond) {
+    private static JWTCreator.Builder getJWTCreator(int expiresInSeconds) {
         // token issue date. use current date get from system.
         Date issueDate = new Date();
 
         // token expire date. add by set.
         Calendar expireDate = Calendar.getInstance();
-        expireDate.add(calendarField, expirySecond);
+        expireDate.add(calendarField, expiresInSeconds);
         Date expiresDate = expireDate.getTime();
 
         // header Map
@@ -127,7 +127,7 @@ public class JWTUtils {
      * @return String
      */
     public static String genToken(Map<String, String> map, int expirySecond) {
-        return genToken(map, SECRET_KEY, calendarInterval);
+        return genToken(map, SECRET_KEY, expirySecond);
     }
 
     /**
@@ -196,6 +196,16 @@ public class JWTUtils {
             throw e;
         }
         return jwt;
+    }
+
+    /**
+     * 得到解码后的JWT对象
+     *
+     * @param token String
+     * @return DecodedJWT
+     */
+    public static DecodedJWT getDecodedJWT(String token) {
+        return decodeToken(token);
     }
 
     /**

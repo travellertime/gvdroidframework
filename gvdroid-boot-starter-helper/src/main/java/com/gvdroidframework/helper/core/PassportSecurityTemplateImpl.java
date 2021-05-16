@@ -1,11 +1,14 @@
 package com.gvdroidframework.helper.core;
 
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.gvdroidframework.base.exception.BaseException;
+import com.gvdroidframework.helper.constant.TokenSignKeyConstant;
 import com.gvdroidframework.security.component.JWTTokenClaim;
-import com.gvdroidframework.security.component.TokenClaim;
+import com.gvdroidframework.security.component.TokenClaimRequest;
+import com.gvdroidframework.security.component.TokenClaimResponse;
 import com.gvdroidframework.security.util.JWTUtils;
 import com.gvdroidframework.util.MD5Util;
-import com.gvdroidframework.util.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.time.Duration;
@@ -15,7 +18,12 @@ import java.util.Map;
 public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
     //    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
+
+    private static final boolean reuseRefreshToken = true;
+
     private static final int TOKEN_EXPIRY = 2419200; // 28天
+
+    private static final int TOKEN_EXPIRY_FACTOR = 2;
 
     private final RedisTemplate<String, String> redisTemplate;
 
@@ -67,7 +75,7 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
      * @param tokenId tokenId
      */
     @Override
-    public void remove(String tokenId) {
+    public void removeToken(String tokenId) {
         // 得到redis key
         String key = getTokenRedisKey(tokenId);
 
@@ -75,111 +83,126 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         redisTemplate.delete(key);
     }
 
-    /**
-     * 生成token
-     *
-     * @param customerId customerId
-     * @param entityCode entityCode
-     * @param channelId  channelId
-     * @param saltCode   saltCode
-     * @return tokenId
-     */
-    @Override
-    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode) {
+//    /**
+//     * 生成token
+//     *
+//     * @param customerId customerId
+//     * @param entityCode entityCode
+//     * @param channelId  channelId
+//     * @param saltCode   saltCode
+//     * @return tokenId
+//     */
+//    @Override
+//    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode) {
+//
+//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
+//
+//        String complexToken = JWTUtils.genToken(map, saltCode);
+//
+//        setRedis(complexToken, saltCode);
+//
+//        return complexToken;
+//    }
+//
+//    /**
+//     * 生成token
+//     *
+//     * @param customerId customerId
+//     * @param entityCode entityCode
+//     * @param channelId  channelId
+//     * @param saltCode   saltCode
+//     * @return tokenId
+//     */
+//    @Override
+//    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
+//
+//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
+//
+//        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
+//
+//        setRedis(complexToken, saltCode, expirySeconds);
+//
+//        return complexToken;
+//    }
+//
+//    @Override
+//    public TokenObject generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
+//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
+//
+//        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
+//
+//        setRedis(complexToken, saltCode, expirySeconds);
+//
+//        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, saltCode);
+//
+//        return fillToken(complexToken, decodedJWT);
+//    }
 
-        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-
-        String complexToken = JWTUtils.genToken(map, saltCode);
-
-        setRedis(complexToken, saltCode);
-
-        return complexToken;
+    public TokenClaimResponse generateToken(TokenClaimRequest tokenClaimRequest) {
+        return this.generateToken(tokenClaimRequest, false);
     }
 
-    /**
-     * 生成token
-     *
-     * @param customerId customerId
-     * @param entityCode entityCode
-     * @param channelId  channelId
-     * @param saltCode   saltCode
-     * @return tokenId
-     */
-    @Override
-    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
-
-        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-
-        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
-
-        setRedis(complexToken, saltCode, expirySeconds);
-
-        return complexToken;
-    }
-
-    @Override
-    public TokenObject generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
-        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-
-        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
-
-        setRedis(complexToken, saltCode, expirySeconds);
-
-        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, saltCode);
-
-        return fillToken(complexToken, decodedJWT);
-    }
-
-    public TokenObject generateToken(TokenClaim tokenClaim, String secretKey, int expirySeconds) {
+    public TokenClaimResponse generateToken(TokenClaimRequest tokenClaimRequest, boolean reuseRefreshToken) {
         Map<String, String> map = new HashMap<>();
-        map.put(JWTTokenClaim.KEY_USER, tokenClaim.getUserId());
-        map.put(JWTTokenClaim.KEY_CHANNEL, tokenClaim.getChannelId());
-        map.put(JWTTokenClaim.KEY_ENTITY, tokenClaim.getEntityId());
-        map.put(JWTTokenClaim.KEY_ROLE, tokenClaim.getRoles());
-        map.put(JWTTokenClaim.KEY_PRIVILEGE, tokenClaim.getPrivileges());
+        this.tokenClaimConvertMap(map, tokenClaimRequest);
 
-        String complexToken = JWTUtils.genToken(map, secretKey, expirySeconds);
+        // 生成accessToken
+        String accessToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_ACCESS_SIGN_KEY, tokenClaimRequest.getExpiresIn());
 
-        setRedis(complexToken, secretKey, expirySeconds);
+        // 生成refreshToken
+        String refreshToken = "";
+        if (!reuseRefreshToken) {
+            refreshToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY, tokenClaimRequest.getExpiresIn() * TOKEN_EXPIRY_FACTOR);
+        }
+//        // 将accessToken存入Redis
+//        setRedis(accessToken, secretKey, tokenClaimRequest.getExpiresIn());
 
-        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, secretKey);
-
-        return fillToken(complexToken, decodedJWT);
+        return fillToken(accessToken, refreshToken, tokenClaimRequest.getExpiresIn());
     }
 
-    private Map<String, String> getTokenMap(String customerId, String entityCode, String channelId) {
-        Map<String, String> map = new HashMap<>();
-        map.put(JWTTokenClaim.KEY_USER, customerId);
-        map.put(JWTTokenClaim.KEY_CHANNEL, channelId);
-        map.put(JWTTokenClaim.KEY_ENTITY, entityCode);
-        return map;
+
+
+    private void tokenClaimConvertMap(Map<String, String> map, TokenClaimRequest tokenClaimRequest) {
+        map.put(JWTTokenClaim.KEY_USER, tokenClaimRequest.getUserId());
+        map.put(JWTTokenClaim.KEY_CHANNEL, tokenClaimRequest.getChannelId());
+        map.put(JWTTokenClaim.KEY_ENTITY, tokenClaimRequest.getEntityId());
+        map.put(JWTTokenClaim.KEY_ROLE, tokenClaimRequest.getRoles());
+        map.put(JWTTokenClaim.KEY_PRIVILEGE, tokenClaimRequest.getPrivileges());
+        map.put(JWTTokenClaim.KEY_EXPIRES_IN, String.valueOf(tokenClaimRequest.getExpiresIn()));
+    }
+
+    private TokenClaimRequest getTokenClaim(String refreshToken) {
+        DecodedJWT jwt = JWTUtils.getDecodedJWT(refreshToken, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY);
+
+        return TokenClaimRequest.builder()
+                .userId(jwt.getClaim(JWTTokenClaim.KEY_USER).asString())
+                .channelId(jwt.getClaim(JWTTokenClaim.KEY_CHANNEL).asString())
+                .entityId(jwt.getClaim(JWTTokenClaim.KEY_ENTITY).asString())
+                .roles(jwt.getClaim(JWTTokenClaim.KEY_ROLE).asString())
+                .privileges(jwt.getClaim(JWTTokenClaim.KEY_PRIVILEGE).asString())
+                .expiresIn(Integer.parseInt(jwt.getClaim(JWTTokenClaim.KEY_EXPIRES_IN).asString()))
+                .build();
     }
 
     @Override
-    public TokenObject refreshToken(String tokenId, String saltCode, int expireSeconds) {
+    public TokenClaimResponse refreshToken(String refreshToken) {
 
-        // 解码传入的token，失败则抛出异常
-        Map<String, String> tokenMap = JWTUtils.getMap(tokenId, saltCode, JWTTokenClaim.KEY_USER, JWTTokenClaim.KEY_ENTITY, JWTTokenClaim.KEY_CHANNEL);
+        try {
+            TokenClaimRequest tokenClaim = this.getTokenClaim(refreshToken);
 
-        // 生成新的token
-        String complexToken = JWTUtils.genToken(tokenMap, saltCode, expireSeconds);
-
-        // 写入Redis缓存
-        this.setRedis(complexToken, saltCode, expireSeconds);
-
-        // 删除旧的Token
-        this.remove(tokenId);
-
-        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, saltCode);
-
-        return fillToken(complexToken, decodedJWT);
+            TokenClaimResponse tokenClaimResponse = this.generateToken(tokenClaim, true);
+            tokenClaimResponse.setRefreshToken(refreshToken);
+            return tokenClaimResponse;
+        } catch (SignatureVerificationException sve) {
+            throw new BaseException("Invalid refresh token", "101");
+        }
     }
 
-    private TokenObject fillToken(String complexToken, DecodedJWT decodedJWT) {
-        TokenObject tokenObject = new TokenObject();
-        tokenObject.setToken(complexToken);
-        tokenObject.setIssueAt(decodedJWT.getIssuedAt().getTime());
-        tokenObject.setExpiresAt(decodedJWT.getExpiresAt().getTime());
-        return tokenObject;
+    private TokenClaimResponse fillToken(String accessToken, String refreshToken, long expiresIn) {
+        TokenClaimResponse tokenClaimResponse = new TokenClaimResponse();
+        tokenClaimResponse.setAccessToken(accessToken);
+        tokenClaimResponse.setRefreshToken(refreshToken);
+        tokenClaimResponse.setExpiresIn(expiresIn);
+        return tokenClaimResponse;
     }
 }

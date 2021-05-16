@@ -24,19 +24,19 @@ public class PassportSecuritySimpleTest {
 
     @Test
     public void tokenTest() {
-        String customerId = "colin";
-        String entityId = "gvdroid";
-        String channel = "web";
-        String salt = "salt";
+//        String customerId = "colin";
+//        String entityId = "gvdroid";
+//        String channel = "web";
+//        String salt = "salt";
+//
+//        String token = this.passportSecurityTemplate.generateTokenId(customerId, entityId, channel, salt);
+//        System.out.println(token);
 
-        String token = this.passportSecurityTemplate.generateTokenId(customerId, entityId, channel, salt);
-        System.out.println(token);
-
-
-        String secretKey = this.passportSecurityTemplate.getTokenSecretKey(token);
-        Map<String, String> map = JWTUtils.getMap(token, secretKey, JWTTokenClaim.KEY_USER, JWTTokenClaim.KEY_ENTITY, JWTTokenClaim.KEY_CHANNEL);
-        System.out.println(map.get(JWTTokenClaim.KEY_USER));
-        System.out.println(map.get(JWTTokenClaim.KEY_ENTITY));
-        System.out.println(map.get(JWTTokenClaim.KEY_CHANNEL));
+//
+//        String secretKey = this.passportSecurityTemplate.getTokenSecretKey(token);
+//        Map<String, String> map = JWTUtils.getMap(token, secretKey, JWTTokenClaim.KEY_USER, JWTTokenClaim.KEY_ENTITY, JWTTokenClaim.KEY_CHANNEL);
+//        System.out.println(map.get(JWTTokenClaim.KEY_USER));
+//        System.out.println(map.get(JWTTokenClaim.KEY_ENTITY));
+//        System.out.println(map.get(JWTTokenClaim.KEY_CHANNEL));
     }
 }
