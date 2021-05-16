@@ -1,7 +1,9 @@
 package com.gvdroid.simple.helper;
 
+import com.alibaba.fastjson.JSON;
 import com.gvdroidframework.helper.core.PassportSecurityTemplate;
-import com.gvdroidframework.security.util.JWTUtils;
+import com.gvdroidframework.helper.core.TokenObject;
+import com.gvdroidframework.security.component.TokenClaim;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +21,20 @@ public class TokenDemoController {
         String entityId = "TAT_M";
         String channelId = "channelId";
         String saltCode = "123456";
-        String token = this.passportSecurityTemplate.generateTokenId(customerId, entityId, channelId, saltCode);
+        TokenClaim tokenClaim = TokenClaim.builder().userId(customerId)
+                .entityId(entityId)
+                .channelId(channelId)
+                .roles("")
+                .privileges("").build();
+        TokenObject tokenObject = this.passportSecurityTemplate.generateToken(tokenClaim, saltCode, 100);
 
-        return token;
+        return JSON.toJSONString(tokenObject);
     }
 
     @GetMapping(value = "/token/refresh/{token}")
     public String refreshToken(@PathVariable("token") String token) {
-        return "";
+        TokenObject tokenObject = this.passportSecurityTemplate.refreshToken(token, "123456", 100);
+        return JSON.toJSONString(tokenObject);
     }
 
     @GetMapping(value = "/token/delete/{token}")

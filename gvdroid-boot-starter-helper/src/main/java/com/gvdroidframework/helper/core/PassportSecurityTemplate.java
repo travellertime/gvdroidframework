@@ -1,5 +1,7 @@
 package com.gvdroidframework.helper.core;
 
+import com.gvdroidframework.security.component.TokenClaim;
+
 /**
  * 登录凭证的生成、刷新、移除
  * 用户登录的时候，返回凭证、签发时间、到期刷新偏移量（该时长由应用层决定给）、到期时间给到前端
@@ -14,13 +16,15 @@ public interface PassportSecurityTemplate {
      */
     void remove(String tokenId);
 
-    String generateTokenId(String customerId, String entityCode, String channelId, String saltCode);
+    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey);
 
-    String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds);
+    String generateTokenId(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
 
-    Token generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds);
+    TokenObject generateToken(String customerId, String entityCode, String channelId, String secretKey, int expirySeconds);
 
-    Token refreshToken(String tokenId, String saltCode, int expireSeconds);
+    TokenObject generateToken(TokenClaim tokenClaim, String secretKey, int expirySeconds);
+
+    TokenObject refreshToken(String tokenId, String saltCode, int expireSeconds);
 
     String getTokenSecretKey(String tokenId);
 }

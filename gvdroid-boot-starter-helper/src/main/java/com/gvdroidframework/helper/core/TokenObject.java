@@ -1,6 +1,6 @@
 package com.gvdroidframework.helper.core;
 
-public class Token {
+public class TokenObject {
 
     private String token;
     private long issueAt;

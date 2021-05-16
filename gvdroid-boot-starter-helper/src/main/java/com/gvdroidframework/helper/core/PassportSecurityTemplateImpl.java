@@ -2,8 +2,10 @@ package com.gvdroidframework.helper.core;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.gvdroidframework.security.component.JWTTokenClaim;
+import com.gvdroidframework.security.component.TokenClaim;
 import com.gvdroidframework.security.util.JWTUtils;
 import com.gvdroidframework.util.MD5Util;
+import com.gvdroidframework.util.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.time.Duration;
@@ -116,7 +118,7 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
     }
 
     @Override
-    public Token generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
+    public TokenObject generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
         Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
 
         String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
@@ -124,6 +126,23 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         setRedis(complexToken, saltCode, expirySeconds);
 
         DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, saltCode);
+
+        return fillToken(complexToken, decodedJWT);
+    }
+
+    public TokenObject generateToken(TokenClaim tokenClaim, String secretKey, int expirySeconds) {
+        Map<String, String> map = new HashMap<>();
+        map.put(JWTTokenClaim.KEY_USER, tokenClaim.getUserId());
+        map.put(JWTTokenClaim.KEY_CHANNEL, tokenClaim.getChannelId());
+        map.put(JWTTokenClaim.KEY_ENTITY, tokenClaim.getEntityId());
+        map.put(JWTTokenClaim.KEY_ROLE, tokenClaim.getRoles());
+        map.put(JWTTokenClaim.KEY_PRIVILEGE, tokenClaim.getPrivileges());
+
+        String complexToken = JWTUtils.genToken(map, secretKey, expirySeconds);
+
+        setRedis(complexToken, secretKey, expirySeconds);
+
+        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, secretKey);
 
         return fillToken(complexToken, decodedJWT);
     }
@@ -137,7 +156,7 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
     }
 
     @Override
-    public Token refreshToken(String tokenId, String saltCode, int expireSeconds) {
+    public TokenObject refreshToken(String tokenId, String saltCode, int expireSeconds) {
 
         // 解码传入的token，失败则抛出异常
         Map<String, String> tokenMap = JWTUtils.getMap(tokenId, saltCode, JWTTokenClaim.KEY_USER, JWTTokenClaim.KEY_ENTITY, JWTTokenClaim.KEY_CHANNEL);
@@ -156,11 +175,11 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         return fillToken(complexToken, decodedJWT);
     }
 
-    private Token fillToken(String complexToken, DecodedJWT decodedJWT) {
-        Token token = new Token();
-        token.setToken(complexToken);
-        token.setIssueAt(decodedJWT.getIssuedAt().getTime());
-        token.setExpiresAt(decodedJWT.getExpiresAt().getTime());
-        return token;
+    private TokenObject fillToken(String complexToken, DecodedJWT decodedJWT) {
+        TokenObject tokenObject = new TokenObject();
+        tokenObject.setToken(complexToken);
+        tokenObject.setIssueAt(decodedJWT.getIssuedAt().getTime());
+        tokenObject.setExpiresAt(decodedJWT.getExpiresAt().getTime());
+        return tokenObject;
     }
 }

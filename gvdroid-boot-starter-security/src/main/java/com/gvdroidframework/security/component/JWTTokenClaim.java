@@ -15,11 +15,6 @@ public interface JWTTokenClaim {
     String KEY_USER = "userId";
 
     /**
-     * 机构编号
-     */
-    String KEY_ORG = "orgId";
-
-    /**
      * 角色
      */
     String KEY_ROLE = "roles";

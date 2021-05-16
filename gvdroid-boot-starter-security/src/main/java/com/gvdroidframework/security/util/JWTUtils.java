@@ -274,13 +274,6 @@ public class JWTUtils {
 //        testToken();
     }
 
-    private static void testToken(long expireTime, long accessTime, long offsetMilleSeconds) {
-        // 访问时间满足token过期时间时，重新颁发令牌
-        if (accessTime + offsetMilleSeconds > expireTime) {
-
-        }
-    }
-
     private static void testMapToken() {
 //        String token = genToken(map, "11111", 10);
 

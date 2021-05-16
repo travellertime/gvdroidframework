@@ -35,15 +35,15 @@ public class Context implements Serializable {
      */
     private String userId;
 
-    /**
-     * 角色
-     */
-    private String roles;
-
-    /**
-     * 权限
-     */
-    private String privileges;
+//    /**
+//     * 角色
+//     */
+//    private String roles;
+//
+//    /**
+//     * 权限
+//     */
+//    private String privileges;
 
     /**
      * 外部流水号。（前端必填，后台不填）
@@ -138,21 +138,21 @@ public class Context implements Serializable {
         this.userId = userId;
     }
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public String getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(String privileges) {
-        this.privileges = privileges;
-    }
+//    public String getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(String roles) {
+//        this.roles = roles;
+//    }
+//
+//    public String getPrivileges() {
+//        return privileges;
+//    }
+//
+//    public void setPrivileges(String privileges) {
+//        this.privileges = privileges;
+//    }
 
     public String getTxnReferenceNo() {
         return txnReferenceNo;
