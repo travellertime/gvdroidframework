@@ -5,9 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.integration.redis.util.RedisLockRegistry;
 
 @Configuration
 public class GRedisAutoConfiguration {
+
+
+    @Bean
+    RedisLockRegistry redisLockRegistry(RedisConnectionFactory redisConnectionFactory) {
+        return new RedisLockRegistry(redisConnectionFactory, "gvdroid:lock:");
+    }
 
     /**
      * @param redisConnectionFactory RedisConnectionFactory

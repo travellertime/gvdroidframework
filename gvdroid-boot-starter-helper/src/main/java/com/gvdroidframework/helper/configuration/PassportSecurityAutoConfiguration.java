@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.integration.support.locks.LockRegistry;
 
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
@@ -17,11 +18,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class PassportSecurityAutoConfiguration {
 
     final RedisTemplate<String, String> redisTemplate;
+    final LockRegistry lockRegistry;
 
     @Bean
     @Primary
     @ConditionalOnMissingBean(name = "passportSecurityTemplate")
     public PassportSecurityTemplate passportSecurityTemplate() {
-        return new PassportSecurityTemplateImpl(redisTemplate);
+        return new PassportSecurityTemplateImpl(redisTemplate, lockRegistry);
     }
 }

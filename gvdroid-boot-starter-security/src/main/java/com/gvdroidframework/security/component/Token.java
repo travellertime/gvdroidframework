@@ -1,6 +1,6 @@
 package com.gvdroidframework.security.component;
 
-public class TokenClaimResponse {
+public class Token {
 
     private String accessToken;
     private String refreshToken;

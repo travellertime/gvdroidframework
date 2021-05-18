@@ -1,180 +1,84 @@
 package com.gvdroidframework.helper.core;
 
-import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.helper.constant.TokenSignKeyConstant;
 import com.gvdroidframework.security.component.JWTTokenClaim;
-import com.gvdroidframework.security.component.TokenClaimRequest;
-import com.gvdroidframework.security.component.TokenClaimResponse;
+import com.gvdroidframework.security.component.Token;
+import com.gvdroidframework.security.component.TokenClaim;
 import com.gvdroidframework.security.util.JWTUtils;
 import com.gvdroidframework.util.MD5Util;
+import com.gvdroidframework.util.StringUtils;
+import lombok.SneakyThrows;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.integration.support.locks.LockRegistry;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
     //    private static final String REDIS_TOKEN_FIELD = "gvdroid-token-";
 
-    private static final boolean reuseRefreshToken = true;
-
-    private static final int TOKEN_EXPIRY = 2419200; // 28天
+//    private static final int TOKEN_EXPIRY = 2419200; // 28天
 
     private static final int TOKEN_EXPIRY_FACTOR = 2;
+    private static final String REFRESH_TOKEN_KEY = "gvdroid:refreshKey:";
+    private static final long LOCK_SECONDS = 10;
 
+    //    private String getTokenRedisKey(String tokenId) {
+//        // 生成redis key
+//        return JWTTokenClaim.KEY_TOKEN_PREFIX + MD5Util.MD5_32bit(tokenId);
+//    }
     private final RedisTemplate<String, String> redisTemplate;
+    private final LockRegistry lockRegistry;
 
-    public PassportSecurityTemplateImpl(RedisTemplate<String, String> redisTemplate) {
+    public PassportSecurityTemplateImpl(RedisTemplate<String, String> redisTemplate, LockRegistry lockRegistry) {
         this.redisTemplate = redisTemplate;
+        this.lockRegistry = lockRegistry;
     }
 
-    private String getTokenRedisKey(String tokenId) {
-        // 生成redis key
-        return JWTTokenClaim.KEY_TOKEN_PREFIX + MD5Util.MD5_32bit(tokenId);
+    public Token generateToken(TokenClaim tokenClaim) {
+        return this.generateToken(tokenClaim, true);
     }
 
-    @Override
-    public String getTokenSecretKey(String tokenId) {
-        String key = getTokenRedisKey(tokenId);
-        return this.redisTemplate.opsForValue().get(key);
-    }
-
-    /**
-     * 将生成的token写入redis
-     *
-     * @param tokenId  tokenId
-     * @param saltCode saltCode
-     */
-    private void setRedis(String tokenId, String saltCode) {
-        // 得到redis key
-        String key = getTokenRedisKey(tokenId);
-        // 异步写入redis
-        redisTemplate.opsForValue().set(key, saltCode, Duration.ofSeconds(TOKEN_EXPIRY));
-    }
-
-    /**
-     * 将生成的token写入redis
-     *
-     * @param tokenId      tokenId
-     * @param saltCode     saltCode
-     * @param expirySecond expirySecond
-     */
-    private void setRedis(String tokenId, String saltCode, int expirySecond) {
-        // 得到redis key
-        String key = getTokenRedisKey(tokenId);
-        // 异步写入redis
-        redisTemplate.opsForValue().set(key, saltCode, Duration.ofSeconds(expirySecond));
-    }
-
-    /**
-     * 将生成的token从redis删除
-     *
-     * @param tokenId tokenId
-     */
-    @Override
-    public void removeToken(String tokenId) {
-        // 得到redis key
-        String key = getTokenRedisKey(tokenId);
-
-        // 异步删除redis
-        redisTemplate.delete(key);
-    }
-
-//    /**
-//     * 生成token
-//     *
-//     * @param customerId customerId
-//     * @param entityCode entityCode
-//     * @param channelId  channelId
-//     * @param saltCode   saltCode
-//     * @return tokenId
-//     */
-//    @Override
-//    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode) {
-//
-//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-//
-//        String complexToken = JWTUtils.genToken(map, saltCode);
-//
-//        setRedis(complexToken, saltCode);
-//
-//        return complexToken;
-//    }
-//
-//    /**
-//     * 生成token
-//     *
-//     * @param customerId customerId
-//     * @param entityCode entityCode
-//     * @param channelId  channelId
-//     * @param saltCode   saltCode
-//     * @return tokenId
-//     */
-//    @Override
-//    public String generateTokenId(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
-//
-//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-//
-//        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
-//
-//        setRedis(complexToken, saltCode, expirySeconds);
-//
-//        return complexToken;
-//    }
-//
-//    @Override
-//    public TokenObject generateToken(String customerId, String entityCode, String channelId, String saltCode, int expirySeconds) {
-//        Map<String, String> map = this.getTokenMap(customerId, entityCode, channelId);
-//
-//        String complexToken = JWTUtils.genToken(map, saltCode, expirySeconds);
-//
-//        setRedis(complexToken, saltCode, expirySeconds);
-//
-//        DecodedJWT decodedJWT = JWTUtils.getDecodedJWT(complexToken, saltCode);
-//
-//        return fillToken(complexToken, decodedJWT);
-//    }
-
-    public TokenClaimResponse generateToken(TokenClaimRequest tokenClaimRequest) {
-        return this.generateToken(tokenClaimRequest, false);
-    }
-
-    public TokenClaimResponse generateToken(TokenClaimRequest tokenClaimRequest, boolean reuseRefreshToken) {
+    public Token generateToken(TokenClaim tokenClaim, boolean generateRefreshToken) {
         Map<String, String> map = new HashMap<>();
-        this.tokenClaimConvertMap(map, tokenClaimRequest);
+        this.tokenClaimConvertMap(map, tokenClaim);
 
         // 生成accessToken
-        String accessToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_ACCESS_SIGN_KEY, tokenClaimRequest.getExpiresIn());
+        String accessToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_ACCESS_SIGN_KEY, tokenClaim.getExpiresIn());
 
         // 生成refreshToken
         String refreshToken = "";
-        if (!reuseRefreshToken) {
-            refreshToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY, tokenClaimRequest.getExpiresIn() * TOKEN_EXPIRY_FACTOR);
+        if (generateRefreshToken) {
+            refreshToken = JWTUtils.genToken(map, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY, tokenClaim.getExpiresIn() * TOKEN_EXPIRY_FACTOR);
         }
-//        // 将accessToken存入Redis
-//        setRedis(accessToken, secretKey, tokenClaimRequest.getExpiresIn());
 
-        return fillToken(accessToken, refreshToken, tokenClaimRequest.getExpiresIn());
+        return fillToken(accessToken, refreshToken, tokenClaim.getExpiresIn());
     }
 
 
-
-    private void tokenClaimConvertMap(Map<String, String> map, TokenClaimRequest tokenClaimRequest) {
-        map.put(JWTTokenClaim.KEY_USER, tokenClaimRequest.getUserId());
-        map.put(JWTTokenClaim.KEY_CHANNEL, tokenClaimRequest.getChannelId());
-        map.put(JWTTokenClaim.KEY_ENTITY, tokenClaimRequest.getEntityId());
-        map.put(JWTTokenClaim.KEY_ROLE, tokenClaimRequest.getRoles());
-        map.put(JWTTokenClaim.KEY_PRIVILEGE, tokenClaimRequest.getPrivileges());
-        map.put(JWTTokenClaim.KEY_EXPIRES_IN, String.valueOf(tokenClaimRequest.getExpiresIn()));
+    private void tokenClaimConvertMap(Map<String, String> map, TokenClaim tokenClaim) {
+        map.put(JWTTokenClaim.KEY_USER, tokenClaim.getUserId());
+        map.put(JWTTokenClaim.KEY_CHANNEL, tokenClaim.getChannelId());
+        map.put(JWTTokenClaim.KEY_ENTITY, tokenClaim.getEntityId());
+        map.put(JWTTokenClaim.KEY_ROLE, tokenClaim.getRoles());
+        map.put(JWTTokenClaim.KEY_PRIVILEGE, tokenClaim.getPrivileges());
+        map.put(JWTTokenClaim.KEY_EXPIRES_IN, String.valueOf(tokenClaim.getExpiresIn()));
     }
 
-    private TokenClaimRequest getTokenClaim(String refreshToken) {
-        DecodedJWT jwt = JWTUtils.getDecodedJWT(refreshToken, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY);
-
-        return TokenClaimRequest.builder()
+    private TokenClaim fillTokenClaim(DecodedJWT jwt) {
+        return TokenClaim.builder()
                 .userId(jwt.getClaim(JWTTokenClaim.KEY_USER).asString())
                 .channelId(jwt.getClaim(JWTTokenClaim.KEY_CHANNEL).asString())
                 .entityId(jwt.getClaim(JWTTokenClaim.KEY_ENTITY).asString())
@@ -184,25 +88,88 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
                 .build();
     }
 
-    @Override
-    public TokenClaimResponse refreshToken(String refreshToken) {
+    /**
+     * 使用refreshToken重新生成accessToken
+     * 当并发调用的时候，会采用分布式锁将线程锁住，只允许一个线程进行处理
+     * 获得锁的线程，到redis中获取accessToken，如果存在则直接返回
+     * 如果不存在则生成token并写入redis中，实效时间为10s
+     *
+     * @param refreshToken refreshToken
+     * @return Token
+     */
+    @SneakyThrows
+    public Token refreshToken(String refreshToken) {
+        // 解析refreshToken
+        TokenClaim tokenClaim = this.getRefreshTokenClaim(refreshToken);
+
+        String key = MD5Util.MD5_32bit(refreshToken);
+        Lock lock = this.lockRegistry.obtain(key);
 
         try {
-            TokenClaimRequest tokenClaim = this.getTokenClaim(refreshToken);
+            boolean lockAcquired = lock.tryLock(LOCK_SECONDS, SECONDS);
+            if (lockAcquired) {
 
-            TokenClaimResponse tokenClaimResponse = this.generateToken(tokenClaim, true);
-            tokenClaimResponse.setRefreshToken(refreshToken);
-            return tokenClaimResponse;
-        } catch (SignatureVerificationException sve) {
-            throw new BaseException("Invalid refresh token", "101");
+                // 校验Redis是否有Token的JSON对象，如果有则直接返回
+                String tokenString = this.redisTemplate.opsForValue().get(REFRESH_TOKEN_KEY + key);
+                if (!StringUtils.isEmpty(tokenString)) {
+                    return JSONObject.parseObject(tokenString, Token.class);
+                }
+
+                // 生成token
+                Token token = this.generateToken(tokenClaim, false);
+                token.setRefreshToken(refreshToken);
+
+                // 写入Redis，过期时间设置为10秒
+                this.redisTemplate.opsForValue().set(REFRESH_TOKEN_KEY + key, JSON.toJSONString(token), Duration.ofSeconds(LOCK_SECONDS));
+
+                // 返回
+                return token;
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+        return null;
+    }
+
+    private TokenClaim getRefreshTokenClaim(String refreshToken) {
+        try {
+            DecodedJWT jwt = JWTUtils.decodeToken(refreshToken, TokenSignKeyConstant.TOKEN_REFRESH_SIGN_KEY);
+            return fillTokenClaim(jwt);
+        } catch (TokenExpiredException expiredException) {
+            throw new BaseException("Refresh token has expired", "101", ErrorCode.INVALID_REFRESH_TOKEN, System.currentTimeMillis());
+        } catch (JWTVerificationException sve) {
+            throw new BaseException("Invalid refresh token", "101", ErrorCode.INVALID_REFRESH_TOKEN, System.currentTimeMillis());
+        }
+
+    }
+
+
+    /**
+     * 解析已经生成好的AccessToken
+     *
+     * @param accessToken accessToken
+     * @return 解析后的Token对象
+     */
+    @Override
+    public TokenClaim getTokenClaim(String accessToken) {
+        try {
+            DecodedJWT jwt = JWTUtils.decodeToken(accessToken, TokenSignKeyConstant.TOKEN_ACCESS_SIGN_KEY);
+            return fillTokenClaim(jwt);
+        } catch (TokenExpiredException expiredException) {
+            throw new BaseException("Access token has expired", "101", ErrorCode.INVALID_ACCESS_TOKEN, System.currentTimeMillis());
+        } catch (JWTVerificationException e) {
+            throw new BaseException("Invalid access token", "101", ErrorCode.INVALID_ACCESS_TOKEN, System.currentTimeMillis());
         }
     }
 
-    private TokenClaimResponse fillToken(String accessToken, String refreshToken, long expiresIn) {
-        TokenClaimResponse tokenClaimResponse = new TokenClaimResponse();
-        tokenClaimResponse.setAccessToken(accessToken);
-        tokenClaimResponse.setRefreshToken(refreshToken);
-        tokenClaimResponse.setExpiresIn(expiresIn);
-        return tokenClaimResponse;
+    private Token fillToken(String accessToken, String refreshToken, long expiresIn) {
+        Token token = new Token();
+        token.setAccessToken(accessToken);
+        token.setRefreshToken(refreshToken);
+        token.setExpiresIn(expiresIn);
+        return token;
     }
 }

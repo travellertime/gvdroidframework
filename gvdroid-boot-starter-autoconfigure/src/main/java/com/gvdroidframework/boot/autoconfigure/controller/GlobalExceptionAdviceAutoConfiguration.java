@@ -102,7 +102,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
      * @return XfaceGenericResponseDTO
      */
     private ResponseEntity<R<?>> getBaseException(BaseException e, R<?> r, Status status) {
-        status.setError(e.getErrorDesc(), e.getErrorCode());
+        status.setError(e.getErrorDesc(), e.getErrorCode(), e.getErrorLevel());
         status.setDuration(e.getTimeStamp() != 0L ? System.currentTimeMillis() - e.getTimeStamp() : 0L);
         r.setStatus(status);
         // log.error("base exception:", e);

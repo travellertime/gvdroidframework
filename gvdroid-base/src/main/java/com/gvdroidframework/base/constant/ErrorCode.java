@@ -20,6 +20,16 @@ public interface ErrorCode {
     String FAILURE = "1";
 
     /**
+     * Unauthorized
+     */
+    String INVALID_ACCESS_TOKEN = "2";
+
+    /**
+     *
+     */
+    String INVALID_REFRESH_TOKEN = "3";
+
+    /**
      * Fatal Exception.
      * value = "9"
      */
@@ -42,6 +52,8 @@ public interface ErrorCode {
      */
     String ERROR_CODE_903 = "903";
     String ERROR_MSG_903 = "primary key cannot be null";
+
+
 
     /**
      * 系统错误请联系管理员

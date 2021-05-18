@@ -1,8 +1,8 @@
 package com.gvdroidframework.security.component;
 
-public class TokenClaimRequest {
+public class TokenClaim {
 
-    private TokenClaimRequest(Builder builder) {
+    private TokenClaim(Builder builder) {
         this.userId = builder.userId;
         this.channelId = builder.channelId;
         this.entityId = builder.entityId;
@@ -109,8 +109,8 @@ public class TokenClaimRequest {
             return this;
         }
 
-        public TokenClaimRequest build() {
-            return new TokenClaimRequest(this);
+        public TokenClaim build() {
+            return new TokenClaim(this);
         }
     }
 }

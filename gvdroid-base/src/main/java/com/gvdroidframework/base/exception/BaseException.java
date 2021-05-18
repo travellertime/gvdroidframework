@@ -62,6 +62,13 @@ public class BaseException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
+    public BaseException(String message, String errorCode, String errorLevel) {
+        super(message);
+        this.errorDesc = message;
+        this.errorCode = errorCode;
+        this.errorLevel = errorLevel;
+    }
+
     public BaseException(String message, String errorCode, Throwable throwable) {
 //        super(message, null, false, false);
         super(message, throwable, false, false);
