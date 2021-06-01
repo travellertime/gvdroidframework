@@ -25,11 +25,11 @@ public class BaseEntity implements Serializable {
      * 创建人
      */
     String createUser;
-//
-//    /**
-//     * 创建机构
-//     */
-//    String createOrg;
+
+    /**
+     * 创建机构
+     */
+    String createOrg;
 
     /**
      * 修改时间
@@ -40,21 +40,21 @@ public class BaseEntity implements Serializable {
      * 修改人
      */
     String updateUser;
-//
-//    /**
-//     * 修改机构
-//     */
-//    String updateOrg;
+
+    /**
+     * 修改机构
+     */
+    String updateOrg;
 
     /**
      * 修改编号
      */
     Integer updateNo;
 
-//    /**
-//     * 实体编号
-//     */
-//    String entityId;
+    /**
+     * 实体编号
+     */
+    String entityId;
 
     public Integer getStatus() {
         return status;
@@ -88,6 +88,14 @@ public class BaseEntity implements Serializable {
         this.createUser = createUser;
     }
 
+    public String getCreateOrg() {
+        return createOrg;
+    }
+
+    public void setCreateOrg(String createOrg) {
+        this.createOrg = createOrg;
+    }
+
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -104,6 +112,13 @@ public class BaseEntity implements Serializable {
         this.updateUser = updateUser;
     }
 
+    public String getUpdateOrg() {
+        return updateOrg;
+    }
+
+    public void setUpdateOrg(String updateOrg) {
+        this.updateOrg = updateOrg;
+    }
 
     public Integer getUpdateNo() {
         return updateNo;
@@ -111,5 +126,13 @@ public class BaseEntity implements Serializable {
 
     public void setUpdateNo(Integer updateNo) {
         this.updateNo = updateNo;
+    }
+
+    public String getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 }

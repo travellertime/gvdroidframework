@@ -22,14 +22,14 @@ public class BaseEntityUtils {
      * @param context    SessionContext
      */
     public static void buildInsert(BaseEntity baseEntity, Context context) {
-//        String org = StringUtils.isEmpty(context.getOrgId()) ? "" : context.getOrgId();
+        String org = StringUtils.isEmpty(context.getOrgId()) ? "" : context.getOrgId();
         String userId = StringUtils.isEmpty(context.getUserId()) ? "" : context.getUserId();
-//        baseEntity.setCreateOrg(org);
+        baseEntity.setCreateOrg(org);
         baseEntity.setCreateUser(userId);
-//        baseEntity.setUpdateOrg(org);
+        baseEntity.setUpdateOrg(org);
         baseEntity.setUpdateUser(userId);
         baseEntity.setUpdateNo(1);
-//        baseEntity.setEntityId(context.getEntityId());
+        baseEntity.setEntityId(context.getEntityId());
     }
 
     /**
@@ -41,18 +41,18 @@ public class BaseEntityUtils {
      */
     public static void buildInsert(BaseEntity baseEntity, Context context, Date createDateTime) {
 
-//        String org = StringUtils.isEmpty(context.getOrgId()) ? "" : context.getOrgId();
+        String org = StringUtils.isEmpty(context.getOrgId()) ? "" : context.getOrgId();
         String userId = StringUtils.isEmpty(context.getUserId()) ? "" : context.getUserId();
-//        baseEntity.setStatus(1);
-//        baseEntity.setDeleted(false);
+        baseEntity.setStatus(1);
+        baseEntity.setDeleted(false);
         baseEntity.setCreateDate(createDateTime);
         baseEntity.setCreateUser(userId);
-//        baseEntity.setCreateOrg(org);
+        baseEntity.setCreateOrg(org);
         baseEntity.setUpdateDate(createDateTime);
         baseEntity.setUpdateUser(userId);
-//        baseEntity.setUpdateOrg(org);
+        baseEntity.setUpdateOrg(org);
         baseEntity.setUpdateNo(1);
-//        baseEntity.setEntityId(context.getEntityId());
+        baseEntity.setEntityId(context.getEntityId());
     }
 
     /**
@@ -63,6 +63,6 @@ public class BaseEntityUtils {
      */
     public static void buildUpdate(BaseEntity baseEntity, Context context) {
         baseEntity.setUpdateUser(context.getUserId());
-//        baseEntity.setUpdateOrg(context.getOrgId());
+        baseEntity.setUpdateOrg(context.getOrgId());
     }
 }
