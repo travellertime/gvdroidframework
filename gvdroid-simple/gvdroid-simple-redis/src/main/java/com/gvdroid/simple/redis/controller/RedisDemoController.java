@@ -3,14 +3,17 @@ package com.gvdroid.simple.redis.controller;
 import com.alibaba.fastjson.JSON;
 import com.gvdroid.simple.redis.dto.User;
 import com.gvdroid.simple.redis.service.UserService;
+import com.gvdroidframework.base.component.R;
 import com.gvdroidframework.redis.utils.RedisUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
+@Api(tags = "NTC01 测试-通知")
 public class RedisDemoController {
 
     @Resource
@@ -21,11 +24,10 @@ public class RedisDemoController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/redis/get/{id}")
-    public String getValue(@PathVariable("id") String id) {
-        User user = this.userService.getUser(id);
-
-        return JSON.toJSONString(user);
+    @PostMapping(value = "/redis/get/{id}")
+    @ApiOperation(value = "NTC01 测试-通知", httpMethod = "POST")
+    public R<List<User>> getValue(@RequestBody User user) {
+        return R.body(this.userService.getUser(user.getId()));
     }
 
     @GetMapping(value = "redis/delete/{id}")

@@ -18,6 +18,14 @@ spring:
 
 server:
   port: 29001
+gvdroid:
+  swagger:
+    enabled: true
+    base-package: com.gvdroid.simple.redis
+    license: com.gvdroid.redis
+    description: simple api
+    title: simple api
+    version: 0.0.1-SNAPSHOT
 logging:
   file:
     name: ./logs/${spring.application.name}-${server.port}.log

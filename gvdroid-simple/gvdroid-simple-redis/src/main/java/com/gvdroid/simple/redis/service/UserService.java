@@ -6,16 +6,21 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 
     @Cacheable(cacheNames = "user", key = "#id")
-    public User getUser(String id) {
+    public List<User> getUser(String id) {
         System.out.println("set cache");
         User user = new User();
         user.setId(id);
         user.setName(id + "-" + "name");
-        return user;
+        List<User> dataList = new ArrayList<>();
+        dataList.add(user);
+        return dataList;
     }
 
     @CachePut(cacheNames = "user", key = "#id")
