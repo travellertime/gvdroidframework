@@ -31,10 +31,11 @@ public class SpringCacheAutoConfiguration {
         log.info("redisCacheManager created.");
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
                 .defaultCacheConfig()
-                .computePrefixWith(name -> name + ":")
-                ;
+                .computePrefixWith(name -> name + ":");
 
-        return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(redisCacheConfiguration).build();
-//        return RedisCacheManager.create(redisConnectionFactory);
+        return RedisCacheManager.
+                builder(redisConnectionFactory).
+                cacheDefaults(redisCacheConfiguration).
+                build();
     }
 }

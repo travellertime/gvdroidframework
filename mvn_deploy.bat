@@ -78,6 +78,5 @@ call mvn clean install org.apache.maven.plugins:maven-deploy-plugin:2.8:deploy -
 cd ../gvdroid-cloud-starter
 call mvn clean install org.apache.maven.plugins:maven-deploy-plugin:2.8:deploy -DskipTests
 
-
 @echo deploy completed.
 cd ..

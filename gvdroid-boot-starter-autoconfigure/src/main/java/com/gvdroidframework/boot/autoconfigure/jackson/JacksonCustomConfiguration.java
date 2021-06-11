@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilde
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 该配置用于实现把API请求和响应中的Long类型转换为String进行传输。
+ */
 @Configuration
 @ConditionalOnClass(ToStringSerializer.class)
 public class JacksonCustomConfiguration {

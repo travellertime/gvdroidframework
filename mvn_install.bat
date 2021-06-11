@@ -78,6 +78,5 @@ call mvn clean install -Dmaven.test.skip=true
 cd ../gvdroid-cloud-starter
 call mvn clean install -Dmaven.test.skip=true
 
-
 @echo compile completed.
 cd ..
