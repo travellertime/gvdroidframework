@@ -7,7 +7,7 @@
     <groupId>com.gvdroidframework.boot</groupId>
     <artifactId>gvdroid-boot</artifactId>
     <packaging>pom</packaging>
-    <version>2.2.5-SNAPSHOT</version>
+    <version>20216-SNAPSHOT</version>
 
 
 </project>

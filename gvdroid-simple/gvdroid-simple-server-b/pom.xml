@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>com.gvdroidframework.cloud</groupId>
                 <artifactId>gvdroid-cloud-dependencies</artifactId>
-                <version>2.2.5-SNAPSHOT</version>
+                <version>20216-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

@@ -39,6 +39,8 @@ gvdroid:
     description: demo1 api
     title: demo1 api
     version: 1.0.0-SNAPSHOT
+  kafka:
+    path: 192.168.12.13:9092
 logging:
 #  config: classpath:logback/logback-${spring.profiles.active}.xml
   file:

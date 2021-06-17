@@ -6,7 +6,7 @@
 
     <groupId>com.gvdroidframework</groupId>
     <artifactId>gvdroid-base</artifactId>
-    <version>5.2.0-SNAPSHOT</version>
+    <version>20216-SNAPSHOT</version>
     <properties>
         <project.encoding>UTF-8</project.encoding>
         <java.version>1.8</java.version>
