@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.gvdroidframework.logging.configuration.LoggingRabbitAutoConfiguration,\
   com.gvdroidframework.logging.configuration.LoggingAutoConfiguration,\
+  com.gvdroidframework.logging.sensitive.ValueDesensitizeFilter, \
   com.gvdroidframework.logging.aspect.BusinessLoggerAspect

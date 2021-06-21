@@ -3,14 +3,15 @@ package com.gvdroidframework.logging.aspect;
 import com.alibaba.fastjson.JSON;
 import com.gvdroidframework.base.component.Context;
 import com.gvdroidframework.base.component.R;
-import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
 import com.gvdroidframework.base.component.Status;
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
 import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.base.exception.RunException;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
 import com.gvdroidframework.logging.component.BusinessLoggingDTO;
 import com.gvdroidframework.logging.core.LoggingTemplate;
+import com.gvdroidframework.logging.sensitive.ValueDesensitizeFilter;
 import com.gvdroidframework.util.ClassUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -39,6 +40,9 @@ public class BusinessLoggerAspect {
     @Autowired(required = false)
     private LoggingTemplate<BusinessLoggingDTO> loggingTemplate;
 
+    @Autowired
+    ValueDesensitizeFilter valueDesensitizeFilter;
+
     @Pointcut("@annotation(com.gvdroidframework.logging.annotation.BusinessLogger)")
     public void loggerPointCut() {
     }
@@ -58,13 +62,6 @@ public class BusinessLoggerAspect {
         try {
             // 得到请求对象
             for (Object o : proceedingJoinPoint.getArgs()) {
-//                Class<?> clazz = o.getClass();
-//                boolean isRequiredClass = clazz.getName().equals("com.gvdroidframework.base.component.Request");
-//                if (isRequiredClass) {
-//                    requestDTO = o;
-//                    break;
-//                }
-                requestDTO = o.getClass();
                 Class<?> superclass = o.getClass().getSuperclass();
                 boolean isRequiredClass = superclass.equals(XfaceGenericRequestDTO.class);
                 if (isRequiredClass) {
@@ -86,8 +83,9 @@ public class BusinessLoggerAspect {
             context = ClassUtils.getObjFiledValue(requestDTO, "context", Context.class);
 
             logger.info("Process Xface Start");
-            requestString = JSON.toJSONString(requestDTO);
+            requestString = JSON.toJSONString(requestDTO, valueDesensitizeFilter);
             logger.info("RequestDTO=" + requestString);
+//            logger.info("RequestDTO=" + requestString);
 
             // 不允许context为空
             if (null == context) {
@@ -197,7 +195,7 @@ public class BusinessLoggerAspect {
             status.setDuration(endTime - startTime);
         }
         // write response logs to local file.
-        String responseString = JSON.toJSONString(responseDTO);
+        String responseString = JSON.toJSONString(responseDTO, valueDesensitizeFilter);
         logger.info("ResponseDTO=" + responseString);
         if (status != null) {
             switch (status.getErrorCode()) {

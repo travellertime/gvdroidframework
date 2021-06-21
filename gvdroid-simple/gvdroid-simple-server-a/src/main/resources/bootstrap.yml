@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: sit
+    active: local
   application:
     name: gvdroid-cloud-a-server
