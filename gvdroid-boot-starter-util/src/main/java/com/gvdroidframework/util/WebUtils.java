@@ -6,15 +6,17 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Deprecated
 public class WebUtils {
 
     /**
      * 获取请求
-     * @return
+     *
+     * @return HttpServletRequest
      */
     public static HttpServletRequest getRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        return requestAttributes == null ? null : ((ServletRequestAttributes)requestAttributes).getRequest();
+        return requestAttributes == null ? null : ((ServletRequestAttributes) requestAttributes).getRequest();
     }
 
 }

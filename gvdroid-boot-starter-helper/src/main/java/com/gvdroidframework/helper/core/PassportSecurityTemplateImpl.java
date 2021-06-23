@@ -47,6 +47,14 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
         this.lockRegistry = lockRegistry;
     }
 
+    /**
+     * 根据tokenClaim生成accessToken和refreshToken,
+     * accessToken的有效时间为tokenClaim里的expiresIn（秒）
+     * refreshToken的有效时间为accessToken有效时间的两倍
+     *
+     * @param tokenClaim token请求参数
+     * @return token
+     */
     public Token generateToken(TokenClaim tokenClaim) {
         return this.generateToken(tokenClaim, true);
     }
@@ -90,9 +98,13 @@ public class PassportSecurityTemplateImpl implements PassportSecurityTemplate {
 
     /**
      * 使用refreshToken重新生成accessToken
+     * 重新生成的accessToken的有效时间等于上次accessToken的时间
+     * 仅当refreshToken在有效时间内才能够重新生成accessToken
+     *
      * 当并发调用的时候，会采用分布式锁将线程锁住，只允许一个线程进行处理
      * 获得锁的线程，到redis中获取accessToken，如果存在则直接返回
-     * 如果不存在则生成token并写入redis中，实效时间为10s
+     * 如果不存在则生成token并写入redis中，锁的最长时间为10s
+     *
      *
      * @param refreshToken refreshToken
      * @return Token

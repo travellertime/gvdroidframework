@@ -11,11 +11,29 @@ public class TokenClaim {
         this.expiresIn = builder.expiresIn;
     }
 
+    /**
+     * 用户编号
+     */
     private String userId;
+    /**
+     * 渠道编号
+     */
     private String channelId;
+    /**
+     * 实体编号
+     */
     private String entityId;
+    /**
+     * 角色，多个角色用逗号分隔
+     */
     private String roles;
+    /**
+     * 权限，多个权限用逗号分隔
+     */
     private String privileges;
+    /**
+     * 多长时间后过期（秒）
+     */
     private int expiresIn;
 
     public String getUserId() {
