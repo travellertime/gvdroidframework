@@ -9,10 +9,19 @@ import org.springframework.integration.redis.util.RedisLockRegistry;
 
 import java.io.Serializable;
 
+/**
+ * Redis配置类
+ */
 @Configuration
 public class GRedisAutoConfiguration implements Serializable {
 
 
+    /**
+     * 基于Redis的分布式锁
+     *
+     * @param redisConnectionFactory Redis连接工厂
+     * @return 分布式锁
+     */
     @Bean
     RedisLockRegistry redisLockRegistry(RedisConnectionFactory redisConnectionFactory) {
         return new RedisLockRegistry(redisConnectionFactory, "gvdroid:lock:");
@@ -34,8 +43,9 @@ public class GRedisAutoConfiguration implements Serializable {
 
 
     /**
-     * @param redisTemplate RedisTemplate<String, Object>
-     * @return HashOperations<String, String, Object>
+     *
+     * @param redisTemplate redisTemplate<String, Object>
+     * @return hashOperations<String, Object, Object>
      */
     @Bean
     public HashOperations<String, Object, Object> hashOperations(RedisTemplate<String, Object> redisTemplate) {

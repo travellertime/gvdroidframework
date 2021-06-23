@@ -45,6 +45,7 @@
                 <directory>${project.basedir}/src/main/resources</directory>
                 <excludes>
                     <exclude>**/*.yml</exclude>
+                    <exclude>**/*.properties</exclude>
                 </excludes>
             </resource>
         </resources>
