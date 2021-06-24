@@ -19,22 +19,22 @@ import java.util.function.Supplier;
 public class RedisUtils {
 
 	@Resource
-	RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 
 	@Resource
-	ValueOperations<String, Object> valueOps;
+	private ValueOperations<String, Object> valueOps;
 
 	@Resource
-	HashOperations<String, Object, Object> hashOps;
+	private HashOperations<String, Object, Object> hashOps;
 
 	@Resource
-	ListOperations<String, Object> listOps;
+	private ListOperations<String, Object> listOps;
 
 	@Resource
-	SetOperations<String, Object> setOps;
+	private SetOperations<String, Object> setOps;
 
 	@Resource
-	ZSetOperations<String, Object> zSetOps;
+	private ZSetOperations<String, Object> zSetOps;
 
 
 	/**

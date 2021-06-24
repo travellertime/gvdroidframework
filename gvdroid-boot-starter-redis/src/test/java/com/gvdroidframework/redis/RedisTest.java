@@ -1,36 +1,30 @@
 package com.gvdroidframework.redis;
 
 import com.gvdroidframework.redis.utils.RedisUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
-import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = RedisApplication.class)
+@SpringBootTest
 public class RedisTest {
-
-    @Autowired
-    RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     RedisUtils redisUtils;
 
     @Test
     public void simple() {
-        this.redisTemplate.opsForValue().set("1111", "11111");
-
+        this.redisUtils.get("111", () -> "111");
+        this.redisUtils.setEx("keyExDuration", "valueEx", Duration.ofSeconds(5));
+        this.redisUtils.setEx("keyExSecond", "valueExSecond", 5L);
     }
 
-    @Test
+//    @Test
     public void simple2() {
 //        List<ItemsCacheSubDTO> subDTOList = new ArrayList<>();
 //        ItemsCacheSubDTO subDTO = new ItemsCacheSubDTO();
@@ -67,7 +61,7 @@ public class RedisTest {
         subDTO.setItemsMd5("666666");
         subDTOList.add(subDTO);
         HashMap map3 = new HashMap<String, Object>();
-        map3.put("8801",subDTOList);
+        map3.put("8801", subDTOList);
         redisUtils.hMset("storeId2", map3);
 
         System.out.println(redisUtils.hGetAll("storeId2"));
