@@ -62,6 +62,7 @@ public class BusinessLoggerAspect {
         try {
             // 得到请求对象
             for (Object o : proceedingJoinPoint.getArgs()) {
+                if (null == o) continue;
                 Class<?> superclass = o.getClass().getSuperclass();
                 boolean isRequiredClass = superclass.equals(XfaceGenericRequestDTO.class);
                 if (isRequiredClass) {

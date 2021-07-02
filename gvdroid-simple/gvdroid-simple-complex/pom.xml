@@ -16,8 +16,14 @@
             <artifactId>gvdroid-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.gvdroidframework.boot</groupId>
+            <artifactId>gvdroid-boot-starter-redis</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

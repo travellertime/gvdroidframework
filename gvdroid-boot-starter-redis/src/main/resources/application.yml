@@ -4,8 +4,8 @@ spring:
   application:
     name: gvdroid-redis-server
   redis:
-    url: redis://@192.168.126.242:6379
-    database: 5
+    url: redis://@192.168.8.8:6379
+    database: 1
     ssl: false
     timeout: 5000
     lettuce:

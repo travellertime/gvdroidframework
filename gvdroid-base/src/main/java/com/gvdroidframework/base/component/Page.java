@@ -46,7 +46,7 @@ public class Page implements Serializable {
     }
 
     public Page() {
-        returnCount = true;
+        returnCount = false;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Page implements Serializable {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.orderBy = orderBy;
-        returnCount = true;
+        returnCount = false;
     }
 
     public String getOrderBy() {
@@ -95,18 +95,18 @@ public class Page implements Serializable {
         this.orderBy = orderBy;
     }
 
-    public int getOffset() {
-        return (pageNum - 1) * pageSize;
-    }
+//    public int getOffset() {
+//        return (pageNum - 1) * pageSize;
+//    }
 
     /**
      * 当前最终的大小
      *
      * @return offset + pageSize
      */
-    public int getLimit() {
-        return getOffset() + pageSize;
-    }
+//    public int getLimit() {
+//        return getOffset() + pageSize;
+//    }
 
     public int getCount() {
         return count;

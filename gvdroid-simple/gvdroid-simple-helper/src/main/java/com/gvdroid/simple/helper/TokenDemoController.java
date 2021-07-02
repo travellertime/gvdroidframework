@@ -41,6 +41,5 @@ public class TokenDemoController {
     public String deleteToken(@PathVariable("token") String token) {
         TokenClaim tokenClaim = this.passportSecurityTemplate.getTokenClaim(token);
         return JSON.toJSONString(tokenClaim);
-
     }
 }

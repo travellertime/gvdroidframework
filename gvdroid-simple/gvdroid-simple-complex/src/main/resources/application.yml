@@ -6,6 +6,14 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
       WRITE_DATES_AS_TIMESTAMPS: true
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    url: "redis://@192.168.8.8:6379"
+    database: 1
+#    timeout: 5000
 gd:
   list:
     - a

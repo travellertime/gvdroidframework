@@ -1,5 +1,10 @@
 package com.gvdroidframework.boot.autoconfigure.jackson;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonFactoryBuilder;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -15,7 +20,10 @@ public class JacksonCustomConfiguration {
 
     @Bean("jackson2ObjectMapperBuilderCustomizer")
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+
         return builder -> builder.serializerByType(Long.class, ToStringSerializer.instance)
-                .serializerByType(Long.TYPE, ToStringSerializer.instance);
+                .serializerByType(Long.TYPE, ToStringSerializer.instance)
+                .failOnEmptyBeans(false)
+                .failOnUnknownProperties(false);
     }
 }
