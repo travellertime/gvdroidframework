@@ -6,7 +6,7 @@
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>2.2.5.RELEASE</version>
+        <version>2.5.2</version>
         <relativePath />
     </parent>
     <groupId>com.gvdroidframework.boot</groupId>

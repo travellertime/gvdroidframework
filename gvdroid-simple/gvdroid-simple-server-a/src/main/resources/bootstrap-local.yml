@@ -2,27 +2,27 @@ server:
   port: 4001
 spring:
   cloud:
-#    consul:
-#      host: 127.0.0.1
-#      port: 8500
-#      enabled: true
-#      discovery:
-#        register: true
-#        enabled: true
-#        prefer-ip-address: true
-#        instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-#        serviceName: ${spring.application.name}
-#        port: ${server.port}
-#        healthCheckInterval: 15s
-#        healthCheckCriticalTimeout: 5m
-    nacos:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      enabled: true
       discovery:
-        server-addr: 192.168.12.12:13003
-        register-enabled: false
-      config:
-        server-addr: 192.168.12.12:13003
-        file-extension: yaml
-        enabled: false
+        register: true
+        enabled: true
+        prefer-ip-address: true
+        instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        serviceName: ${spring.application.name}
+        port: ${server.port}
+        healthCheckInterval: 15s
+        healthCheckCriticalTimeout: 5m
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.12.12:13003
+#        register-enabled: false
+#      config:
+#        server-addr: 192.168.12.12:13003
+#        file-extension: yaml
+#        enabled: false
   ## internationalization (MessageSourceProperties)
   messages:
     always-use-message-format: false # Whether to always apply the MessageFormat rules, parsing even messages without arguments.

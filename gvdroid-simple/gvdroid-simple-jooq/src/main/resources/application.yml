@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: gvdroid-simple-jooq-server
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/sms?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+logging:
+  level:
+    root: info
+    org.jooq.tools.LoggerListener: debug

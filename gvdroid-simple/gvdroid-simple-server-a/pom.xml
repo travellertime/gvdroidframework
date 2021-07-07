@@ -28,19 +28,20 @@
 <!--            <groupId>com.alibaba.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
 <!--        </dependency>-->
-                <dependency>
-                    <groupId>com.github.danielwegener</groupId>
-                    <artifactId>logback-kafka-appender</artifactId>
-                </dependency>
-                <!-- git第三方kafkajar -->
-                <dependency>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                </dependency>
+<!--                <dependency>-->
+<!--                    <groupId>com.github.danielwegener</groupId>-->
+<!--                    <artifactId>logback-kafka-appender</artifactId>-->
+<!--                </dependency>-->
+<!--                &lt;!&ndash; git第三方kafkajar &ndash;&gt;-->
+<!--                <dependency>-->
+<!--                    <groupId>ch.qos.logback</groupId>-->
+<!--                    <artifactId>logback-classic</artifactId>-->
+<!--                </dependency>-->
         <!-- other dependencies end   -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>

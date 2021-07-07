@@ -25,6 +25,7 @@
         <module>gvdroid-simple-server-a</module>
         <module>gvdroid-simple-server-b</module>
         <module>gvdroid-simple-print</module>
+        <module>gvdroid-simple-jooq</module>
     </modules>
 
 
