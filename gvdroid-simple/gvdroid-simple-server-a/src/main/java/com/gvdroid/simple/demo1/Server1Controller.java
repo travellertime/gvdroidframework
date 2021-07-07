@@ -6,6 +6,7 @@ import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Timestamp;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Api(tags = "DEMO-1 Demo1")
@@ -38,18 +41,15 @@ public class Server1Controller {
     @ApiOperation(value = "DEMO-1 Demo1", httpMethod = "POST")
     @PostMapping(value = "/demo/1")
     @ResponseBody
+    @SneakyThrows
     public R<UserResponseDTO> inquiryUser(@Valid @RequestBody UserRequestDTO requestDTO) {
 
-//        TimeUnit.SECONDS.sleep(10L);
+        Random random = new Random();
+        int i = random.nextInt(10);
+        TimeUnit.SECONDS.sleep(i);
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setName(this.gDemoProperties.getBbb());
         responseDTO.setDataList(this.gDemoProperties.getList());
-
-        String str = null;
-        if (requestDTO.getId().equals("111")) {
-            throw new BaseException("222", "222");
-        }
-        System.out.println(JSON.toJSONString(requestDTO));
         return R.body(responseDTO);
     }
 

@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @Slf4j
 public class Server2Controller {
 
-    @Resource
+    @Autowired
     Demo1Service demo1Service;
 
     @BusinessLogger(value = "DEMO-2")
