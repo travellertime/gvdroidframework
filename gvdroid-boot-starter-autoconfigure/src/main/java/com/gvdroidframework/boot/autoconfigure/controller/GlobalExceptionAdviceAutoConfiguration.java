@@ -118,7 +118,7 @@ public class GlobalExceptionAdviceAutoConfiguration {
      * @param status TransactionStatus
      */
     private void fillTransactionStatus(Exception e, R<?> r, Status status) {
-        status.setError(ErrorCode.ERROR_MSG_999 + e.getCause().toString(), ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
+        status.setError(ErrorCode.ERROR_MSG_999 + e.getCause(), ErrorCode.ERROR_CODE_999, ErrorCode.EXCEPTION);
 //        status.setMemo(e.getCause().toString());
         r.setStatus(status);
     }

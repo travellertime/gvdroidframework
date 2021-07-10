@@ -55,7 +55,7 @@ public class Server1Controller {
 
     //    @BusinessLogger(value = "DEMO-2")
     @ApiOperation(value = "DEMO-2 Demo2", httpMethod = "POST")
-    @PostMapping(value = "/demo/2")
+    @PostMapping(value = "/demo/download")
     public void downloadFile(@Valid @RequestBody DownloadRequestDTO requestDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
         //声明本次下载状态的记录对象
         DownloadRecord downloadRecord = new DownloadRecord(requestDTO.getFileName(), requestDTO.getFilePath(), request);
@@ -64,7 +64,7 @@ public class Server1Controller {
         response.setContentType("multipart/form-data");
         response.setHeader("Content-Disposition", "attachment;fileName=" + requestDTO.getFileName());
         //用于记录以完成的下载的数据量，单位是byte
-        long downloadedLength = 0l;
+        long downloadedLength = 0L;
         try {
             //打开本地文件流
             InputStream inputStream = new FileInputStream(requestDTO.getFilePath() + requestDTO.getFileName());

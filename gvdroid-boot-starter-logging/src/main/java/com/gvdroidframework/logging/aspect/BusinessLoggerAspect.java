@@ -9,8 +9,6 @@ import com.gvdroidframework.base.constant.ErrorCode;
 import com.gvdroidframework.base.exception.BaseException;
 import com.gvdroidframework.base.exception.RunException;
 import com.gvdroidframework.logging.annotation.BusinessLogger;
-import com.gvdroidframework.logging.component.BusinessLoggingDTO;
-import com.gvdroidframework.logging.core.LoggingTemplate;
 import com.gvdroidframework.logging.sensitive.ValueDesensitizeFilter;
 import com.gvdroidframework.util.ClassUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -37,8 +35,8 @@ import java.lang.reflect.Method;
 @Order(-1000)
 public class BusinessLoggerAspect {
 
-    @Autowired(required = false)
-    private LoggingTemplate<BusinessLoggingDTO> loggingTemplate;
+//    @Autowired(required = false)
+//    private LoggingTemplate<BusinessLoggingDTO> loggingTemplate;
 
     @Autowired
     ValueDesensitizeFilter valueDesensitizeFilter;
@@ -216,27 +214,27 @@ public class BusinessLoggerAspect {
         }
 
         // 如果配置了消息队列和开启了业务日志则将写入日志异步写入MQ
-        if (null != loggingTemplate && null != context) {
-            BusinessLoggingDTO dto = new BusinessLoggingDTO();
-            dtoBuilder(dto, context, requestString, responseString, startTime, endTime);
-            loggingTemplate.save(dto, targetClassName);
-        }
+//        if (null != loggingTemplate && null != context) {
+//            BusinessLoggingDTO dto = new BusinessLoggingDTO();
+//            dtoBuilder(dto, context, requestString, responseString, startTime, endTime);
+//            loggingTemplate.save(dto, targetClassName);
+//        }
     }
 
-    private void dtoBuilder(BusinessLoggingDTO dto, Context context, String requestString, String responseString, long startTime, long endTime) {
-        dto.setChannel(context.getChannel());
-        dto.setEntityId(String.valueOf(context.getEntityId()));
-        dto.setLocalDate(context.getLocalDateTime());
-        dto.setRefUserNo(context.getUserReferenceNo());
-        dto.setRefTxnNo(context.getTxnReferenceNo());
-        dto.setRequestDTO(requestString);
-        dto.setResponseDTO(responseString);
-        dto.setServiceId(context.getServiceId());
-        dto.setStartTime(startTime);
-        dto.setEndTime(endTime);
-        dto.setUserId(context.getUserId());
-        dto.setOrgId(context.getOrgId());
-        dto.setIp(context.getIp());
-        dto.setLbs(context.getLbs());
-    }
+//    private void dtoBuilder(BusinessLoggingDTO dto, Context context, String requestString, String responseString, long startTime, long endTime) {
+//        dto.setChannel(context.getChannel());
+//        dto.setEntityId(String.valueOf(context.getEntityId()));
+//        dto.setLocalDate(context.getLocalDateTime());
+//        dto.setRefUserNo(context.getUserReferenceNo());
+//        dto.setRefTxnNo(context.getTxnReferenceNo());
+//        dto.setRequestDTO(requestString);
+//        dto.setResponseDTO(responseString);
+//        dto.setServiceId(context.getServiceId());
+//        dto.setStartTime(startTime);
+//        dto.setEndTime(endTime);
+//        dto.setUserId(context.getUserId());
+//        dto.setOrgId(context.getOrgId());
+//        dto.setIp(context.getIp());
+//        dto.setLbs(context.getLbs());
+//    }
 }
