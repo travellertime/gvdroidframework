@@ -1,6 +1,6 @@
-package com.gvdroidframework.helper.constant;
+package com.gvdroidframework.security.component;
 
-public interface TokenSignKeyConstant {
+public interface TokenSignKey {
 
     //TODO 定义全局的Access Token SignKey和Refresh Token SignKey
 

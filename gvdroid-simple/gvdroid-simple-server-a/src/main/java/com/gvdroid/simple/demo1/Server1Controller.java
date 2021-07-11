@@ -45,8 +45,8 @@ public class Server1Controller {
     public R<UserResponseDTO> inquiryUser(@Valid @RequestBody UserRequestDTO requestDTO) {
 
         Random random = new Random();
-        int i = random.nextInt(10);
-        TimeUnit.SECONDS.sleep(i);
+        int i = random.nextInt(200);
+        TimeUnit.MILLISECONDS.sleep(i);
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setName(this.gDemoProperties.getBbb());
         responseDTO.setDataList(this.gDemoProperties.getList());

@@ -5,6 +5,8 @@ server:
       enabled: true
       dir: ./logs
       pattern: "[%{time,yyyy-MM-dd HH:mm:ss.S z}] %m %U %q %s %D %b %{i,X-B3-TraceId},%{i,X-B3-SpanId} %{i,X-Real-IP} %{i,Referer} %{i,User-Agent} %{i,Platform} %l %u %I %v %a"
+    threads:
+      worker: 128
 spring:
   cloud:
     consul:

@@ -10,15 +10,15 @@ import com.gvdroidframework.security.component.TokenClaim;
  */
 public interface PassportSecurityTemplate {
 
-    /**
-     * 根据tokenClaim生成accessToken和refreshToken,
-     * accessToken的有效时间为tokenClaim里的expiresIn（秒）
-     * refreshToken的有效时间为accessToken有效时间的两倍
-     *
-     * @param tokenClaim token请求参数
-     * @return token
-     */
-    Token generateToken(TokenClaim tokenClaim);
+//    /**
+//     * 根据tokenClaim生成accessToken和refreshToken,
+//     * accessToken的有效时间为tokenClaim里的expiresIn（秒）
+//     * refreshToken的有效时间为accessToken有效时间的两倍
+//     *
+//     * @param tokenClaim token请求参数
+//     * @return token
+//     */
+//    Token generateToken(TokenClaim tokenClaim);
 
     /**
      * 使用refreshToken重新生成accessToken
@@ -35,11 +35,11 @@ public interface PassportSecurityTemplate {
      */
     Token refreshToken(String refreshToken);
 
-    /**
-     * 解析已经生成好的AccessToken
-     *
-     * @param accessToken accessToken
-     * @return 解析后的Token对象
-     */
-    TokenClaim getTokenClaim(String accessToken);
+//    /**
+//     * 解析已经生成好的AccessToken
+//     *
+//     * @param accessToken accessToken
+//     * @return 解析后的Token对象
+//     */
+//    TokenClaim getTokenClaim(String accessToken);
 }

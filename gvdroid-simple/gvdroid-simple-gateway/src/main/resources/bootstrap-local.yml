@@ -1,0 +1,45 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: spring-gateway-simple-server
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      enabled: true
+      discovery:
+        register: false
+        enabled: true
+        prefer-ip-address: true
+        instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        serviceName: ${spring.application.name}
+        port: ${server.port}
+        healthCheckInterval: 15s
+        healthCheckCriticalTimeout: 5m
+    gateway:
+      enabled: true
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 30s
+      loadbalancer:
+        use404: false # 当服务不存在的时候，默认返回的是503
+      routes:
+        - id: simple
+          uri: lb://gvdroid-cloud-a-server
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+
+logging:
+  level:
+    root: info
+#    reactor.netty.http.server: debug
+    org.springframework.cloud.gateway: debug
+#    org.springframework.http.server.reactive: debug
+#    org.springframework.web.reactive: debug
+#    org.springframework.boot.autoconfigure.web: debug
+#    reactor.netty: debug
+#    redisratelimiter: debug
