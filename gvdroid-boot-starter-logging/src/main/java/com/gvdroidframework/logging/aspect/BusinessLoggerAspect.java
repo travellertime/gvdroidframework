@@ -91,7 +91,7 @@ public class BusinessLoggerAspect {
                 throw new BaseException("context cannot be null, please refer to api docs to get more info.", "777", ErrorCode.EXCEPTION, startTime);
             }
 
-            if (StringUtils.isEmpty(context.getEntityId())) {
+            if (!StringUtils.hasLength(context.getEntityId())) {
                 throw new BaseException("entityId cannot be null in context", "777", ErrorCode.EXCEPTION, startTime);
             }
 
@@ -101,7 +101,7 @@ public class BusinessLoggerAspect {
 //            }
 
             // 业务日志中的服务编号字段不允许为空
-            if (StringUtils.isEmpty(businessLogger.value())) {
+            if (!StringUtils.hasLength(businessLogger.value())) {
                 throw new BaseException("日志注解中的value字段必须填入接口的serviceCode值。", "777", ErrorCode.EXCEPTION, startTime);
             }
             context.setServiceId(businessLogger.value());

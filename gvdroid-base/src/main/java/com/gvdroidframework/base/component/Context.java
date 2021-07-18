@@ -1,7 +1,6 @@
 package com.gvdroidframework.base.component;
 
 import java.io.Serializable;
-import java.time.Instant;
 
 public class Context implements Serializable {
 
@@ -20,10 +19,10 @@ public class Context implements Serializable {
      */
     private String serviceId;
 
-    /**
-     * 调用方本地时间 --年月日时分秒。（前端不填，后端可选）
-     */
-    private String localDateTime;
+//    /**
+//     * 调用方本地时间 --年月日时分秒。（前端不填，后端可选）
+//     */
+//    private String localDateTime;
 
     /**
      * 交易机构编号。（可选）
@@ -35,60 +34,60 @@ public class Context implements Serializable {
      */
     private String userId;
 
+    /**
+     * 角色
+     */
+    private String roles;
+
+    /**
+     * 权限
+     */
+    private String privileges;
+
 //    /**
-//     * 角色
+//     * 外部流水号。（前端必填，后台不填）
 //     */
-//    private String roles;
+//    private String txnReferenceNo;
 //
 //    /**
-//     * 权限
+//     * 内部流水号。（前端必填，与内部流水号相同，后台必填，系统根据流水号规则自动生成。）
 //     */
-//    private String privileges;
+//    private String userReferenceNo;
 
-    /**
-     * 外部流水号。（前端必填，后台不填）
-     */
-    private String txnReferenceNo;
-
-    /**
-     * 内部流水号。（前端必填，与内部流水号相同，后台必填，系统根据流水号规则自动生成。）
-     */
-    private String userReferenceNo;
-
-    /**
-     * 终端设备的唯一Id。（前端必填）
-     */
-    private String deviceId;
+//    /**
+//     * 终端设备的唯一Id。（前端必填）
+//     */
+//    private String deviceId;
 
     /**
      * 本地语言，用于多语言控制。（非必填）
      */
     private String locale;
 
-    /**
-     * 访问令牌。（登陆后必填）
-     */
-    private String token;
+//    /**
+//     * 访问令牌。（登陆后必填）
+//     */
+//    private String token;
 
-    /**
-     * IP地址。（除PC外必填）
-     */
-    private String ip;
-
-    /**
-     * LBS。
-     */
-    private String lbs;
-
-    /**
-     * 回调主键编号，用户找寻业务信息。（需要回调时必填）
-     */
-    private String callbackId;
-
-    /**
-     * 回调地址，提供给调用方，待对方处理完后回调的地址。（需要回调时必填）
-     */
-    private String callBackUrl;
+//    /**
+//     * IP地址。（除PC外必填）
+//     */
+//    private String ip;
+//
+//    /**
+//     * LBS。
+//     */
+//    private String lbs;
+//
+//    /**
+//     * 回调主键编号，用户找寻业务信息。（需要回调时必填）
+//     */
+//    private String callbackId;
+//
+//    /**
+//     * 回调地址，提供给调用方，待对方处理完后回调的地址。（需要回调时必填）
+//     */
+//    private String callBackUrl;
 
     public String getEntityId() {
         return entityId;
@@ -114,14 +113,14 @@ public class Context implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public String getLocalDateTime() {
-        return localDateTime;
-    }
-
-    public void setLocalDateTime(String localDateTime) {
-        this.localDateTime = localDateTime;
-    }
-
+//    public String getLocalDateTime() {
+//        return localDateTime;
+//    }
+//
+//    public void setLocalDateTime(String localDateTime) {
+//        this.localDateTime = localDateTime;
+//    }
+//
     public String getOrgId() {
         return orgId;
     }
@@ -138,45 +137,45 @@ public class Context implements Serializable {
         this.userId = userId;
     }
 
-//    public String getRoles() {
-//        return roles;
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(String privileges) {
+        this.privileges = privileges;
+    }
+
+//    public String getTxnReferenceNo() {
+//        return txnReferenceNo;
 //    }
 //
-//    public void setRoles(String roles) {
-//        this.roles = roles;
+//    public void setTxnReferenceNo(String txnReferenceNo) {
+//        this.txnReferenceNo = txnReferenceNo;
 //    }
 //
-//    public String getPrivileges() {
-//        return privileges;
+//    public String getUserReferenceNo() {
+//        return userReferenceNo;
 //    }
 //
-//    public void setPrivileges(String privileges) {
-//        this.privileges = privileges;
+//    public void setUserReferenceNo(String userReferenceNo) {
+//        this.userReferenceNo = userReferenceNo;
 //    }
 
-    public String getTxnReferenceNo() {
-        return txnReferenceNo;
-    }
-
-    public void setTxnReferenceNo(String txnReferenceNo) {
-        this.txnReferenceNo = txnReferenceNo;
-    }
-
-    public String getUserReferenceNo() {
-        return userReferenceNo;
-    }
-
-    public void setUserReferenceNo(String userReferenceNo) {
-        this.userReferenceNo = userReferenceNo;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
+//    public String getDeviceId() {
+//        return deviceId;
+//    }
+//
+//    public void setDeviceId(String deviceId) {
+//        this.deviceId = deviceId;
+//    }
 
     public String getLocale() {
         return locale;
@@ -186,43 +185,43 @@ public class Context implements Serializable {
         this.locale = locale;
     }
 
-    public String getToken() {
-        return token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
+//
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getLbs() {
-        return lbs;
-    }
-
-    public void setLbs(String lbs) {
-        this.lbs = lbs;
-    }
-
-    public String getCallbackId() {
-        return callbackId;
-    }
-
-    public void setCallbackId(String callbackId) {
-        this.callbackId = callbackId;
-    }
-
-    public String getCallBackUrl() {
-        return callBackUrl;
-    }
-
-    public void setCallBackUrl(String callBackUrl) {
-        this.callBackUrl = callBackUrl;
-    }
+//    public String getIp() {
+//        return ip;
+//    }
+//
+//    public void setIp(String ip) {
+//        this.ip = ip;
+//    }
+//
+//    public String getLbs() {
+//        return lbs;
+//    }
+//
+//    public void setLbs(String lbs) {
+//        this.lbs = lbs;
+//    }
+//
+//    public String getCallbackId() {
+//        return callbackId;
+//    }
+//
+//    public void setCallbackId(String callbackId) {
+//        this.callbackId = callbackId;
+//    }
+//
+//    public String getCallBackUrl() {
+//        return callBackUrl;
+//    }
+//
+//    public void setCallBackUrl(String callBackUrl) {
+//        this.callBackUrl = callBackUrl;
+//    }
 }
