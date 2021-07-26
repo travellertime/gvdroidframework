@@ -23,7 +23,9 @@ public class MysqlDialect extends Dialect {
         if (!StringUtils.isNullOrEmpty(orderBy)) {
             sql += " order by " + orderBy;
         }
-        buffer.append(" SELECT ROW_.* FROM (").append(sql).append(" limit ").append(offset).append(",").append(limit).append(") ROW_");
+//        buffer.append(" SELECT ROW_.* FROM (").append(sql).append(" limit ").append(offset).append(",").append(limit).append(") ROW_");
+        buffer.append(sql).append(" limit ").append(offset).append(",").append(limit);
+
         return buffer.toString();
     }
 

@@ -3,22 +3,5 @@ spring:
     time-zone: UTC
   application:
     name: gvdroid-simple-mybatis-server
-  # 数据源配置
-  datasource:
-    continue-on-error: false
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://order-dev.gvdroid.com:3306/gvdroid?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
-    username: root
-    password: Pa44w0Rd
-gvdroid:
-  swagger:
-    enabled: true
-    base-package: com.gvdroid.simple.mybatis
-    license: com.gvdroid.simple
-    description: mybatis api
-    title: mybatis api
-    version: 0.0.1-SNAPSHOT
-logging:
-  level:
-    root: info
-    com.gvdroid.simple.mybatis: debug
+  profiles:
+    active: local

@@ -32,6 +32,8 @@ public class RepositoryInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+
+
         long startTime = System.currentTimeMillis();
 
         final MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];

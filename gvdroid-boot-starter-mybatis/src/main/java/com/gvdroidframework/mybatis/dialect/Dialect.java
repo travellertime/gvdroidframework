@@ -5,12 +5,12 @@ package com.gvdroidframework.mybatis.dialect;
  */
 public abstract class Dialect {
 
-    public enum Type {
-        MYSQL,
-        ORACLE,
-        SQLSERVER,
-        DB2
-    }
+//    public enum Type {
+//        MYSQL,
+//        ORACLE,
+//        SQLSERVER,
+//        DB2
+//    }
 
     public abstract String spellPageSql(String sql, int offset, int limit);
 }
