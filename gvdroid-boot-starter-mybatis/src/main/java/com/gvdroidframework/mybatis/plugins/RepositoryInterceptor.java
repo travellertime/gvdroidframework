@@ -33,13 +33,14 @@ public class RepositoryInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
 
+        final MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
+        final Log log = mappedStatement.getStatementLog();
+        if (!log.isDebugEnabled() && !log.isDebugEnabled()) {
+            return invocation.proceed();
+        }
 
         long startTime = System.currentTimeMillis();
-
-        final MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
         final Object parameter = invocation.getArgs().length > 1 ? invocation.getArgs()[1] : null;
-        final Log log = mappedStatement.getStatementLog();
-
         final BoundSql boundSql = mappedStatement.getBoundSql(parameter);
 
         log.debug(PROCESS_REPOSITORY_BEGIN);
@@ -47,6 +48,7 @@ public class RepositoryInterceptor implements Interceptor {
 
         final Object returnValue = invocation.proceed();
         log.debug(PROCESS_REPOSITORY_END + " Elapsed:" + (System.currentTimeMillis() - startTime) + PROCESS_REPOSITORY_TIME_UNIT);
+
         return returnValue;
     }
 
