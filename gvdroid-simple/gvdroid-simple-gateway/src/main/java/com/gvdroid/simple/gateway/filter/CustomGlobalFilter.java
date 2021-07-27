@@ -1,7 +1,6 @@
 package com.gvdroid.simple.gateway.filter;
 
 import com.gvdroidframework.base.exception.BaseException;
-import com.gvdroidframework.security.util.TokenUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -17,6 +16,8 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class CustomGlobalFilter implements GlobalFilter, Ordered {
+
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -36,7 +37,8 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     private void validToken(String accessToken) {
         try {
-            TokenUtils.checkToken(accessToken);
+            //TODO 使用PassportTemplate
+//            TokenUtils.checkToken(accessToken);
         } catch (BaseException e) {
             throw e;
         }

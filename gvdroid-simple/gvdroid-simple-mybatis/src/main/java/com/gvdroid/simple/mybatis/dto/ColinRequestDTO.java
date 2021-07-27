@@ -1,9 +1,11 @@
 package com.gvdroid.simple.mybatis.dto;
 
+import com.gvdroidframework.base.component.XfaceGenericRequestDTO;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-public class ColinRequestDTO {
+public class ColinRequestDTO extends XfaceGenericRequestDTO {
 
     Long id;
 
