@@ -15,6 +15,7 @@
             <groupId>com.gvdroidframework.boot</groupId>
             <artifactId>gvdroid-boot-starter-mybatis</artifactId>
             <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.gvdroidframework.boot</groupId>
@@ -30,6 +31,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

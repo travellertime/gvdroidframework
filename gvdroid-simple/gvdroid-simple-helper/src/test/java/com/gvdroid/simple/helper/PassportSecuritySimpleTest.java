@@ -3,8 +3,7 @@ package com.gvdroid.simple.helper;
 import com.gvdroidframework.helper.core.PassportSecurityTemplate;
 import com.gvdroidframework.security.component.JWTTokenClaim;
 import com.gvdroidframework.security.util.JWTUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = {SimpleHelperApplication.class})
 public class PassportSecuritySimpleTest {
 

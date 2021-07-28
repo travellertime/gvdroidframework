@@ -9,123 +9,58 @@ public class BaseEntity implements Serializable {
     /**
      * 状态
      */
-    Integer status;
-
-    /**
-     * 逻辑删除
-     */
-    Boolean deleted;
+    int status;
 
     /**
      * 创建时间
      */
-    Date createDate;
+    Date createAt;
 
     /**
      * 创建人
      */
-    String createUser;
-
-    /**
-     * 创建机构
-     */
-    String createOrg;
+    String createBy;
 
     /**
      * 修改时间
      */
-    Date updateDate;
-
-    /**
-     * 修改人
-     */
-    String updateUser;
-
-    /**
-     * 修改机构
-     */
-    String updateOrg;
-
-    /**
-     * 修改编号
-     */
-    Integer updateNo;
+    Date updateAt;
 
     /**
      * 实体编号
      */
     String entityId;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-
-    public String getCreateOrg() {
-        return createOrg;
-    }
-
-    public void setCreateOrg(String createOrg) {
-        this.createOrg = createOrg;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public String getUpdateOrg() {
-        return updateOrg;
-    }
-
-    public void setUpdateOrg(String updateOrg) {
-        this.updateOrg = updateOrg;
-    }
-
-    public Integer getUpdateNo() {
-        return updateNo;
-    }
-
-    public void setUpdateNo(Integer updateNo) {
-        this.updateNo = updateNo;
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 
     public String getEntityId() {
