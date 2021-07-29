@@ -9,7 +9,7 @@ public class BaseEntity implements Serializable {
     /**
      * 状态
      */
-    int status;
+    Integer status;
 
     /**
      * 创建时间
@@ -31,11 +31,11 @@ public class BaseEntity implements Serializable {
      */
     String entityId;
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
