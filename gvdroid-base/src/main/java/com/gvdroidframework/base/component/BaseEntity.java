@@ -22,6 +22,11 @@ public class BaseEntity implements Serializable {
     String createBy;
 
     /**
+     * 创建人所属机构
+     */
+    String createOrg;
+
+    /**
      * 修改时间
      */
     Date updateAt;
@@ -53,6 +58,14 @@ public class BaseEntity implements Serializable {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    public String getCreateOrg() {
+        return createOrg;
+    }
+
+    public void setCreateOrg(String createOrg) {
+        this.createOrg = createOrg;
     }
 
     public Date getUpdateAt() {

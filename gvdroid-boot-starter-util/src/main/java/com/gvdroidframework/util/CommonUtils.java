@@ -30,12 +30,12 @@ public class CommonUtils {
     }
 
     public static void primaryKeyValidation(Context context, String... keys) {
-        if (StringUtils.hasLength(context.getEntityId())) {
+        if (!StringUtils.hasLength(context.getEntityId())) {
             throw new BaseException(ErrorCode.ERROR_MSG_902, ErrorCode.ERROR_CODE_902);
         }
 
         for (String key : keys) {
-            if (StringUtils.isEmpty(key)) {
+            if (!StringUtils.hasLength(key)) {
                 throw new BaseException(ErrorCode.ERROR_MSG_903, ErrorCode.ERROR_CODE_903);
             }
         }
