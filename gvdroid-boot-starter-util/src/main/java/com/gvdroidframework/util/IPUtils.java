@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author TuJun
  */
-public class IpUtils {
+public class IPUtils {
 
     /**
      * 获取客户端IP

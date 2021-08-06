@@ -7,6 +7,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.util.List;
 
+@Deprecated
 public class JsonUtils {
 
     /**
@@ -38,8 +39,8 @@ public class JsonUtils {
     /**
      * 功能描述：把JSON数据转换成指定的java对象
      *
-     * @param jsonString JSON数据
-     * @param targetClass   指定的java对象
+     * @param jsonString  JSON数据
+     * @param targetClass 指定的java对象
      * @return 指定的java对象
      */
     public static <T> T toBean(String jsonString, Class<T> targetClass) {
@@ -50,8 +51,8 @@ public class JsonUtils {
      * 功能描述：把JSON数据转换成指定的java对象，属性保持原来的顺序
      *
      * @param sourceJsonString srcJsonString
-     * @param targetClass     destClazz
-     * @param <T>           t
+     * @param targetClass      destClazz
+     * @param <T>              t
      * @return destClazz
      */
     public static <T> T toBeanOrdered(String sourceJsonString, Class<T> targetClass) {
@@ -62,7 +63,7 @@ public class JsonUtils {
      * 将json转化成List
      *
      * @param sourceJsonString 源字符串
-     * @param targetClass  目标对象
+     * @param targetClass      目标对象
      * @return List
      */
     public static <T> List<T> toList(String sourceJsonString, Class<T> targetClass) {
